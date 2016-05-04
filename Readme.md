@@ -1,0 +1,1 @@
+[照著Coding Style程式碼比較好看懂><](https://google.github.io/styleguide/javaguide.html/ "照著Coding Style程式碼比較好看懂><") inline link.
