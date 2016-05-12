@@ -13,6 +13,8 @@ public class MainApplet extends PApplet{
 	private PImage imgBackground;
 	private final int windowWidth = 1200, windowHeight = 700;
 	private ControlP5 controlP5;
+	private int currentRoom=1;
+	private String[] filenameRooms = {"BedRoom.jpg" , "LivingRoom.jpg" , "Kitchen.jpg"};
 	public void setup() {
 		size(windowWidth, windowHeight);
 		smooth();
@@ -24,7 +26,7 @@ public class MainApplet extends PApplet{
 		     .setImages(loadImage(path+"arrowLeft.png"), loadImage(path+"arrowLeft.png") , loadImage(path+"arrowLeftPressed.png"))
 		     .updateSize();
 		controlP5.addButton("buttonRight")
-	     .setPosition(700,275)
+	     .setPosition(900,275)
 	     .setImages(loadImage(path+"arrowRight.png"), loadImage(path+"arrowRight.png") , loadImage(path+"arrowRightPressed.png"))
 	     .updateSize();
 	}
@@ -35,13 +37,20 @@ public class MainApplet extends PApplet{
 
 
 	public void buttonLeft(int theValue) {
-		imgBackground = loadImage(path+"Bedroom.jpg");
-		imgBackground.resize(windowWidth, windowHeight);
+		if(currentRoom!=0)
+		{
+			imgBackground = loadImage(path+filenameRooms[--currentRoom]);
+			imgBackground.resize(windowWidth, windowHeight);			
+		}
+
 	}
 	
 	public void buttonRight(int theValue) {
-		imgBackground = loadImage(path+"Kitchen.jpg");
-		imgBackground.resize(windowWidth, windowHeight);
+		if(currentRoom!=2)
+		{
+			imgBackground = loadImage(path+filenameRooms[++currentRoom]);
+			imgBackground.resize(windowWidth, windowHeight);			
+		}
 	}
 
 	public void draw() {
