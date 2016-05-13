@@ -1,5 +1,6 @@
 package main.java;
 
+import controlP5.CallbackEvent;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import processing.core.PApplet;
@@ -15,44 +16,41 @@ public class MainApplet extends PApplet{
 	private ControlP5 controlP5;
 	private int currentRoom=1;
 	private String[] filenameRooms = {"BedRoom.jpg" , "LivingRoom.jpg" , "Kitchen.jpg"};
+	private Item buttonRight;
+	private Item buttonLeft;
 	public void setup() {
 		size(windowWidth, windowHeight);
 		smooth();
 		imgBackground = loadImage(path+"LivingRoom.jpg");
 		imgBackground.resize(windowWidth, windowHeight);
-		controlP5 = new ControlP5(this);
-		controlP5.addButton("buttonLeft")
-		     .setPosition(0,275)
-		     .setImages(loadImage(path+"arrowLeft.png"), loadImage(path+"arrowLeft.png") , loadImage(path+"arrowLeftPressed.png"))
-		     .updateSize();
-		controlP5.addButton("buttonRight")
-	     .setPosition(900,275)
-	     .setImages(loadImage(path+"arrowRight.png"), loadImage(path+"arrowRight.png") , loadImage(path+"arrowRightPressed.png"))
-	     .updateSize();
+		
+		buttonLeft = new Item(this , 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png"){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+		           if (theEvent.getAction() == 100) {
+		       		  if(currentRoom!=0)
+		    		  {
+		    			 imgBackground = loadImage(path+filenameRooms[--currentRoom]);
+		    			 imgBackground.resize(windowWidth, windowHeight);			
+		    		  }
+		           }
+		       }
+		};
+		
+		buttonRight = new Item(this , 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png"){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if (theEvent.getAction() == 100) {
+					if(currentRoom!=2)
+					{
+					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
+					    imgBackground.resize(windowWidth, windowHeight);			
+					}
+				}
+		    }
+		};
 	}
 	
-	public void controlEvent(ControlEvent theEvent) {
-
-	}
-
-
-	public void buttonLeft(int theValue) {
-		if(currentRoom!=0)
-		{
-			imgBackground = loadImage(path+filenameRooms[--currentRoom]);
-			imgBackground.resize(windowWidth, windowHeight);			
-		}
-
-	}
-	
-	public void buttonRight(int theValue) {
-		if(currentRoom!=2)
-		{
-			imgBackground = loadImage(path+filenameRooms[++currentRoom]);
-			imgBackground.resize(windowWidth, windowHeight);			
-		}
-	}
-
 	public void draw() {
 		image(imgBackground, 0, 0);
 	}
