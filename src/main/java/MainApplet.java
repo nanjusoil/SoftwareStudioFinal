@@ -1,5 +1,7 @@
 package main.java;
 
+import javax.swing.JFrame;
+
 import controlP5.CallbackEvent;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
@@ -18,11 +20,19 @@ public class MainApplet extends PApplet{
 	private String[] filenameRooms = {"BedRoom.jpg" , "LivingRoom.jpg" , "Kitchen.jpg"};
 	private Item buttonRight;
 	private Item buttonLeft;
+	private Item microwave;
+	private JFrame jframe;
+	private LoginApplet loginapplet;
+	
+	public MainApplet(JFrame jframe){
+		this.jframe = jframe;
+	}
 	public void setup() {
 		size(windowWidth, windowHeight);
 		smooth();
 		imgBackground = loadImage(path+"LivingRoom.jpg");
 		imgBackground.resize(windowWidth, windowHeight);
+		loginapplet = new LoginApplet();
 		
 		buttonLeft = new Item(this , 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png"){
 			@Override
@@ -41,6 +51,13 @@ public class MainApplet extends PApplet{
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
+					loginapplet.init();
+					loginapplet.start();
+					loginapplet.setFocusable(true);
+					jframe.setContentPane(loginapplet);
+					jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					jframe.setSize(windowWidth, windowHeight);
+					jframe.setVisible(true);
 					if(currentRoom!=2)
 					{
 					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
