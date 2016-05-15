@@ -5,9 +5,10 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class Main extends JFrame{
 	
-	private final static int windowWidth = 1200, windowHeight = 670;
+	private final static int windowWidth = 1303, windowHeight = 745;
 	
 	public static void main(String [] args){
+		
 		JFrame window = new JFrame("±K«Ç°k²æ");
 		MainApplet applet = new MainApplet(window);
 		applet.init();
