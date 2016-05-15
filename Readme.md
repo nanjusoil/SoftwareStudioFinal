@@ -1,35 +1,35 @@
-ï»¿# [Coding Styles](https://google.github.io/styleguide/javaguide.html)
-+ ç…§è‘—ä¸€å®šçš„Coding Styleæ‡‰è©²æœƒçœ‹èµ·ä¾†æ¯”è¼ƒå¥½ä¸€é»ž
+# [Coding Styles](https://google.github.io/styleguide/javaguide.html)
++ ·ÓµÛ¤@©wªºCoding StyleÀ³¸Ó·|¬Ý°_¨Ó¤ñ¸û¦n¤@ÂI
 
 # [ControlP5 -- a proccesing library](http://www.sojamo.de/libraries/controlP5/)
-+ è«‹ç…§åŠ å…¥core.jarçš„æ¨¡å¼åŠ å…¥ControlP5.jar
-+ é€™å€‹jaræœ‰å¾ˆå¤šå…§å»ºçš„æ–¹æ³•å¯ä»¥ç”¨ï¼Œæˆ‘ç›®å‰æ˜¯ç”¨ä¾†åšæŒ‰éˆ•(core.jaræ²’æœ‰æŒ‰éˆ•)
++ ½Ð·Ó¥[¤Jcore.jarªº¼Ò¦¡¥[¤JControlP5.jar
++ ³o­Ójar¦³«Ü¦h¤º«Øªº¤èªk¥i¥H¥Î¡A§Ú¥Ø«e¬O¥Î¨Ó°µ«ö¶s(core.jar¨S¦³«ö¶s)
 
-# æ–°Applet
-+ ç¾åœ¨çš„æµç¨‹æ˜¯ Main(å»ºç«‹JFrame)->å»ºç«‹MainApplet æŒ‰å³éµ ->å»ºç«‹LoginApplet(æ¸¬è©¦Appletçš„è½‰æ›)
-+ ä»¥å¾Œæ‡‰è©²æœƒæ˜¯ Main -> LoginApplet ->æ¯å€‹å ´æ™¯ä¸€å€‹Applet
+# ·sApplet
++ ²{¦bªº¬yµ{¬O Main(«Ø¥ßJFrame)->«Ø¥ßMainApplet «ö¥kÁä ->«Ø¥ßLoginApplet(´ú¸ÕAppletªºÂà´«)
++ ¥H«áÀ³¸Ó·|¬O Main -> LoginApplet ->¨C­Ó³õ´º¤@­ÓApplet
 
-# å¦‚ä½•å»ºç«‹æ–°çš„Applet
-+ 					loginapplet.init();  //ä¸€å®šè¦åˆå§‹åŒ–
+# ¦p¦ó«Ø¥ß·sªºApplet
++ 					loginapplet.init();  //¤@©w­nªì©l¤Æ
 +					loginapplet.start();
 +					loginapplet.setFocusable(true);
-+                   jframe.setContentPane(loginapplet); //æŠŠAppletåŠ åˆ°JFrame
++                   jframe.setContentPane(loginapplet); //§âApplet¥[¨ìJFrame
 
-#Itemä»‹ç´¹
-+åˆ†ä¸‰ç¨®Type: CONTROL, TOOL, MESSAGE
-+CONTROL:æŽ§åˆ¶éŠæˆ²çš„é€²è¡Œex:åˆ‡æ›æˆ¿é–“çš„å·¦å³éµ
-+TOOL:åœ¨æˆ¿é–“è£¡æ’¿åˆ°ï¼Œå¯ä»¥åœ¨æŽ¥ä¸‹ä¾†çš„é€ƒè„«éŽç¨‹ä¸­æ´¾ä¸Šç”¨å ´ex:key
-+MESSAGE:ex:æˆ¿é–“è£¡æ’¿åˆ°çš„ç´™åœ‘ï¼Œæ”¤é–‹å¾Œæœƒæœ‰æç¤º
+#Item¤¶²Ð
++ ¤À¤TºØType: CONTROL, TOOL, MESSAGE
++ CONTROL:±±¨î¹CÀ¸ªº¶i¦æex:¤Á´«©Ð¶¡ªº¥ª¥kÁä
++ TOOL:¦b©Ð¶¡¸Ì¾ß¨ì¡A¥i¥H¦b±µ¤U¨Óªº°k²æ¹Lµ{¤¤¬£¤W¥Î³õex:key
++ MESSAGE:ex:©Ð¶¡¸Ì¾ß¨ìªº¯È?¡AÅu¶}«á·|¦³´£¥Ü
 
-#éŠæˆ²æµç¨‹
-+TOOL
-+æ’¿åˆ°Item(é“å…·)/call ItemBoxçš„putinItem()
-+(æ›åˆ°æ­£ç¢ºçš„å ´æ™¯)
-+åœ¨é“å…·æ¬„é»žä¸€ä¸‹é“å…·(ä»£è¡¨æ‹¿èµ·é“å…·)/call ItemBoxçš„checkItem()
-+åœ¨æ­£ç¢ºçš„ä½ç½®é»žä¸€ä¸‹ï¼Œé“å…·å°±æœƒç™¼æ®ä½œç”¨ä¸¦æ¶ˆå¤±/call ItemBoxçš„useItem()
-+solControlP5å°±æ˜¯çŽ©å®¶åœ¨æ‹¿èµ·é“å…·å¾Œè©²é»žçš„ä½ç½®
+#¹CÀ¸¬yµ{
++ TOOL
++ ¾ß¨ìItem(¹D¨ã)/call ItemBoxªºputinItem()
++ (´«¨ì¥¿½Tªº³õ´º)
++ ¦b¹D¨ãÄæÂI¤@¤U¹D¨ã(¥Nªí®³°_¹D¨ã)/call ItemBoxªºcheckItem()
++ ¦b¥¿½Tªº¦ì¸mÂI¤@¤U¡A¹D¨ã´N·|µo´§§@¥Î¨Ã®ø¥¢/call ItemBoxªºuseItem()
++ solControlP5´N¬Oª±®a¦b®³°_¹D¨ã«á¸ÓÂIªº¦ì¸m
 
-+MESSAGE
-+æ’¿åˆ°ç´™æ¢/call ItemBoxçš„putinItem()
-+åœ¨é“å…·æ¬„é»žä¸€ä¸‹é“å…·å¯ä»¥æŸ¥çœ‹å®ƒçš„å…§å®¹/call ItemBoxçš„checkItem()
-+ç•¶é”åˆ°ç‰¹å®šæ¢ä»¶(ex:ä¿éšªç®±æ‰“é–‹å¾Œï¼Œå¯«æœ‰ä¿éšªç®±å¯†ç¢¼çš„ç´™æ¢å°±æœƒæ¶ˆå¤±)æ™‚ï¼Œç´™æ¢å°±æœƒæ¶ˆå¤±/call ItemBoxçš„useItem()
++ MESSAGE
++ ¾ß¨ì¯È±ø/call ItemBoxªºputinItem()
++ ¦b¹D¨ãÄæÂI¤@¤U¹D¨ã¥i¥H¬d¬Ý¥¦ªº¤º®e/call ItemBoxªºcheckItem()
++ ·í¹F¨ì¯S©w±ø¥ó(ex:«OÀI½c¥´¶}«á¡A¼g¦³«OÀI½c±K½Xªº¯È±ø´N·|®ø¥¢)®É¡A¯È±ø´N·|®ø¥¢/call ItemBoxªºuseItem()
