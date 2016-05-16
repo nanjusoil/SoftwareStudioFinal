@@ -26,6 +26,7 @@ public class MainApplet extends PApplet{
 	private Item microwave;
 	private JFrame jframe;
 	private LoginApplet loginapplet;
+	private Item safe;
 		
 	public MainApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -100,7 +101,15 @@ public class MainApplet extends PApplet{
 				}
 		    }
 		};
-		
+		safe = new Item(this , 500 , 400 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.TOOL){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if (theEvent.getAction() == 100) {
+					
+					safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
+				}
+		    }
+		};
 		
 	}
 	
