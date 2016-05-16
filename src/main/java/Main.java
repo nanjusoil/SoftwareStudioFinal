@@ -6,11 +6,12 @@ import javax.swing.JFrame;
 public class Main extends JFrame{
 	
 	private final static int windowWidth = 1303, windowHeight = 745;
-	
+	public static JFrame window;
 	public static void main(String [] args){
 		
-		JFrame window = new JFrame("±K«Ç°k²æ");
-		MainApplet applet = new MainApplet(window);
+		window = new JFrame("±K«Ç°k²æ");
+		//MainApplet applet = new MainApplet(window);
+		LoginApplet applet = new LoginApplet(window);
 		applet.init();
 		applet.start();
 		applet.setFocusable(true);

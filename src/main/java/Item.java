@@ -41,7 +41,7 @@ public class Item extends PApplet implements CallbackListener{
 	public boolean isHolded; //become true when checkItem() called
 	public Type type; //TOOL or MESSAGE 
        
-	public Item (MainApplet parent , int x , int y , String sImgItem , String sImgItemHover , String sImgItemOnclick, Type type) {
+	public Item (PApplet parent , int x , int y , String sImgItem , String sImgItemHover , String sImgItemOnclick, Type type) {
 		imgItem = loadImage(path+sImgItem);
 		imgItemHover = loadImage(path+sImgItem);
 		imgItemOnclick = loadImage(path+sImgItem);   

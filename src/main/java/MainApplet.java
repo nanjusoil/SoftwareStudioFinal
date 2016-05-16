@@ -37,7 +37,7 @@ public class MainApplet extends PApplet{
 		smooth();
 		imgBackground = loadImage(path+"LivingRoom.jpg");
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
-		loginapplet = new LoginApplet();
+		loginapplet = new LoginApplet(jframe);
 		
 		buttonLeft = new Item(this , 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
 			@Override

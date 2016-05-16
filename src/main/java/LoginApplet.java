@@ -1,16 +1,48 @@
 package main.java;
 
+import javax.swing.JFrame;
+
+import controlP5.CallbackEvent;
+import controlP5.ControlP5;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class LoginApplet extends PApplet{
 	private String path = "main/resources/";
 	private PImage imgBackground;
-	public LoginApplet(){
-		System.out.println("asdsad");
+	private final int windowWidth = 1286, windowHeight = 700;
+	private ControlP5 controlP5;
+	private Item stage1;
+	private Item stage2;
+	private Item stage3;
+	private MainApplet mainApplet;
+	private JFrame jframe;
+	public LoginApplet(JFrame jframe){
+		this.jframe = jframe;
 	}
+	
 	public void setup() {
+		size(windowWidth, windowHeight);
+		smooth();
 		imgBackground = loadImage(path+"BathRoom.jpg");
+		mainApplet = new MainApplet(jframe);
+		stage1 = new Item(this , 275 , 275 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+		           if (theEvent.getAction() == 100) {
+		        	   mainApplet.init();
+		        	   mainApplet.start();
+		        	   mainApplet.setFocusable(true);
+		        	   jframe.setContentPane(mainApplet);
+		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        	   jframe.setSize(windowWidth, windowHeight);
+		        	   jframe.setVisible(true);
+		           }
+		       }
+		};
+		//Item stage2 = new Item(this , 500 , 400 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL);
+		//Item stage3 = new Item(this , 500 , 400 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL);
+
 	}
 	public void draw() {
 		image(imgBackground, 0, 0);

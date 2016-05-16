@@ -19,7 +19,7 @@ import processing.event.MouseEvent;
 
 public class ItemBox extends PApplet implements CallbackListener{
 	//five properties in the property box
-	private MainApplet parent; //use MainApplet to declare so that the variable can be accessed
+	private PApplet parent; //use MainApplet to declare so that the variable can be accessed
 	private PImage box;
 	private int x, y, width, height; //location and size
 	private int cellWidth, cellHeight;
@@ -30,7 +30,7 @@ public class ItemBox extends PApplet implements CallbackListener{
 	private final int itemboxWidth = 86;
 	private int indexActiveBox;
 	
-	public ItemBox(MainApplet parent, int x, int y, String imgItemBox){
+	public ItemBox(PApplet parent, int x, int y, String imgItemBox){
 		this.parent = parent;
 		this.box = this.loadImage(path + imgItemBox);
 		this.box.resize(itemboxWidth, 700);
