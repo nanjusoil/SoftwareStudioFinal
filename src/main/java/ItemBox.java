@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import controlP5.CallbackEvent;
@@ -80,7 +83,7 @@ public class ItemBox extends PApplet implements CallbackListener{
 				initem.isInBox = true;
 				initem.colIndex = i;
 				
-				initem.controlP5.setPosition(this.x-initem.x+10, this.y - initem.y+10);
+				initem.controlP5.setPosition(this.x-initem.x+10, this.y - initem.y+10 + this.cellHeight*i);
 //				this.parent.image(initem.imgItem, this.x - this.cellWidth/2, this.y + this.cellHeight*i - this.height/2);
 				break;
 			}
@@ -108,6 +111,18 @@ public class ItemBox extends PApplet implements CallbackListener{
 		}else if(citem.type == Type.MESSAGE){
 		//group two : show its content
 			JOptionPane.showMessageDialog(parent, "Here's the hint.");
+			//still can't show picture in the dialog box?
+			JDialog dialog = new JDialog();
+			
+			dialog.setBounds(this.parent.getWidth()/2 - 150, this.parent.getHeight()/2 - 100, 300, 200); 
+			dialog.setVisible(true);
+//			dialog.setUndecorated(true);
+			JLabel label = new JLabel( new ImageIcon(path + "key.png") );
+			label.setSize(100, 100);
+			label.setVisible(true);
+			dialog.add( label );
+			dialog.pack();
+			dialog.setSize(300, 200); 
 		}
 	
 	}

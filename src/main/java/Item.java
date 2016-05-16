@@ -56,12 +56,12 @@ public class Item extends PApplet implements CallbackListener{
 		setName(sImgItem.substring(0, sImgItem.indexOf('.')));
 		
 		controlP5 = new ControlP5(parent);
-		controlP5.addButton(this.getName())
+   		   controlP5.addButton(this.getName())
 	       .setPosition(this.x,this.y)
 	       .setImages(imgItem, imgItemHover, imgItemOnclick)
 	       .updateSize()
 	       .addCallback(this);
-		//updateImage(imgItem,imgItemHover,imgItemOnclick);
+   		//updateImage(imgItem,imgItemHover,imgItemOnclick);
    		 
    		//when player clicks here, that means players solve the problem
    		if(type == Type.TOOL){
@@ -72,6 +72,8 @@ public class Item extends PApplet implements CallbackListener{
    	   			.setPosition(800,400)
    	   			.setSize(20, 20)
    	   			.addCallback(this);
+   		}else if(type == Type.MESSAGE){
+   			
    		}
     }
        
@@ -80,6 +82,7 @@ public class Item extends PApplet implements CallbackListener{
 //          	 System.out.println(this.getName());
            }
     }
+	
 	public void updateImage(String string , String string2 , String string3){
 		imgItem = loadImage(path+string);
 		imgItemHover = loadImage(path+string2);

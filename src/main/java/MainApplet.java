@@ -22,11 +22,12 @@ public class MainApplet extends PApplet{
 	private Item buttonRight;
 	private Item buttonLeft;
 	private Item key;
+	private Item paperball;
 	private ItemBox itemBox;
 	private Item microwave;
+	private Item safe;
 	private JFrame jframe;
 	private LoginApplet loginapplet;
-	private Item safe;
 		
 	public MainApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -101,6 +102,7 @@ public class MainApplet extends PApplet{
 				}
 		    }
 		};
+		
 		safe = new Item(this , 500 , 400 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
@@ -111,6 +113,20 @@ public class MainApplet extends PApplet{
 		    }
 		};
 		
+		paperball = new Item(this , 800 , 500 , "paperball.png" , "paperball.png" , "paperball.png", Type.MESSAGE){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if(theEvent.getController().getName().equals("paperball")){
+					if (theEvent.getAction() == 100) {
+						if(!isInBox){
+							itemBox.putinItem(this);
+						}else{
+							itemBox.checkItem(this);
+						}
+					}
+				}
+		    }
+		};
 	}
 	
 	public void draw() {

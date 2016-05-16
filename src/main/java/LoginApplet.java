@@ -10,7 +10,7 @@ import processing.core.PImage;
 public class LoginApplet extends PApplet{
 	private String path = "main/resources/";
 	private PImage imgBackground;
-	private final int windowWidth = 1286, windowHeight = 700;
+	private final int windowWidth = 1303, windowHeight = 745;
 	private ControlP5 controlP5;
 	private Item stage1;
 	private Item stage2;

@@ -7,6 +7,7 @@ public class Main extends JFrame{
 	
 	private final static int windowWidth = 1303, windowHeight = 745;
 	public static JFrame window;
+	
 	public static void main(String [] args){
 		
 		window = new JFrame("±K«Ç°k²æ");
