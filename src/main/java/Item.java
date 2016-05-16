@@ -41,6 +41,35 @@ public class Item extends PApplet implements CallbackListener{
 	public boolean isHolded; //become true when checkItem() called
 	public Type type; //TOOL or MESSAGE 
        
+	
+public Item (PApplet parent ,int sizeX, int sizeY, int x , int y ,  String sImgItem , String sImgItemHover , String sImgItemOnclick, Type type) {
+		
+		imgItem = loadImage(path+sImgItem);
+		imgItemHover = loadImage(path+sImgItem);
+		imgItemOnclick = loadImage(path+sImgItem);   
+		this.x = x;
+		this.y = y;
+		
+		this.isInBox = false;
+		this.colIndex = -1;
+		this.isHolded = false;
+		this.type = type;
+		
+		
+		setName(sImgItem.substring(0, sImgItem.indexOf('.')));
+		PImage image = loadImage(path+sImgItem);
+		image.resize(sizeX, sizeY);
+		//parent.image(image, x, y);
+		
+		controlP5 = new ControlP5(parent);
+		   controlP5.addButton(this.getName())
+	       .setPosition(this.x,this.y)
+	       .setImages(image, image, image)
+	       .updateSize()
+	       .addCallback(this);
+	
+	}
+
 	public Item (PApplet parent , int x , int y , String sImgItem , String sImgItemHover , String sImgItemOnclick, Type type) {
 		imgItem = loadImage(path+sImgItem);
 		imgItemHover = loadImage(path+sImgItem);

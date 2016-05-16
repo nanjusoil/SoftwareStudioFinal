@@ -28,6 +28,14 @@ public class MainApplet extends PApplet{
 	private Item safe;
 	private JFrame jframe;
 	private LoginApplet loginapplet;
+	
+	// parameter::  sizex, sizey , x , y
+	private Item musician;//200, 200, 0, 0
+	private Item cabinet;//1200, 700, 0, 0
+	private Item monopoly;//190, 150, 385, 60 
+	private Item Napoleon;//190, 150, 600, 60
+	private Item pentatonix;//190, 150, 385, 250
+	private Item rural;//190, 150, 600, 250
 		
 	public MainApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -40,6 +48,15 @@ public class MainApplet extends PApplet{
 		imgBackground = loadImage(path+"LivingRoom.jpg");
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
+		
+		
+		musician = new Item(this , 200 , 200 , 0 , 0 , "musician.png" , "musician.png" , "musician.png", Type.CONTROL);
+		cabinet = new Item(this , 1200 , 700 , 0 , 0 , "cabinet.png" , "cabinet.png" , "cabinet.png", Type.CONTROL);
+		monopoly = new Item(this , 190 , 150 , 385 , 60, "monopoly.png" , "monopoly.png" , "monopoly.png", Type.CONTROL);
+		Napoleon = new Item(this , 190 , 150 , 600 , 60 , "Napoleon.png" , "Napoleon.png" , "Napoleon.png", Type.CONTROL);
+		pentatonix = new Item(this , 190 , 150 , 385 , 250 , "pentatonix.png" , "pentatonix.png" , "pentatonix.png", Type.CONTROL);
+		rural = new Item(this , 190 , 150 , 600 , 250, "rural.png" , "rural.png" , "rural.png", Type.CONTROL);
+		
 		
 		buttonLeft = new Item(this , 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
 			@Override
