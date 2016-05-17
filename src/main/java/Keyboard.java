@@ -8,19 +8,27 @@ import javax.swing.JPanel;
 
 public class Keyboard extends JFrame{
 	
+	private Item safe;
 	private Board board;
 	private Key key;
-	private Safe safe;
+	//private Safe safe;
 	private int keyInput;
+	private String password;
+	public Icon safe_close;
+	public Icon safe_nomove;
+	public Icon safe_open;
+	public Icon safe_screen_open;
+	
 
 	
 	//private J
 	
-	public Keyboard(Safe s){
+	public Keyboard(Item i,String p){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 300);
 		this.setLayout(null);
-		this.safe = s;
+		this.safe = i;
+		this.password = p;
 		//keyboard = new JPanel();
 		//keyboard.setLayout(null);
 		//keyboard.add(board);
@@ -34,6 +42,15 @@ public class Keyboard extends JFrame{
 		//this.setVisible(true);
 		
 	}
-	
+	private void loadImage(){
+		safe_close =  new ImageIcon("Image/safe_close.png");
+		safe_nomove =  new ImageIcon("Image/safe_nomove.png");
+		safe_open =  new ImageIcon("Image/safe_open.png");
+		safe_screen_open =  new ImageIcon("Image/safe_screen_open.png");
+		System.out.println("loadImage");
+	}
+	public String getPassword(){
+		return password;
+	}
 	
 }

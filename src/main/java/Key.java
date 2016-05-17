@@ -19,7 +19,7 @@ public class Key extends JPanel implements ActionListener{
 	private Keyboard keyboard;
 	private Board board;
 	private JTextArea board_textArea;
-	private Safe safe;
+	private Item safe;
 	//private ArrayList<Character> inputCode; 
 	private StringBuilder inputCode;
 	private char end = 'e';
@@ -54,10 +54,10 @@ public class Key extends JPanel implements ActionListener{
 	
 	
 	
-	public Key(Keyboard k, Board b,Safe s){
+	public Key(Keyboard k, Board b,Item i){
 		this.keyboard = k;
 		this.board = b;
-		this.safe = s;
+		this.safe = i;
 		//this.board_textArea = board.get_textArea();
 		inputCode = new StringBuilder("");
 		loadImage();
@@ -157,14 +157,16 @@ public class Key extends JPanel implements ActionListener{
         	inputCode.deleteCharAt(inputCode.length()-1);
         }else if(e.getSource() == button_11){
          	//System.out.println(board.get_text());
-        	if(inputCode.toString().equals(safe.getPassword())){
-        		safe.set_safe_Image(safe.safe_open);
+        	System.out.println(keyboard.getPassword())
+        	;
+        	if(inputCode.toString().equals(keyboard.getPassword())){
+        		safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
         	}else{
-        		safe.set_safe_Image(safe.safe_close);
+        		safe.updateImage("safe_close.png", "safe_close.png", "safe_close.png");
         	}
         	initial();
         }
-        if(inputCode.toString().length()>safe.getPassword().length()){
+        if(inputCode.toString().length()>keyboard.getPassword().length()){
         	//inputCode.setCharAt(inputCode.length()-1, end);
         	inputCode.deleteCharAt(inputCode.length()-1);
         }

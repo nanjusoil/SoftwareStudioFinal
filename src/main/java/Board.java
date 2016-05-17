@@ -12,10 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Board extends JPanel{
+	
+	private Item safe;
 	private JTextArea textArea;
 	private Keyboard keyboard;
-	private Safe safe;
+//	private Safe safe;
 	private Icon board;
+	
 	JLabel label;
 	private StringBuilder inputCode;
 	
@@ -32,9 +35,9 @@ public class Board extends JPanel{
 	private Image show_number_10;//means nothing
 	private Image temp;
 	
-	public Board(Keyboard k,Safe s){
+	public Board(Keyboard k,Item i){
 		this.keyboard = k;
-		this.safe = s;
+		this.safe = i;
 		this.inputCode = new StringBuilder();
 		this.textArea = new JTextArea("");
 		loadImage();
@@ -115,7 +118,7 @@ public class Board extends JPanel{
 	protected void paintComponent(Graphics g) {
        // super.paintComponent(g);
 		System.out.println("Board inputCode:" + inputCode);
-        for(int i=0;i<safe.getPassword().length();i++){
+        for(int i=0;i<keyboard.getPassword().length();i++){
         	if(i<inputCode.length()){
         		temp = get_inputCode_Image(inputCode.toString().charAt(i));
         		System.out.println("get_inputCode_Image:" + inputCode.toString().charAt(i));

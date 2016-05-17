@@ -28,6 +28,7 @@ public class MainApplet extends PApplet{
 	private Item safe;
 	private JFrame jframe;
 	private LoginApplet loginapplet;
+	private Keyboard keyboard;
 	
 	// parameter::  sizex, sizey , x , y
 	private Item musician;//200, 200, 0, 0
@@ -48,6 +49,7 @@ public class MainApplet extends PApplet{
 		imgBackground = loadImage(path+"LivingRoom.jpg");
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
+		
 		
 		
 		musician = new Item(this , 200 , 200 , 0 , 0 , "musician.png" , "musician.png" , "musician.png", Type.CONTROL);
@@ -124,8 +126,9 @@ public class MainApplet extends PApplet{
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
-					
-					safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
+					keyboard = new Keyboard(safe,"1234");
+					keyboard.setVisible(true);
+					System.out.println("SAFE CLICK");
 				}
 		    }
 		};
