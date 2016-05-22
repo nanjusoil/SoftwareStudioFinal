@@ -16,10 +16,11 @@
 +                   jframe.setContentPane(loginapplet); //把Applet加到JFrame
 
 #Item介紹
-+ 分三種Type: CONTROL, TOOL, MESSAGE
-+ CONTROL:控制遊戲的進行ex:切換房間的左右鍵
++ 分四種Type: CONTROL, TOOL, MESSAGE, FURNITURE
++ CONTROL:控制遊戲的進行ex:切換房間的左右鍵,桌子(因為可以切換背景)
 + TOOL:在房間裡撿到，可以在接下來的逃脫過程中派上用場ex:key
-+ MESSAGE:ex:房間裡撿到的紙?，攤開後會有提示
++ MESSAGE:ex:房間裡撿到的紙團，攤開後會有提示
++ FURNITURE: ex: 保險箱,圖畫，不能被移動
 
 #遊戲流程
 + TOOL
