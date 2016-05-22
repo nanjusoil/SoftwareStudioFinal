@@ -76,9 +76,15 @@ public class ItemBox extends PApplet implements CallbackListener{
 			if(items.get(i)==null){//find first empty cell in the box
 				int max = Math.max(initem.imgItem.width, initem.imgItem.height);
 				//fit into the cell
-//				initem.imgItem.width = initem.imgItem.width*(cellWidth*8/10)/max;
-//				initem.imgItem.height = initem.imgItem.height*(cellWidth*8/10)/max;
-//				initem.resize(68, 66);
+				int neww, newh;
+				neww = initem.imgItem.width*(cellWidth*8/10)/max;
+				newh = initem.imgItem.height*(cellWidth*8/10)/max;
+
+				initem.imgItem.resize(neww,newh);
+				initem.imgItemHover.resize(neww,newh);
+				initem.imgItemOnclick.resize(neww,newh);
+				//the size of button muse be updated correspondingly
+				initem.btnControlP5.updateSize();
 				items.set(i, initem);
 				initem.isInBox = true;
 				initem.colIndex = i;

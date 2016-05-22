@@ -52,15 +52,15 @@ public class MainApplet extends PApplet{
 		
 		
 		
-		musician = new Item(this , 200 , 200 , 0 , 0 , "musician.png" , "musician.png" , "musician.png", Type.CONTROL);
-		cabinet = new Item(this , 1200 , 700 , 0 , 0 , "cabinet.png" , "cabinet.png" , "cabinet.png", Type.CONTROL);
-		monopoly = new Item(this , 190 , 150 , 385 , 60, "monopoly.png" , "monopoly.png" , "monopoly.png", Type.CONTROL);
-		Napoleon = new Item(this , 190 , 150 , 600 , 60 , "Napoleon.png" , "Napoleon.png" , "Napoleon.png", Type.CONTROL);
-		pentatonix = new Item(this , 190 , 150 , 385 , 250 , "pentatonix.png" , "pentatonix.png" , "pentatonix.png", Type.CONTROL);
-		rural = new Item(this , 190 , 150 , 600 , 250, "rural.png" , "rural.png" , "rural.png", Type.CONTROL);
+		musician = new Item(this , 200 , 200 , 0 , 0 , "musician.png" , "musician.png" , "musician.png", Type.FURNITURE);
+		cabinet = new Item(this , 1200 , 700 , 0 , 0 , "cabinet.png" , "cabinet.png" , "cabinet.png", Type.FURNITURE);
+		monopoly = new Item(this , 190 , 150 , 385 , 60, "monopoly.png" , "monopoly.png" , "monopoly.png", Type.FURNITURE);
+		Napoleon = new Item(this , 190 , 150 , 600 , 60 , "Napoleon.png" , "Napoleon.png" , "Napoleon.png", Type.FURNITURE);
+		pentatonix = new Item(this , 190 , 150 , 385 , 250 , "pentatonix.png" , "pentatonix.png" , "pentatonix.png", Type.FURNITURE);
+		rural = new Item(this , 190 , 150 , 600 , 250, "rural.png" , "rural.png" , "rural.png", Type.FURNITURE);
 		
 		
-		buttonLeft = new Item(this , 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
+		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 		           if (theEvent.getAction() == 100) {
@@ -80,7 +80,7 @@ public class MainApplet extends PApplet{
 		       }
 		};
 		
-		buttonRight = new Item(this , 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
+		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
@@ -103,7 +103,7 @@ public class MainApplet extends PApplet{
 		};
 		
 		
-		key = new Item(this , 500 , 400 , "key.png" , "key.png" , "key.png", Type.TOOL){
+		key = new Item(this , 56, 56, 800 , 600 , "key.png" , "key.png" , "key.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("key")){
@@ -122,7 +122,7 @@ public class MainApplet extends PApplet{
 		    }
 		};
 		
-		safe = new Item(this , 500 , 400 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.TOOL){
+		safe = new Item(this , 235, 161, 500 , 400 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.FURNITURE){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
@@ -133,7 +133,7 @@ public class MainApplet extends PApplet{
 		    }
 		};
 		
-		paperball = new Item(this , 800 , 500 , "paperball.png" , "paperball.png" , "paperball.png", Type.MESSAGE){
+		paperball = new Item(this , 70, 76, 800 , 500 , "paperball.png" , "paperball.png" , "paperball.png", Type.MESSAGE){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("paperball")){

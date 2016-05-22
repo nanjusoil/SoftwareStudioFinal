@@ -16,6 +16,7 @@ public class LoginApplet extends PApplet{
 	private Item stage2;
 	private Item stage3;
 	private MainApplet mainApplet;
+	private BuddhistTempleApplet btApplet;
 	private JFrame jframe;
 	public LoginApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -25,15 +26,24 @@ public class LoginApplet extends PApplet{
 		size(windowWidth, windowHeight);
 		smooth();
 		imgBackground = loadImage(path+"BathRoom.jpg");
+		
 		mainApplet = new MainApplet(jframe);
-		stage1 = new Item(this , 275 , 275 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL){
+		btApplet = new BuddhistTempleApplet(jframe);
+		
+		stage1 = new Item(this , 78, 83, 275 , 275 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 		           if (theEvent.getAction() == 100) {
-		        	   mainApplet.init();
-		        	   mainApplet.start();
-		        	   mainApplet.setFocusable(true);
-		        	   jframe.setContentPane(mainApplet);
+//		        	   mainApplet.init();
+//		        	   mainApplet.start();
+//		        	   mainApplet.setFocusable(true);
+//		        	   jframe.setContentPane(mainApplet);
+		        	   
+		        	   btApplet.init();
+		        	   btApplet.start();
+		        	   btApplet.setFocusable(true);
+		        	   jframe.setContentPane(btApplet);
+		        	   
 		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        	   jframe.setSize(windowWidth, windowHeight);
 		        	   jframe.setVisible(true);
