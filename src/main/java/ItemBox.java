@@ -97,7 +97,7 @@ public class ItemBox extends PApplet implements CallbackListener{
 	}
 	
 	//property become ready to be used or show its content
-	public void checkItem(Item citem){
+	public void checkItem(Item citem, ArrayList<Item> itemArr){
 		
 		/*the item falls into one of the two groups
 		 * TOOL: it can be used, 
@@ -108,7 +108,15 @@ public class ItemBox extends PApplet implements CallbackListener{
 		 * meaning that the property is ready to be used
 		 */
 		if(citem.type == Type.TOOL){
-			citem.isHolded = true;
+			//can only check one item at a time
+			int cindex = itemArr.indexOf(citem);
+			for(int i = 0;i<itemArr.size(); i++){
+				if(i!=cindex){
+					itemArr.get(i).isHolded = false;
+				}else{
+					itemArr.get(i).isHolded = true;
+				}
+			}
 			//the holded item is in which cells in the box
 			this.indexActiveBox = citem.colIndex;
 			//make the cell's border become deeper

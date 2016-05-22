@@ -32,6 +32,7 @@ public class Item extends PApplet implements CallbackListener{
 	public ControlP5 controlP5;
 	public ControlP5 solControlP5;
 	public Button btnControlP5; //need to update its size, so declare it explicitly
+	public Button btnSolControlP5;
 	private String path = "main/resources/";
 	public PImage imgItem;
 	public PImage imgItemHover;
@@ -43,13 +44,14 @@ public class Item extends PApplet implements CallbackListener{
 	public int colIndex; //become 0~7 when putinItem() called
 	public boolean isHolded; //become true when checkItem() called
 	public Type type; //TOOL or MESSAGE 
+	
        
 //called if the item's type isn't TOOL
 public Item (PApplet parent ,int sizeX, int sizeY, int x , int y ,  String sImgItem , String sImgItemHover , String sImgItemOnclick,  Type type) {
 		
 		imgItem = loadImage(path+sImgItem);
-		imgItemHover = loadImage(path+sImgItem);
-		imgItemOnclick = loadImage(path+sImgItem);   
+		imgItemHover = loadImage(path+sImgItemHover);
+		imgItemOnclick = loadImage(path+sImgItemOnclick);   
 		imgItem.resize(sizeX, sizeY);
 		imgItemHover.resize(sizeX, sizeY);
 		imgItemOnclick.resize(sizeX, sizeY);
@@ -91,7 +93,8 @@ public Item (PApplet parent ,int sizeX, int sizeY, int x , int y ,  String sImgI
 			imgSol.resize(solSizeX, solSizeY);
 			
 			solControlP5 = new ControlP5(parent);
-   	   		solControlP5.addButton("sol" + this.getName())
+			btnSolControlP5 = solControlP5.addButton("sol" + this.getName());
+   	   		btnSolControlP5
 //   	   		.setVisible(false)
 //   	   		.setColor((new CColor()))
    	   			.setImages(imgSol, imgSol, imgSol)

@@ -1,5 +1,8 @@
 package main.java;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JFrame;
 
 import controlP5.CallbackEvent;
@@ -37,6 +40,7 @@ public class MainApplet extends PApplet{
 	private Item Napoleon;//190, 150, 600, 60
 	private Item pentatonix;//190, 150, 385, 250
 	private Item rural;//190, 150, 600, 250
+	private ArrayList<Item> itemArr;
 		
 	public MainApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -111,7 +115,7 @@ public class MainApplet extends PApplet{
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
-							itemBox.checkItem(this);
+							itemBox.checkItem(this, itemArr);
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solkey")){
@@ -141,12 +145,14 @@ public class MainApplet extends PApplet{
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
-							itemBox.checkItem(this);
+							itemBox.checkItem(this, itemArr);
 						}
 					}
 				}
 		    }
 		};
+		
+		itemArr = new ArrayList<Item>(Arrays.asList(key, paperball));
 	}
 	
 	public void draw() {

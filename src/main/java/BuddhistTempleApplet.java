@@ -1,5 +1,8 @@
 package main.java;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JFrame;
 
 import controlP5.CallbackEvent;
@@ -21,7 +24,8 @@ public class BuddhistTempleApplet extends PApplet{
 	private String[] filenameRooms = {"BedRoom.jpg" , "LivingRoom.jpg" , "Kitchen.jpg"};
 	private Item buttonRight;
 	private Item buttonLeft;
-	private Item key;
+	private Item buttonReturn;
+	private Item mykey;
 	private ItemBox itemBox;
 	private JFrame jframe;
 	private LoginApplet loginapplet;
@@ -38,6 +42,12 @@ public class BuddhistTempleApplet extends PApplet{
 	private Item dufu;
 	private Item wangwei;
 	private Item libai;
+	
+	private ArrayList<Item> itemArr; 
+	//used as second parameter of checkItem(), to make different items' isHolded exclusive
+	//(There is at most only one item's isHolded being true in any given time)
+	
+	private int numSolved;
 
 	public BuddhistTempleApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -50,6 +60,7 @@ public class BuddhistTempleApplet extends PApplet{
 		imgBackground = loadImage(path+"BuddhistTempleWithoutTable.png");
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
+		numSolved = 0;
 		
 		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
 			@Override
@@ -84,6 +95,21 @@ public class BuddhistTempleApplet extends PApplet{
 		    }
 		};
 		
+		buttonReturn = new Item(this , 128, 128, 0 , 572 , "arrowReturn.png" , "arrowReturn.png" , "arrowReturnPressed.png", Type.CONTROL){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if (theEvent.getAction() == 100) {
+					imgBackground = loadImage(path+"BuddhistTempleWithoutTable.png");
+					imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
+					baijuyi.solControlP5.setVisible(false);
+					dufu.solControlP5.setVisible(false);
+					wangwei.solControlP5.setVisible(false);
+					libai.solControlP5.setVisible(false);
+					table.controlP5.setVisible(true);
+				}
+		    }
+		};
+		
 		itemBox = new ItemBox(this, 1200, 0, "propsColumn.png"){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
@@ -94,30 +120,30 @@ public class BuddhistTempleApplet extends PApplet{
 		};
 		
 		
-//		key = new Item(this , 56, 56, 800 , 600 , "key.png" , "key.png" , "key.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
-//			@Override
-//			public void controlEvent(CallbackEvent theEvent) {
-//				if(theEvent.getController().getName().equals("key")){
-//					if (theEvent.getAction() == 100) {
-//						if(!isInBox){
-//							itemBox.putinItem(this);
-//						}else{
-//							itemBox.checkItem(this);
-//						}
-//					}
-//				}else if(theEvent.getController().getName().equals("solkey")){
-//					if ((theEvent.getAction() == 100) && isInBox && isHolded){
-//						itemBox.useItem(this);
-//					}
-//				}
-//		    }
-//		};
+		mykey = new Item(this , 56, 56, 500 , 600 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if(theEvent.getController().getName().equals("mykey")){
+					if (theEvent.getAction() == 100) {
+						if(!isInBox){
+							itemBox.putinItem(this);
+						}else{
+							itemBox.checkItem(this, itemArr);
+						}
+					}
+				}else if(theEvent.getController().getName().equals("solmykey")){
+					if ((theEvent.getAction() == 100) && isInBox && isHolded){
+						itemBox.useItem(this);
+					}
+				}
+		    }
+		};
 		
 		
 		
 		//sizex:sizey = 1.14402:1
 //		table = new Item(this , 343 , 300 , 430 , 330 , "table.png" , "table.png" , "table.png", Type.FURNITURE){
-		table = new Item(this , 343 , 300 , 430 , 330 , "TableWithStatue.png" , "TableWithStatue.png" , "TableWithStatue.png", Type.FURNITURE){
+		table = new Item(this , 343 , 300 , 430 , 330 , "TableWithStatue.png" , "TableWithStatue.png" , "TableWithStatue.png", Type.CONTROL){
 			
 		@Override
 			public void controlEvent(CallbackEvent theEvent) {
@@ -204,17 +230,23 @@ public class BuddhistTempleApplet extends PApplet{
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
-							itemBox.checkItem(this);
+							itemBox.checkItem(this, itemArr);
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solmonopoly")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
+//						itemBox.useItem(this);
+						//use btnControlP5 rather than ControlP5
+//						this.btnControlP5.setPosition((int)this.btnSolControlP5.getPosition()[0]+200,(int)this.btnSolControlP5.getPosition()[1]-20);
+//						this.btnControlP5.setPosition(50,50);
 						itemBox.useItem(this);
+						numSolved ++;
+						checkWin();
 					}
 				}
 		   	}
 		};
-	
+		
 		dufu = new Item(this , 100 , 100 , 320 , 20 , "musician.png" , "musician.png" , "musician.png", 80 , 186 , 520 , 100, "confucius.png", Type.TOOL){
 		
 		@Override
@@ -224,12 +256,14 @@ public class BuddhistTempleApplet extends PApplet{
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
-							itemBox.checkItem(this);
+							itemBox.checkItem(this, itemArr);
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solmusician")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
 						itemBox.useItem(this);
+						numSolved ++;
+						checkWin();
 					}
 				}
 		   	}
@@ -244,12 +278,14 @@ public class BuddhistTempleApplet extends PApplet{
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
-							itemBox.checkItem(this);
+							itemBox.checkItem(this, itemArr);
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solNapoleon")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
 						itemBox.useItem(this);
+						numSolved ++;
+						checkWin();
 					}
 				}
 		   	}
@@ -265,12 +301,14 @@ public class BuddhistTempleApplet extends PApplet{
 							if(!isInBox){
 								itemBox.putinItem(this);
 							}else{
-								itemBox.checkItem(this);
+								itemBox.checkItem(this, itemArr);
 							}
 						}
 					}else if(theEvent.getController().getName().equals("solcarpet")){
 						if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
 							itemBox.useItem(this);
+							numSolved ++;
+							checkWin();
 						}
 					}
 			   	}
@@ -283,6 +321,8 @@ public class BuddhistTempleApplet extends PApplet{
 		dufu.solControlP5.setVisible(false);
 		wangwei.solControlP5.setVisible(false);
 		libai.solControlP5.setVisible(false);
+		mykey.controlP5.setVisible(false);
+		itemArr = new ArrayList<Item>(Arrays.asList(baijuyi, dufu, wangwei, libai, mykey));
 	}
 	
 	public void draw() {
@@ -306,6 +346,13 @@ public class BuddhistTempleApplet extends PApplet{
 	public void keyPressed(){
 		
 	}
+	
+	public void checkWin(){
+		if(numSolved == 4){
+			this.mykey.controlP5.setVisible(true);
+		}
+	}
+
 
 }
 
