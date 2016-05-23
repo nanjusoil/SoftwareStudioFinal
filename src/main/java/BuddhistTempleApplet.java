@@ -28,6 +28,7 @@ public class BuddhistTempleApplet extends PApplet{
 	private Item mykey;
 	private ItemBox itemBox;
 	private JFrame jframe;
+	private JFrame cardframe;
 	private LoginApplet loginapplet;
 	
 	// parameter::  sizex, sizey , x , y
@@ -61,6 +62,8 @@ public class BuddhistTempleApplet extends PApplet{
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
 		numSolved = 0;
+		
+		
 		
 		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
 			@Override
@@ -221,12 +224,21 @@ public class BuddhistTempleApplet extends PApplet{
 //		};
 		
 		//later change the picture to tokens
-		baijuyi = new Item(this , 100 , 100 , 100 , 200 , "monopoly.png" , "monopoly.png" , "monopoly.png", 186 , 240 , 330 , 50, "lucifer.png", Type.TOOL){
+		baijuyi = new Item(this , 100 , 100 , 100 , 200 , "card2.png" , "card2.png" , "card2.png", 186 , 240 , 330 , 50, "lucifer.png", Type.TOOL){
 		
 		@Override
 			public void controlEvent(CallbackEvent theEvent) {
-				if(theEvent.getController().getName().equals("monopoly")){
+				if(theEvent.getController().getName().equals("card2")){
 					if (theEvent.getAction() == 100) {
+						FirstApplet applet = new FirstApplet();
+						applet.init();
+						applet.start();
+						applet.setFocusable(true);
+						
+						JFrame window = new JFrame("WORD");
+						window.setContentPane(applet);
+						window.setSize( 800, 800);
+						window.setVisible(true);
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
@@ -247,12 +259,22 @@ public class BuddhistTempleApplet extends PApplet{
 		   	}
 		};
 		
-		dufu = new Item(this , 100 , 100 , 320 , 20 , "musician.png" , "musician.png" , "musician.png", 80 , 186 , 520 , 100, "confucius.png", Type.TOOL){
+		dufu = new Item(this , 100 , 100 , 320 , 20 , "card2.png" , "card2.png" , "card2.png", 80 , 186 , 520 , 100, "confucius.png", Type.TOOL){
 		
 		@Override
 			public void controlEvent(CallbackEvent theEvent) {
-				if(theEvent.getController().getName().equals("musician")){
+				if(theEvent.getController().getName().equals("card2")){
+					
 					if (theEvent.getAction() == 100) {
+						SecondApplet applet = new SecondApplet();
+						applet.init();
+						applet.start();
+						applet.setFocusable(true);
+						
+						JFrame window = new JFrame("WORD");
+						window.setContentPane(applet);
+						window.setSize( 800, 800);
+						window.setVisible(true);
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
@@ -269,12 +291,21 @@ public class BuddhistTempleApplet extends PApplet{
 		   	}
 		};
 		
-		wangwei = new Item(this , 100 , 100 , 20 , 210 , "Napoleon.png" , "Napoleon.png" , "Napoleon.png", 110 , 186 , 630 , 105, "buddha.png", Type.TOOL){
+		wangwei = new Item(this , 100 , 100 , 20 , 210 , "card2.png" , "card2.png" , "card2.png", 110 , 186 , 630 , 105, "buddha.png", Type.TOOL){
 		
 		@Override
 			public void controlEvent(CallbackEvent theEvent) {
-				if(theEvent.getController().getName().equals("Napoleon")){
+				if(theEvent.getController().getName().equals("card2")){
 					if (theEvent.getAction() == 100) {
+						ThirdApplet applet = new ThirdApplet();
+						applet.init();
+						applet.start();
+						applet.setFocusable(true);
+						
+						JFrame window = new JFrame("WORD");
+						window.setContentPane(applet);
+						window.setSize( 800, 800);
+						window.setVisible(true);
 						if(!isInBox){
 							itemBox.putinItem(this);
 						}else{
@@ -292,12 +323,21 @@ public class BuddhistTempleApplet extends PApplet{
 		};
 		
 		
-		libai = new Item(this , 100 , 100 , 20 , 20 , "carpet.jpg" , "carpet.jpg" , "carpet.jpg", 118 , 186 , 750 , 105, "ludongbin.png", Type.TOOL){
+		libai = new Item(this , 100 , 100 , 20 , 20 , "card2.png" , "card2.png" , "card2.png", 118 , 186 , 750 , 105, "ludongbin.png", Type.TOOL){
 			
 			@Override
 				public void controlEvent(CallbackEvent theEvent) {
 					if(theEvent.getController().getName().equals("carpet")){
 						if (theEvent.getAction() == 100) {
+							FourthApplet applet = new FourthApplet();
+							applet.init();
+							applet.start();
+							applet.setFocusable(true);
+							
+							JFrame window = new JFrame("WORD");
+							window.setContentPane(applet);
+							window.setSize( 800, 800);
+							window.setVisible(true);
 							if(!isInBox){
 								itemBox.putinItem(this);
 							}else{
