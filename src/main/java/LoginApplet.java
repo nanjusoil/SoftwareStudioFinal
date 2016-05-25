@@ -30,7 +30,7 @@ public class LoginApplet extends PApplet{
 		imgBackground = loadImage(path+"BathRoom.jpg");
 		
 		mainApplet = new MusicPuzzleApplet(jframe);
-		//btApplet = new BuddhistTempleApplet(jframe);
+		btApplet = new BuddhistTempleApplet(jframe);
 		//astronomyapplet = new AstronomyApplet(jframe);
 		musicPuzzleApplet = new MusicPuzzleApplet(jframe);
 		
@@ -43,20 +43,20 @@ public class LoginApplet extends PApplet{
 //		        	   mainApplet.setFocusable(true);
 //		        	   jframe.setContentPane(mainApplet);
 		        	   
-		        	   //btApplet.init();
-		        	   //btApplet.start();
-		        	   //btApplet.setFocusable(true);
-		        	   //jframe.setContentPane(btApplet);
+		        	   btApplet.init();
+		        	   btApplet.start();
+		        	   btApplet.setFocusable(true);
+		        	   jframe.setContentPane(btApplet);
 		        	   
 		        	  /* astronomyapplet.init();
 		        	   astronomyapplet.start();
 		        	   astronomyapplet.setFocusable(true);
 		        	   jframe.setContentPane(astronomyapplet);*/
 		        	   
-		        	   musicPuzzleApplet.init();
+		        	   /*musicPuzzleApplet.init();
 		        	   musicPuzzleApplet.start();
 		        	   musicPuzzleApplet.setFocusable(true);
-		        	   jframe.setContentPane(musicPuzzleApplet);
+		        	   jframe.setContentPane(musicPuzzleApplet);*/
 		        	   
 		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        	   jframe.setSize(windowWidth, windowHeight);

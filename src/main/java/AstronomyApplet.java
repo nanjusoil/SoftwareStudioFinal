@@ -65,6 +65,8 @@ public class AstronomyApplet extends PApplet{
 		loginapplet = new LoginApplet(jframe);
 		numSolved = 0;
 		
+	
+		
 		controlP5 = new ControlP5(this);
 		controlP5.addKnob("k").setImage(loadImage(path+"arrowLeft.png")).setViewStyle(1)
 		  .setPosition(200, 100)

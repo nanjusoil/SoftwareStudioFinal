@@ -53,6 +53,8 @@ public class MusicPuzzleApplet extends PApplet{
 	
 	Clip faith, hero, vocal, rurals;   
 	
+	AstronomyApplet astronomyApplet;
+	
 	public MusicPuzzleApplet(JFrame jframe){
 		this.jframe = jframe;
 	}
@@ -66,7 +68,7 @@ public class MusicPuzzleApplet extends PApplet{
 		loginapplet = new LoginApplet(jframe);
 		
 		
-		
+		astronomyApplet = new AstronomyApplet(jframe); 
 
 		    try {
 		        
@@ -191,6 +193,14 @@ public class MusicPuzzleApplet extends PApplet{
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
+				
+		        	   astronomyApplet.init();
+		        	   astronomyApplet.start();
+		        	   astronomyApplet.setFocusable(true);
+		        	   jframe.setContentPane(astronomyApplet);
+		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        	   jframe.setSize(windowWidth, windowHeight);
+		        	   jframe.setVisible(true);
 					if(currentRoom!=2)
 					{
 					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);

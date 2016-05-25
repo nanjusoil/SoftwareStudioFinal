@@ -34,3 +34,12 @@
 + 撿到紙條/call ItemBox的putinItem()
 + 在道具欄點一下道具可以查看它的內容/call ItemBox的checkItem()
 + 當達到特定條件(ex:保險箱打開後，寫有保險箱密碼的紙條就會消失)時，紙條就會消失/call ItemBox的useItem()
+
+#音樂播放
++ 首先先宣告一個 ------ Clip 變數名稱
++ 再利用 變數名稱 = MusicPlay.getMusic("src/" + path + "Sounds/音樂檔名稱.wav");  <<< 注意一定要加上"src/"!!!!!     path為  "main/resources/" >>>
++ 要暫停，撥放，循環播放分別用 變數名稱.stop();
+							   變數名稱.start();
+							   變數名稱.loop(Clip.LOOP_CONTINUOUSLY);
++ 音樂檔僅能為.wav檔，附上音樂剪輯及轉檔網址 ----   音樂剪輯:: http://mp3cut.net/
+													轉檔::  http://media.io/zh/

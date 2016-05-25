@@ -49,6 +49,10 @@ public class BuddhistTempleApplet extends PApplet{
 	//(There is at most only one item's isHolded being true in any given time)
 	
 	private int numSolved;
+	
+	private MusicPuzzleApplet musicPuzzleApplet;
+	
+	
 
 	public BuddhistTempleApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -63,7 +67,7 @@ public class BuddhistTempleApplet extends PApplet{
 		loginapplet = new LoginApplet(jframe);
 		numSolved = 0;
 		
-		
+		musicPuzzleApplet = new MusicPuzzleApplet(jframe);
 		
 		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
 			@Override
@@ -89,6 +93,13 @@ public class BuddhistTempleApplet extends PApplet{
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
+					musicPuzzleApplet.init();
+					musicPuzzleApplet.start();
+					musicPuzzleApplet.setFocusable(true);
+		        	   jframe.setContentPane(musicPuzzleApplet);
+		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        	   jframe.setSize(windowWidth, windowHeight);
+		        	   jframe.setVisible(true);
 					if(currentRoom!=2)
 					{
 					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
