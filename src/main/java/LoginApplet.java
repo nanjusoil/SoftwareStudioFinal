@@ -15,9 +15,10 @@ public class LoginApplet extends PApplet{
 	private Item stage1;
 	private Item stage2;
 	private Item stage3;
-	private MainApplet mainApplet;
+	private MusicPuzzleApplet mainApplet;
 	private BuddhistTempleApplet btApplet;
 	private AstronomyApplet astronomyapplet;
+	private MusicPuzzleApplet musicPuzzleApplet;
 	private JFrame jframe;
 	public LoginApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -28,9 +29,10 @@ public class LoginApplet extends PApplet{
 		smooth();
 		imgBackground = loadImage(path+"BathRoom.jpg");
 		
-		mainApplet = new MainApplet(jframe);
+		mainApplet = new MusicPuzzleApplet(jframe);
 		//btApplet = new BuddhistTempleApplet(jframe);
-		astronomyapplet = new AstronomyApplet(jframe);
+		//astronomyapplet = new AstronomyApplet(jframe);
+		musicPuzzleApplet = new MusicPuzzleApplet(jframe);
 		
 		stage1 = new Item(this , 78, 83, 275 , 275 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL){
 			@Override
@@ -46,10 +48,15 @@ public class LoginApplet extends PApplet{
 		        	   //btApplet.setFocusable(true);
 		        	   //jframe.setContentPane(btApplet);
 		        	   
-		        	   astronomyapplet.init();
+		        	  /* astronomyapplet.init();
 		        	   astronomyapplet.start();
 		        	   astronomyapplet.setFocusable(true);
-		        	   jframe.setContentPane(astronomyapplet);
+		        	   jframe.setContentPane(astronomyapplet);*/
+		        	   
+		        	   musicPuzzleApplet.init();
+		        	   musicPuzzleApplet.start();
+		        	   musicPuzzleApplet.setFocusable(true);
+		        	   jframe.setContentPane(musicPuzzleApplet);
 		        	   
 		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        	   jframe.setSize(windowWidth, windowHeight);
