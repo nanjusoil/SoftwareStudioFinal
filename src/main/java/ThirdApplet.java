@@ -18,6 +18,7 @@ public class ThirdApplet extends PApplet{
 	PFont f;
 	Minim minim;
 	AudioPlayer song;
+	private String path = "main/resources/";
 	
 	private int begin = 20;
 	private int addition = 40;
@@ -117,7 +118,7 @@ public class ThirdApplet extends PApplet{
 		ani_13.start();
 		ani_14.start();
 		ani_15.start();*/
-		bg = loadImage("/Image/paper.jpg");
+		bg = loadImage(path +"paper.jpg");
 
 	}
 	//千呼萬喚始出來，猶抱琵琶半遮面(白居易-詩魔)
