@@ -114,8 +114,12 @@ public class FirstApplet extends PApplet{
 		ani_9.start();
 		ani_10.start();
 		ani_11.start();*/
+		try{
 		bg = loadImage(path +"paper.jpg");
-		
+		}catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
 
 	}
 	//舉杯邀明月，對影成三人

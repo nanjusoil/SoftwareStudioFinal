@@ -241,7 +241,7 @@ public class BuddhistTempleApplet extends PApplet{
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("card2")){
 					if (theEvent.getAction() == 100) {
-						FirstApplet applet = new FirstApplet(cardframe);
+						FirstApplet applet = new FirstApplet();
 						applet.init();
 						applet.start();
 						applet.setFocusable(true);
