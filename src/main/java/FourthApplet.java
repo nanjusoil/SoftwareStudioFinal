@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.ArrayList;
 
+import javax.sound.sampled.Clip;
+
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
@@ -18,6 +20,8 @@ public class FourthApplet extends PApplet{
 	PFont f;
 	Minim minim;
 	AudioPlayer song;
+	
+	private String path = "main/resources/";
 	private PImage bg;
 	private int r=204,g=102,b=0;
 	private int r1=0;
@@ -47,12 +51,22 @@ public class FourthApplet extends PApplet{
 	private Ani ani_10;
 	private Ani ani_11;
 	
+	Clip poem2;
+	
 	public void setup(){
 		/*minim = new Minim(this);
 		//song = minim.loadFile(this.getClass().getResource("audio/toast.mp3").getPath());
 		song = minim.loadFile("audio/toast.mp3", 524288);
 		
 		song.loop();*/
+		try{
+			poem2 = MusicPlay.getMusic("src/" + path + "Sounds/poem2.wav");
+		}catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
+		
+		
 		
 		Ani.init(this);
 		ani_r = Ani.to(this, 10 , "r", 0);

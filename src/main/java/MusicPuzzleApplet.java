@@ -51,7 +51,7 @@ public class MusicPuzzleApplet extends PApplet{
 	private Item rural;//190, 150, 600, 250
 	private ArrayList<Item> itemArr;
 	
-	Clip faith, hero, vocal, rurals;   
+	Clip faith, hero, vocal, rurals,toast;   
 	
 	AstronomyApplet astronomyApplet;
 	
@@ -80,7 +80,7 @@ public class MusicPuzzleApplet extends PApplet{
 		       
 		        rurals = MusicPlay.getMusic("src/" + path + "Sounds/rurals.wav");
 		       
-		         
+		        
 		        
 		        
 		    } catch(Exception ex) {

@@ -12,13 +12,19 @@ import processing.data.JSONArray;
 import processing.data.JSONObject;
 import ddf.minim.*;
 
+import javax.sound.sampled.Clip;
+import javax.swing.JFrame;
 
-public class FirstApplet extends PApplet{
+public class FirstApplet<PoemApplet> extends PApplet{
 	
 	PFont f;
 	Minim minim;
 	AudioPlayer song;
 	private PImage bg;
+	
+	private String path = "main/resources/";
+	private JFrame jframe;
+	
 	private int r=204,g=102,b=0;
 	private int r1=0;
 	private int r2=0;
@@ -47,12 +53,27 @@ public class FirstApplet extends PApplet{
 	private Ani ani_10;
 	private Ani ani_11;
 	
+	Clip toast;
+	
+	
+	public FirstApplet(JFrame jframe){
+		this.jframe = jframe;
+	}
+	
 	public void setup(){
 		/*minim = new Minim(this);
 		//song = minim.loadFile(this.getClass().getResource("audio/toast.mp3").getPath());
 		song = minim.loadFile("audio/toast.mp3", 524288);
 		
 		song.loop();*/
+		try{
+			toast = MusicPlay.getMusic("src/" + path + "Sounds/toast.wav");
+		}catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
+		
+		
 		
 		Ani.init(this);
 		ani_r = Ani.to(this, 10 , "r", 0);
