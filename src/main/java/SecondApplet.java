@@ -19,6 +19,7 @@ public class SecondApplet extends PApplet{
 	Minim minim;
 	AudioPlayer song;
 	private PImage bg;
+	private String path = "main/resources/";
 	private int r=204,g=102,b=0;
 	private int r1=0;
 	private int r2=0;
@@ -97,7 +98,7 @@ public class SecondApplet extends PApplet{
 		ani_9.start();
 		ani_10.start();
 		ani_11.start();*/
-		bg = loadImage("/Image/paper.jpg");
+		bg = loadImage(path +"paper.jpg");
 		
 
 	}

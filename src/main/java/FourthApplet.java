@@ -112,7 +112,7 @@ public class FourthApplet extends PApplet{
 		ani_10.start();
 		ani_11.start();
 		
-		bg = loadImage("/Image/paper.jpg");
+		bg = loadImage(path +"paper.jpg");
 
 	}
 	//感時花濺淚 恨別鳥驚心(杜甫)

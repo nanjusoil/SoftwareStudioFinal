@@ -338,7 +338,7 @@ public class BuddhistTempleApplet extends PApplet{
 			
 			@Override
 				public void controlEvent(CallbackEvent theEvent) {
-					if(theEvent.getController().getName().equals("carpet")){
+					if(theEvent.getController().getName().equals("card2")){
 						if (theEvent.getAction() == 100) {
 							FourthApplet applet = new FourthApplet();
 							applet.init();

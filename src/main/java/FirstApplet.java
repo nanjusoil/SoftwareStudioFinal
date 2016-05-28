@@ -15,7 +15,7 @@ import ddf.minim.*;
 import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
-public class FirstApplet<PoemApplet> extends PApplet{
+public class FirstApplet extends PApplet{
 	
 	PFont f;
 	Minim minim;
@@ -55,10 +55,6 @@ public class FirstApplet<PoemApplet> extends PApplet{
 	
 	Clip toast;
 	
-	
-	public FirstApplet(JFrame jframe){
-		this.jframe = jframe;
-	}
 	
 	public void setup(){
 		/*minim = new Minim(this);
@@ -118,7 +114,7 @@ public class FirstApplet<PoemApplet> extends PApplet{
 		ani_9.start();
 		ani_10.start();
 		ani_11.start();*/
-		bg = loadImage("/Image/paper.jpg");
+		bg = loadImage(path +"paper.jpg");
 		
 
 	}
