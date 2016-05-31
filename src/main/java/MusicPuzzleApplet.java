@@ -79,6 +79,7 @@ public class MusicPuzzleApplet extends PApplet{
 		        vocal = MusicPlay.getMusic("src/" + path + "Sounds/vocal.wav");
 		       
 		        rurals = MusicPlay.getMusic("src/" + path + "Sounds/rurals.wav");
+		        
 		       
 		        
 		        

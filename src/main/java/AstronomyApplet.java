@@ -60,7 +60,7 @@ public class AstronomyApplet extends PApplet{
 	public void setup() {
 		size(windowWidth, windowHeight);
 		smooth();
-		imgBackground = loadImage(path+"starnight.jpg");
+		imgBackground = loadImage(path+"Observatory.png");
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
 		numSolved = 0;
@@ -69,7 +69,7 @@ public class AstronomyApplet extends PApplet{
 		
 		controlP5 = new ControlP5(this);
 		controlP5.addKnob("k").setImage(loadImage(path+"arrowLeft.png")).setViewStyle(1)
-		  .setPosition(600, 450)
+		  .setPosition(200, 100)
 		  .setRadius(50)
 		  .setScrollSensitivity((float) 0.001)
 		  .setMin(60)
@@ -77,7 +77,7 @@ public class AstronomyApplet extends PApplet{
 		  .addCallback(new CallbackListener(){
 				@Override
 				public void controlEvent(CallbackEvent theEvent) {
-					if(theEvent.getController().getValue() >= 95 && theEvent.getController().getValue() <= 99)
+					if(theEvent.getController().getValue() >= 75 && theEvent.getController().getValue() <= 80)
 						mykey.controlP5.setVisible(true);
 			    }
 		  });
@@ -151,8 +151,7 @@ public class AstronomyApplet extends PApplet{
 		    }
 		};
 		
-		cassiopeia = new Item(this , 100 , 100 , 400, 550 , "Cassiopeia.jpg" , "Cassiopeia.jpg" , "Cassiopeia.jpg", 118 , 186 , 750 , 105, "Cassiopeia.png", Type.FURNITURE){
-			
+		cassiopeia = new Item(this , 100 , 100 , 100 , 100 , "Cassiopeia.jpg" , "Cassiopeia.jpg" , "Cassiopeia.jpg", 118 , 186 , 750 , 105, "Cassiopeia.png", Type.FURNITURE){
 			
 			@Override
 				public void controlEvent(CallbackEvent theEvent) {
@@ -173,7 +172,7 @@ public class AstronomyApplet extends PApplet{
 			   	}
 		};
 		
-		bigDipper = new Item(this , 100 , 150 , 800 , 300 , "BigDipper.jpg" , "BigDipper.jpg" , "BigDipper.jpg", 118 , 286 , 850 , 205, "BigDipper.png", Type.FURNITURE){
+		bigDipper = new Item(this , 100 , 150 , 20 , 20 , "BigDipper.jpg" , "BigDipper.jpg" , "BigDipper.jpg", 118 , 286 , 850 , 205, "BigDipper.png", Type.FURNITURE){
 			
 			@Override
 				public void controlEvent(CallbackEvent theEvent) {
@@ -199,7 +198,7 @@ public class AstronomyApplet extends PApplet{
 	}
 	
 	public void draw() {
-		image(imgBackground,0,0,1286,700);
+		image(imgBackground, 0, 0);
 		
 	}
 

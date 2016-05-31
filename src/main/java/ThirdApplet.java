@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.ArrayList;
 
+import javax.sound.sampled.Clip;
+
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
@@ -60,12 +62,22 @@ public class ThirdApplet extends PApplet{
 	private Ani ani_14;
 	private Ani ani_15;
 	
+	Clip toast;
+	
 	public void setup(){
 		/*minim = new Minim(this);
 		//song = minim.loadFile(this.getClass().getResource("audio/toast.mp3").getPath());
 		song = minim.loadFile("audio/toast.mp3", 524288);
 		
 		song.loop();*/
+		
+		try{
+			toast = MusicPlay.getMusic("src/" + path + "Sounds/third.wav");
+			System.out.println("OK playing sound.");
+		}catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
 		
 		Ani.init(this);
 		ani_r = Ani.to(this, 10 , "r", 0);
@@ -119,6 +131,8 @@ public class ThirdApplet extends PApplet{
 		ani_14.start();
 		ani_15.start();*/
 		bg = loadImage(path +"paper.jpg");
+		
+		toast.start();
 
 	}
 	//千呼萬喚始出來，猶抱琵琶半遮面(白居易-詩魔)

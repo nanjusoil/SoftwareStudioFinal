@@ -2,6 +2,8 @@ package main.java;
 
 import java.util.ArrayList;
 
+import javax.sound.sampled.Clip;
+
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import de.looksgood.ani.Ani;
@@ -48,12 +50,20 @@ public class SecondApplet extends PApplet{
 	private Ani ani_10;
 	private Ani ani_11;
 	
+	Clip toast;
 	public void setup(){
 		/*minim = new Minim(this);
 		//song = minim.loadFile(this.getClass().getResource("audio/toast.mp3").getPath());
 		song = minim.loadFile("audio/toast.mp3", 524288);
 		
 		song.loop();*/
+		try{
+			toast = MusicPlay.getMusic("src/" + path + "Sounds/second.wav");
+			System.out.println("OK playing sound.");
+		}catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
 		
 		Ani.init(this);
 		ani_r = Ani.to(this, 10 , "r", 0);
@@ -100,7 +110,7 @@ public class SecondApplet extends PApplet{
 		ani_11.start();*/
 		bg = loadImage(path +"paper.jpg");
 		
-
+		toast.start();
 	}
 	//行到水窮處，坐看雲起時(王維)
 	public void draw(){

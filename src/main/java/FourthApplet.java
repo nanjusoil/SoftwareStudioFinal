@@ -51,7 +51,7 @@ public class FourthApplet extends PApplet{
 	private Ani ani_10;
 	private Ani ani_11;
 	
-	Clip poem2;
+	Clip toast;
 	
 	public void setup(){
 		/*minim = new Minim(this);
@@ -60,7 +60,7 @@ public class FourthApplet extends PApplet{
 		
 		song.loop();*/
 		try{
-			poem2 = MusicPlay.getMusic("src/" + path + "Sounds/poem2.wav");
+			toast = MusicPlay.getMusic("src/" + path + "Sounds/fourth.wav");
 		}catch(Exception ex) {
 	        System.out.println("Error with playing sound.");
 	        ex.printStackTrace();
@@ -113,7 +113,8 @@ public class FourthApplet extends PApplet{
 		ani_11.start();
 		
 		bg = loadImage(path +"paper.jpg");
-
+		
+		toast.start();
 	}
 	//感時花濺淚 恨別鳥驚心(杜甫)
 	public void draw(){

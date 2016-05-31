@@ -39,6 +39,10 @@ public class BuddhistTempleApplet extends PApplet{
 	private Item ludongbin;
 	
 	//the token which ...'s phrase is written on
+	private Item leftBox;
+	private Item rightBox;
+	
+	
 	private Item baijuyi;
 	private Item dufu;
 	private Item wangwei;
@@ -235,10 +239,17 @@ public class BuddhistTempleApplet extends PApplet{
 //		};
 		
 		//later change the picture to tokens
-		baijuyi = new Item(this , 100 , 100 , 100 , 200 , "card2.png" , "card2.png" , "card2.png", 186 , 240 , 330 , 50, "lucifer.png", Type.TOOL){
+		
+		
+		
+		
+		
+		baijuyi = new Item(this , 30 , 30 , 500 , 440 , "card2.png" , "card2.png" , "card2.png", 186 , 240 , 330 , 50, "lucifer.png", Type.TOOL){
 		
 		@Override
+		
 			public void controlEvent(CallbackEvent theEvent) {
+				baijuyi.solControlP5.setVisible(false);
 				if(theEvent.getController().getName().equals("card2")){
 					if (theEvent.getAction() == 100) {
 						FirstApplet applet = new FirstApplet();
@@ -270,7 +281,7 @@ public class BuddhistTempleApplet extends PApplet{
 		   	}
 		};
 		
-		dufu = new Item(this , 100 , 100 , 320 , 20 , "card2.png" , "card2.png" , "card2.png", 80 , 186 , 520 , 100, "confucius.png", Type.TOOL){
+		dufu = new Item(this , 30 , 30 , 550 , 440 , "card2.png" , "card2.png" , "card2.png", 80 , 186 , 520 , 100, "confucius.png", Type.TOOL){
 		
 		@Override
 			public void controlEvent(CallbackEvent theEvent) {
@@ -302,7 +313,7 @@ public class BuddhistTempleApplet extends PApplet{
 		   	}
 		};
 		
-		wangwei = new Item(this , 100 , 100 , 20 , 210 , "card2.png" , "card2.png" , "card2.png", 110 , 186 , 630 , 105, "buddha.png", Type.TOOL){
+		wangwei = new Item(this , 30 , 30 , 620 , 440 , "card2.png" , "card2.png" , "card2.png", 110 , 186 , 630 , 105, "buddha.png", Type.TOOL){
 		
 		@Override
 			public void controlEvent(CallbackEvent theEvent) {
@@ -334,7 +345,7 @@ public class BuddhistTempleApplet extends PApplet{
 		};
 		
 		
-		libai = new Item(this , 100 , 100 , 20 , 20 , "card2.png" , "card2.png" , "card2.png", 118 , 186 , 750 , 105, "ludongbin.png", Type.TOOL){
+		libai = new Item(this , 30 , 30 , 670 , 440 , "card2.png" , "card2.png" , "card2.png", 118 , 186 , 750 , 105, "ludongbin.png", Type.TOOL){
 			
 			@Override
 				public void controlEvent(CallbackEvent theEvent) {
@@ -364,7 +375,28 @@ public class BuddhistTempleApplet extends PApplet{
 					}
 			   	}
 		};
-		
+		leftBox = new Item(this , 100 , 100 , 300 , 500 , "buddaSafe_nomove.png" , "buddaSafe_nomove.png" , "buddaSafe_nomove.png", Type.FURNITURE){
+			
+			@Override
+				public void controlEvent(CallbackEvent theEvent) {
+					if(theEvent.getController().getName().equals("buddaSafe_nomove")){
+						if (theEvent.getAction() == 100) {
+							leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+						}
+					}
+			   	}
+			};
+		rightBox = new Item(this , 100 , 100 , 800 , 500 , "buddaSafe_nomove.png" , "buddaSafe_nomove.png" , "buddaSafe_nomove.png", Type.FURNITURE){
+				
+				@Override
+					public void controlEvent(CallbackEvent theEvent) {
+						if(theEvent.getController().getName().equals("buddaSafe_nomove")){
+							if (theEvent.getAction() == 100) {
+								rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+							}
+						}
+					   }
+			};
 		
 		
 		//they are deactivated until changing to the table background

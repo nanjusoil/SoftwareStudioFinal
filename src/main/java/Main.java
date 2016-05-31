@@ -21,7 +21,7 @@ public class Main extends JFrame{
 		
 		window = new JFrame("±K«Ç°k²æ");
 		//MainApplet applet = new MainApplet(window);
-		LoginApplet applet = new LoginApplet(window);
+		BuddhistTempleApplet applet = new BuddhistTempleApplet(window);
 		applet.init();
 		applet.start();
 		applet.setFocusable(true);

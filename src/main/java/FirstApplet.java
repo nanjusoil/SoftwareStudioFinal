@@ -63,7 +63,8 @@ public class FirstApplet extends PApplet{
 		
 		song.loop();*/
 		try{
-			toast = MusicPlay.getMusic("src/" + path + "Sounds/toast.wav");
+			toast = MusicPlay.getMusic("src/" + path + "Sounds/hang.wav");
+			System.out.println("OK playing sound.");
 		}catch(Exception ex) {
 	        System.out.println("Error with playing sound.");
 	        ex.printStackTrace();
@@ -120,6 +121,7 @@ public class FirstApplet extends PApplet{
 	        System.out.println("Error with playing sound.");
 	        ex.printStackTrace();
 	    }
+		toast.start();
 
 	}
 	//舉杯邀明月，對影成三人

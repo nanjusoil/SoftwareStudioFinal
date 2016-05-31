@@ -120,4 +120,21 @@ public Item (PApplet parent ,int sizeX, int sizeY, int x , int y ,  String sImgI
 	       .updateSize()
 	       .addCallback(this);
 	}
+	
+	public void updateImage(int sizeX, int sizeY, int x , int y ,String string , String string2 , String string3){
+		imgItem = loadImage(path+string);
+		imgItemHover = loadImage(path+string2);
+		imgItemOnclick = loadImage(path+string3); 
+		imgItem.resize(sizeX, sizeY);
+		imgItemHover.resize(sizeX, sizeY);
+		imgItemOnclick.resize(sizeX, sizeY);
+		
+		this.x = x;
+		this.y = y;
+		controlP5.addButton(this.getName())
+	       .setPosition(this.x,this.y)
+	       .setImages(imgItem, imgItemHover, imgItemOnclick)
+	       .updateSize()
+	       .addCallback(this);
+	}
 }
