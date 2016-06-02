@@ -59,8 +59,8 @@ public class BuddhistTempleApplet extends PApplet{
 	
 	public Clip slash,slash2;
 	
-	private int box_status = 0;//0:box not open 1:box open
-	
+	private boolean left_box_status = false;//0:box not open 1:box open
+	private boolean right_box_status = false;
 	private MusicPuzzleApplet musicPuzzleApplet;
 	
 	
@@ -71,10 +71,8 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  slash.start();
-				  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
-				  baijuyi.controlP5.setVisible(true);	
-				  dufu.controlP5.setVisible(true);
+				  System.out.println("asc");
+				  left_box_status = true;
 			  }
 
 			});
@@ -82,10 +80,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  slash.start();
-				  rightBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
-				  wangwei.controlP5.setVisible(true);
-				  libai.controlP5.setVisible(true);
+				  right_box_status = true;
 			  }
 
 		});
@@ -455,6 +450,23 @@ public class BuddhistTempleApplet extends PApplet{
 		libai.solControlP5.setVisible(false);
 		mykey.controlP5.setVisible(false);
 		itemArr = new ArrayList<Item>(Arrays.asList(baijuyi, dufu, wangwei, libai, mykey));
+		
+		server_connection();
+		
+	}
+	public void server_connection(){
+		if(left_box_status == true){
+			slash.start();
+			  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+			  baijuyi.controlP5.setVisible(true);	
+			  dufu.controlP5.setVisible(true);
+		}
+		if(right_box_status == true){
+			slash.start();
+			  rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+			  wangwei.controlP5.setVisible(true);	
+			  libai.controlP5.setVisible(true);
+		}
 	}
 	
 	public void draw() {
