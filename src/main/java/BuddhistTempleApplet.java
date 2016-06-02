@@ -73,6 +73,8 @@ public class BuddhistTempleApplet extends PApplet{
 			  public void call(Object... args) {
 				  slash.start();
 				  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+				  baijuyi.controlP5.setVisible(true);	
+				  dufu.controlP5.setVisible(true);
 			  }
 
 			});
@@ -82,6 +84,8 @@ public class BuddhistTempleApplet extends PApplet{
 			  public void call(Object... args) {
 				  slash.start();
 				  rightBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+				  wangwei.controlP5.setVisible(true);
+				  libai.controlP5.setVisible(true);
 			  }
 
 		});
