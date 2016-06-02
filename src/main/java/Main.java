@@ -13,7 +13,7 @@ import io.socket.emitter.Emitter;
 @SuppressWarnings("serial")
 public class Main extends JFrame{
 	
-	private final static int windowWidth = 1303, windowHeight = 745;
+	private final static int windowWidth = 1286, windowHeight = 700;
 	public static JFrame window;
 	public static Socket socket;
 	public static String sockettext = "acascascsacsacascacsacsacsacsacascsacsacsacsacsac";
@@ -25,7 +25,8 @@ public class Main extends JFrame{
 
 
 		socket = IO.socket("http://localhost:3001");
-		MusicPuzzleApplet applet = new MusicPuzzleApplet(window);
+		LoginApplet applet = new LoginApplet(window);
+		//MusicPuzzleApplet applet = new MusicPuzzleApplet(window);
 		applet.init();
 		applet.start();
 		applet.setFocusable(true);

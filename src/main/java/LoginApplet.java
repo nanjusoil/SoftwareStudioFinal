@@ -31,7 +31,7 @@ public class LoginApplet extends PApplet{
 		
 		mainApplet = new MusicPuzzleApplet(jframe);
 		btApplet = new BuddhistTempleApplet(jframe);
-		//astronomyapplet = new AstronomyApplet(jframe);
+		astronomyapplet = new AstronomyApplet(jframe);
 		musicPuzzleApplet = new MusicPuzzleApplet(jframe);
 		
 		stage1 = new Item(this , 78, 83, 275 , 275 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL){
@@ -69,7 +69,7 @@ public class LoginApplet extends PApplet{
 
 	}
 	public void draw() {
-		image(imgBackground, 0, 0);
+		image(imgBackground, 0, 0,1305,745);
 	}
 
 }
