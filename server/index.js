@@ -16,13 +16,16 @@ function handler (req, res) {
     res.end(data);
   });
 }
-
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', function (chunk) {
+	console.log(chunk.substring(0,chunk.length-2));
+});
 io.on('connection', function (socket) {
   console.log("connection");
-  socket.emit('safeopen', { hello: 'world' });
+  socket.emit('message', { hello: 'world' });
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', function (chunk) {
-	socket.emit(chunk, { hello: chunk });
+	socket.emit('message', { hello: chunk });
   });
   process.stdin.on('end', () => {
 	process.stdout.write('end');
