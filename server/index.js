@@ -25,7 +25,7 @@ io.on('connection', function (socket) {
   socket.emit('message', { hello: 'world' });
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', function (chunk) {
-	socket.emit('message', { hello: chunk });
+	socket.emit(chunk.substring(0 , chunk.length-2), { hello: chunk });
   });
   process.stdin.on('end', () => {
 	process.stdout.write('end');
