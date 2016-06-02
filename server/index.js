@@ -19,7 +19,7 @@ function handler (req, res) {
 
 io.on('connection', function (socket) {
   console.log("connection");
-  socket.emit('message', { hello: 'world' });
+  socket.emit('abcd', { hello: 'world' });
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', function (chunk) {
 	socket.emit('message', { hello: chunk });

@@ -18,24 +18,26 @@ public class Keyboard extends JFrame{
 	public Icon safe_nomove;
 	public Icon safe_open;
 	public Icon safe_screen_open;
+	private boolean safe_status;
 	
 
 	
 	//private J
 	
-	public Keyboard(Item i,String p){
+	public Keyboard(Item i,String p,boolean safe_s){
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 300);
 		this.setLayout(null);
 		this.safe = i;
 		this.password = p;
+		this.safe_status = safe_s;
 		//keyboard = new JPanel();
 		//keyboard.setLayout(null);
 		//keyboard.add(board);
 		board = new Board(this,safe);
 		board.setBounds(0, 0, 150, 200);
 		this.add(board);
-		key = new Key(this,board,safe);
+		key = new Key(this,board,safe,safe_s);
 		key.setBounds(0, 80, 150, 150);
 		this.add(key);
 		

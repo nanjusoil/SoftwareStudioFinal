@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import controlP5.CallbackEvent;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
+import io.socket.emitter.Emitter;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.JSONArray;
@@ -55,8 +56,18 @@ public class MusicPuzzleApplet extends PApplet{
 	
 	AstronomyApplet astronomyApplet;
 	
+	private boolean safe_status = false;//false:safe關著   true:safe 打開
+	
 	public MusicPuzzleApplet(JFrame jframe){
 		this.jframe = jframe;
+		Main.socket.on("safeopen", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  safe_status = true;
+			  }
+
+		});
 	}
 
 	
@@ -241,10 +252,13 @@ public class MusicPuzzleApplet extends PApplet{
 		};*/
 		
 		safe = new Item(this , 235, 161, 490 , 450 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.FURNITURE){
+			
 			@Override
+			
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
-					keyboard = new Keyboard(safe,"1234");
+					keyboard = new Keyboard(safe,"5396",safe_status);
+					
 					keyboard.setVisible(true);
 					System.out.println("SAFE CLICK");
 				}
@@ -267,6 +281,9 @@ public class MusicPuzzleApplet extends PApplet{
 		};*/
 		
 		//itemArr = new ArrayList<Item>(Arrays.asList(key, paperball));
+		if(safe_status == true){
+			safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
+		}
 	}
 	
 	public void draw() {

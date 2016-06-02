@@ -15,13 +15,17 @@ public class Main extends JFrame{
 	
 	private final static int windowWidth = 1303, windowHeight = 745;
 	public static JFrame window;
-	private static Socket socket;
+	public static Socket socket;
 	public static String sockettext = "acascascsacsacascacsacsacsacsacascsacsacsacsacsac";
 	public static void main(String [] args) throws URISyntaxException{
 		
 		window = new JFrame("±K«Ç°k²æ");
 		//MainApplet applet = new MainApplet(window);
-		BuddhistTempleApplet applet = new BuddhistTempleApplet(window);
+
+
+
+		socket = IO.socket("http://localhost:3001");
+		MusicPuzzleApplet applet = new MusicPuzzleApplet(window);
 		applet.init();
 		applet.start();
 		applet.setFocusable(true);
@@ -29,7 +33,6 @@ public class Main extends JFrame{
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(windowWidth, windowHeight);
 		window.setVisible(true);
-		socket = IO.socket("http://localhost:3001");
 		socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 
 		  @Override

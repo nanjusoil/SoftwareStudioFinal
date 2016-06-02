@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import controlP5.CallbackEvent;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.JSONArray;
@@ -57,12 +59,33 @@ public class BuddhistTempleApplet extends PApplet{
 	
 	public Clip slash,slash2;
 	
+	private int box_status = 0;//0:box not open 1:box open
+	
 	private MusicPuzzleApplet musicPuzzleApplet;
 	
 	
 
 	public BuddhistTempleApplet(JFrame jframe){
 		this.jframe = jframe;
+		Main.socket.on("leftboxopen", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  slash.start();
+				  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+			  }
+
+			});
+		Main.socket.on("rightboxopen", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  slash.start();
+				  rightBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+			  }
+
+		});
+		
 	}
 
 	
@@ -261,7 +284,6 @@ public class BuddhistTempleApplet extends PApplet{
 		@Override
 		
 			public void controlEvent(CallbackEvent theEvent) {
-				baijuyi.solControlP5.setVisible(false);
 				if(theEvent.getController().getName().equals("card2")){
 					if (theEvent.getAction() == 100) {
 						FirstApplet applet = new FirstApplet();
@@ -395,6 +417,8 @@ public class BuddhistTempleApplet extends PApplet{
 						if (theEvent.getAction() == 100) {
 							slash.start();
 							leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+							baijuyi.controlP5.setVisible(true);	
+							dufu.controlP5.setVisible(true);
 						}
 					}
 			   	}
@@ -407,6 +431,8 @@ public class BuddhistTempleApplet extends PApplet{
 							if (theEvent.getAction() == 100) {
 								slash2.start();
 								rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+								wangwei.controlP5.setVisible(true);
+								libai.controlP5.setVisible(true);
 							}
 						}
 					   }
@@ -414,6 +440,11 @@ public class BuddhistTempleApplet extends PApplet{
 		
 		
 		//they are deactivated until changing to the table background
+		baijuyi.controlP5.setVisible(false);	
+		dufu.controlP5.setVisible(false);
+		wangwei.controlP5.setVisible(false);
+		libai.controlP5.setVisible(false);
+			
 		baijuyi.solControlP5.setVisible(false);
 		dufu.solControlP5.setVisible(false);
 		wangwei.solControlP5.setVisible(false);

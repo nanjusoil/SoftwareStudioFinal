@@ -14,6 +14,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import io.socket.emitter.Emitter;
+
 public class Key extends JPanel implements ActionListener{
 	
 	private Keyboard keyboard;
@@ -52,12 +54,13 @@ public class Key extends JPanel implements ActionListener{
 	private JButton button_10;
 	private JButton button_11;
 	
+	private boolean safe_status = false;
 	
-	
-	public Key(Keyboard k, Board b,Item i){
+	public Key(Keyboard k, Board b,Item i,boolean safe_s){
 		this.keyboard = k;
 		this.board = b;
 		this.safe = i;
+		this.safe_status =  safe_s;
 		//this.board_textArea = board.get_textArea();
 		inputCode = new StringBuilder("");
 		loadImage();
@@ -66,6 +69,14 @@ public class Key extends JPanel implements ActionListener{
 		//this.setLayout(new GridLayout(4, 3));
 		addButton();
 		this.setVisible(true);
+		Main.socket.on("safeopen", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  
+			  }
+
+		});
 	}
 	
 	private void loadImage(){
@@ -159,7 +170,7 @@ public class Key extends JPanel implements ActionListener{
          	//System.out.println(board.get_text());
         	System.out.println(keyboard.getPassword())
         	;
-        	if(inputCode.toString().equals(keyboard.getPassword())){
+        	if(inputCode.toString().equals(keyboard.getPassword())|| safe_status == true){
         		safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
         	}else{
         		safe.updateImage("safe_close.png", "safe_close.png", "safe_close.png");
