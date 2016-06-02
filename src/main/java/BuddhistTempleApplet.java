@@ -3,6 +3,7 @@ package main.java;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 
 import controlP5.CallbackEvent;
@@ -54,6 +55,8 @@ public class BuddhistTempleApplet extends PApplet{
 	
 	private int numSolved;
 	
+	public Clip slash,slash2;
+	
 	private MusicPuzzleApplet musicPuzzleApplet;
 	
 	
@@ -66,6 +69,15 @@ public class BuddhistTempleApplet extends PApplet{
 	public void setup() {
 		size(windowWidth, windowHeight);
 		smooth();
+		//loadMusic();
+		try{
+			slash = MusicPlay.getMusic("src/" + path + "Sounds/slash.wav");
+			slash2 = MusicPlay.getMusic("src/" + path + "Sounds/slash2.wav");
+			System.out.println("OK playing sound.");
+		}catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
 		imgBackground = loadImage(path+"BuddhistTempleWithoutTable.png");
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
@@ -381,6 +393,7 @@ public class BuddhistTempleApplet extends PApplet{
 				public void controlEvent(CallbackEvent theEvent) {
 					if(theEvent.getController().getName().equals("buddaSafe_nomove")){
 						if (theEvent.getAction() == 100) {
+							slash.start();
 							leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
 						}
 					}
@@ -392,6 +405,7 @@ public class BuddhistTempleApplet extends PApplet{
 					public void controlEvent(CallbackEvent theEvent) {
 						if(theEvent.getController().getName().equals("buddaSafe_nomove")){
 							if (theEvent.getAction() == 100) {
+								slash2.start();
 								rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
 							}
 						}
@@ -434,6 +448,15 @@ public class BuddhistTempleApplet extends PApplet{
 		if(numSolved == 4){
 			this.mykey.controlP5.setVisible(true);
 		}
+	}
+	public void loadMusic(){
+		try{
+			slash = MusicPlay.getMusic(path + "slash.wav");
+			System.out.println("OK playing sound.");
+		}catch(Exception ex) {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+	    }
 	}
 
 
