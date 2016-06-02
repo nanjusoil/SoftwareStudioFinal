@@ -19,10 +19,10 @@ function handler (req, res) {
 
 io.on('connection', function (socket) {
   console.log("connection");
-  socket.emit('leftboxopen', { hello: 'world' });
+  socket.emit('safeopen', { hello: 'world' });
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', function (chunk) {
-	socket.emit('message', { hello: chunk });
+	socket.emit(chunk, { hello: chunk });
   });
   process.stdin.on('end', () => {
 	process.stdout.write('end');

@@ -281,11 +281,15 @@ public class MusicPuzzleApplet extends PApplet{
 		};*/
 		
 		//itemArr = new ArrayList<Item>(Arrays.asList(key, paperball));
+		server_connection();
+		
+		
+	}
+	public void server_connection(){
 		if(safe_status == true){
 			safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
 		}
 	}
-	
 	public void draw() {
 		image(imgBackground, 0, 0);
 		

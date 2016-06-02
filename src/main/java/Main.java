@@ -25,7 +25,7 @@ public class Main extends JFrame{
 
 
 		socket = IO.socket("http://localhost:3001");
-		BuddhistTempleApplet applet = new BuddhistTempleApplet(window);
+		MusicPuzzleApplet applet = new MusicPuzzleApplet(window);
 		applet.init();
 		applet.start();
 		applet.setFocusable(true);
