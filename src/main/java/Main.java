@@ -25,7 +25,8 @@ public class Main extends JFrame{
 
 
 		socket = IO.socket("http://localhost:3001");
-		LoginApplet applet = new LoginApplet(window);
+		StartGame applet = new StartGame(window);
+		//LoginApplet applet = new LoginApplet(window);
 		//MusicPuzzleApplet applet = new MusicPuzzleApplet(window);
 		applet.init();
 		applet.start();
