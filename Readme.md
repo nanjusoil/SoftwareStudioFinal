@@ -35,8 +35,6 @@
 + 在道具欄點一下道具可以查看它的內容/call ItemBox的checkItem()
 + 當達到特定條件時，紙條就會消失(ex:保險箱打開後，寫有保險箱密碼的紙條就會消失)/call ItemBox的useItem()
 
-+ 當達到特定條件(ex:保險箱打開後，寫有保險箱密碼的紙條就會消失)時，紙條就會消失/call ItemBox的useItem()
-
 #音樂播放
 + 首先先宣告一個 ------ Clip 變數名稱
 + 再利用 變數名稱 = MusicPlay.getMusic("src/" + path + "Sounds/音樂檔名稱.wav");  <<< 注意一定要加上"src/"!!!!!     path為  "main/resources/" >>>

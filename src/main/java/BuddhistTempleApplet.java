@@ -69,24 +69,121 @@ public class BuddhistTempleApplet extends PApplet{
 
 	public BuddhistTempleApplet(JFrame jframe){
 		this.jframe = jframe;
-//		Main.socket.on("leftboxopen", new Emitter.Listener() {
-//
-//			  @Override
-//			  public void call(Object... args) {
-//				  System.out.println("asc");
-//				  left_box_status = true;
-//			  }
-//
-//			});
-//		Main.socket.on("rightboxopen", new Emitter.Listener() {
-//
-//			  @Override
-//			  public void call(Object... args) {
-//				  right_box_status = true;
-//			  }
-//
-//		});
-		
+		Main.socket.on("leftboxopen", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  System.out.println("asc");
+				  left_box_status = true;
+				  server_connection();
+			  }
+
+			});
+		Main.socket.on("rightboxopen", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  right_box_status = true;
+				  server_connection();
+			  }
+
+		});
+		Main.socket.on("putinCardbaijuyi", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  putinCard(baijuyi); 
+			  };
+
+		});
+		Main.socket.on("checkCardbaijuyi", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  checkCard(baijuyi); 
+			  };
+
+		});
+		Main.socket.on("useCardbaijuyi", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  useCard(baijuyi, 10, 180); 
+			  };
+
+		});
+		Main.socket.on("putinCarddufu", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  putinCard(dufu); 
+			  };
+
+		});
+		Main.socket.on("checkCarddufu", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  checkCard(dufu); 
+			  };
+
+		});
+		Main.socket.on("useCarddufu", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  useCard(dufu, -10, 130);
+			  };
+
+		});
+		Main.socket.on("putinCardwangwei", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  putinCard(wangwei); 
+			  };
+
+		});
+		Main.socket.on("checkCardwangwei", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  checkCard(wangwei); 
+			  };
+
+		});
+		Main.socket.on("useCardwangwei", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  useCard(wangwei, 80, 130);
+			  };
+
+		});
+		Main.socket.on("putinCardlibai", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  putinCard(libai); 
+			  };
+
+		});
+		Main.socket.on("checkCardlibai", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  checkCard(libai); 
+			  };
+
+		});
+		Main.socket.on("useCardlibai", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  useCard(libai, 70, 120);
+			  };
+
+		});
 	}
 
 	
@@ -302,52 +399,54 @@ public class BuddhistTempleApplet extends PApplet{
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("card2")){
 					if (theEvent.getAction() == 100) {
-						System.out.println("0");
 						if(!isInBox){
-							itemBox.putinItem(this);
-							if(pos[0]>=0){//first card originally at some statue's side
-								hasCard[pos[0]] = false; //first card is originally at pos[0]-th statue
-								pos[0] = -1; //first card is no longer besides statues
-							}
+//							itemBox.putinItem(this);
+//							if(pos[0]>=0){//first card originally at some statue's side
+//								hasCard[pos[0]] = false; //first card is originally at pos[0]-th statue
+//								pos[0] = -1; //first card is no longer besides statues
+//							}
+							putinCard(this);
 						}else{
-							itemBox.checkItem(this, itemArr);
-							indexHolded = itemArr.indexOf(this);
-							FirstApplet applet = new FirstApplet();
-							applet.init();
-							applet.start();
-							applet.setFocusable(true);
-							
-							JFrame window = new JFrame("WORD");
-							window.setContentPane(applet);
-							window.setSize( 800, 800);
-							window.setVisible(true);
+//							itemBox.checkItem(this, itemArr);
+//							indexHolded = itemArr.indexOf(this);
+//							FirstApplet applet = new FirstApplet();
+//							applet.init();
+//							applet.start();
+//							applet.setFocusable(true);
+//							
+//							JFrame window = new JFrame("WORD");
+//							window.setContentPane(applet);
+//							window.setSize( 800, 800);
+//							window.setVisible(true);
+							checkCard(this);
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solcard2")){
 					if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[0])){ //a statue can only has one card
-						Item citem = itemArr.get(indexHolded);
-						
-//						System.out.println("indexHolded: " + indexHolded);
-//						System.out.println("X: " + citem.btnControlP5.getPosition()[0] + 
-//								"Y: " + citem.btnControlP5.getPosition()[1]);
+//						Item citem = itemArr.get(indexHolded);
 //						
-						//set the card besides the statue
-						citem.updateImage(50, 50, 
-								(int)this.btnSolControlP5.getPosition()[0]+10, (int)this.btnSolControlP5.getPosition()[1]+180, 
-								"card2.png" , "card2.png" , "card2.png");
-//						System.out.println(numSolved);
-						
-//						System.out.println(numSolved);
-//						System.out.println("X: " + citem.btnControlP5.getPosition()[0] + 
-//								"Y: " + citem.btnControlP5.getPosition()[1]);
-//						System.out.println("SolX: " + citem.btnSolControlP5.getPosition()[0] + 
-//								"SolY: " + citem.btnSolControlP5.getPosition()[1]);
-						
-						pos[indexHolded] = 0; //pos[card_index] = statue_index
-						checkWin();
-						hasCard[0] = true;
-						indexHolded = -1;
-						itemBox.useItem(citem);
+////						System.out.println("indexHolded: " + indexHolded);
+////						System.out.println("X: " + citem.btnControlP5.getPosition()[0] + 
+////								"Y: " + citem.btnControlP5.getPosition()[1]);
+////						
+//						//set the card besides the statue
+//						citem.updateImage(50, 50, 
+//								(int)this.btnSolControlP5.getPosition()[0]+10, (int)this.btnSolControlP5.getPosition()[1]+180, 
+//								"card2.png" , "card2.png" , "card2.png");
+////						System.out.println(numSolved);
+//						
+////						System.out.println(numSolved);
+////						System.out.println("X: " + citem.btnControlP5.getPosition()[0] + 
+////								"Y: " + citem.btnControlP5.getPosition()[1]);
+////						System.out.println("SolX: " + citem.btnSolControlP5.getPosition()[0] + 
+////								"SolY: " + citem.btnSolControlP5.getPosition()[1]);
+//						
+//						pos[indexHolded] = 0; //pos[card_index] = statue_index
+//						checkWin();
+//						hasCard[0] = true;
+//						indexHolded = -1;
+//						itemBox.useItem(citem);
+						useCard(this, 10, 180);
 					}
 				}
 		   	}
@@ -359,40 +458,42 @@ public class BuddhistTempleApplet extends PApplet{
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("card2")){
 					
-					if (theEvent.getAction() == 100) {System.out.println("1");
+					if (theEvent.getAction() == 100) {
 						if(!isInBox){
-							itemBox.putinItem(this);
-							if(pos[1]>=0){
-								hasCard[pos[1]] = false; 
-								pos[1] = -1; 
-							}
+//							itemBox.putinItem(this);
+//							if(pos[1]>=0){
+//								hasCard[pos[1]] = false; 
+//								pos[1] = -1; 
+//							}
+							putinCard(this);
 						}else{
-							itemBox.checkItem(this, itemArr);
-							indexHolded = itemArr.indexOf(this);
-							System.out.println("indexHolded: " + indexHolded);
-							
-							SecondApplet applet = new SecondApplet();
-							applet.init();
-							applet.start();
-							applet.setFocusable(true);
-							
-							JFrame window = new JFrame("WORD");
-							window.setContentPane(applet);
-							window.setSize( 800, 800);
-							window.setVisible(true);
+//							itemBox.checkItem(this, itemArr);
+//							indexHolded = itemArr.indexOf(this);
+//							
+//							SecondApplet applet = new SecondApplet();
+//							applet.init();
+//							applet.start();
+//							applet.setFocusable(true);
+//							
+//							JFrame window = new JFrame("WORD");
+//							window.setContentPane(applet);
+//							window.setSize( 800, 800);
+//							window.setVisible(true);
+							checkCard(this);
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solcard2")){
 					if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[1])){ //a statue can only has one card
-						Item citem = itemArr.get(indexHolded);
-						citem.updateImage(50, 50, 
-								(int)this.btnSolControlP5.getPosition()[0]-10, (int)this.btnSolControlP5.getPosition()[1]+130, 
-								"card2.png" , "card2.png" , "card2.png");
-						pos[indexHolded] = 1; //pos[card_index] = statue_index
-						checkWin();
-						hasCard[1] = true;
-						indexHolded = -1;
-						itemBox.useItem(citem);
+//						Item citem = itemArr.get(indexHolded);
+//						citem.updateImage(50, 50, 
+//								(int)this.btnSolControlP5.getPosition()[0]-10, (int)this.btnSolControlP5.getPosition()[1]+130, 
+//								"card2.png" , "card2.png" , "card2.png");
+//						pos[indexHolded] = 1; //pos[card_index] = statue_index
+//						checkWin();
+//						hasCard[1] = true;
+//						indexHolded = -1;
+//						itemBox.useItem(citem);
+						useCard(this, -10, 130);
 					}
 				}
 		   	}
@@ -403,38 +504,41 @@ public class BuddhistTempleApplet extends PApplet{
 		@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("card2")){
-					if (theEvent.getAction() == 100) {System.out.println("2");
+					if (theEvent.getAction() == 100) {
 						if(!isInBox){
-							itemBox.putinItem(this);
-							if(pos[2]>=0){
-								hasCard[pos[2]] = false; 
-								pos[2] = -1; 
-							}
+//							itemBox.putinItem(this);
+//							if(pos[2]>=0){
+//								hasCard[pos[2]] = false; 
+//								pos[2] = -1; 
+//							}
+							putinCard(this);
 						}else{
-							itemBox.checkItem(this, itemArr);
-							indexHolded = itemArr.indexOf(this);
-							ThirdApplet applet = new ThirdApplet();
-							applet.init();
-							applet.start();
-							applet.setFocusable(true);
-							
-							JFrame window = new JFrame("WORD");
-							window.setContentPane(applet);
-							window.setSize( 800, 800);
-							window.setVisible(true);
+//							itemBox.checkItem(this, itemArr);
+//							indexHolded = itemArr.indexOf(this);
+//							ThirdApplet applet = new ThirdApplet();
+//							applet.init();
+//							applet.start();
+//							applet.setFocusable(true);
+//							
+//							JFrame window = new JFrame("WORD");
+//							window.setContentPane(applet);
+//							window.setSize( 800, 800);
+//							window.setVisible(true);
+							checkCard(this);
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solcard2")){
 					if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[2])){ //a statue can only has one card
-						Item citem = itemArr.get(indexHolded);
-						citem.updateImage(50, 50, 
-								(int)this.btnSolControlP5.getPosition()[0]+80, (int)this.btnSolControlP5.getPosition()[1]+130, 
-								"card2.png" , "card2.png" , "card2.png");
-						pos[indexHolded] = 2; //pos[card_index] = statue_index
-						checkWin();
-						hasCard[2] = true;
-						indexHolded = -1;
-						itemBox.useItem(citem);
+//						Item citem = itemArr.get(indexHolded);
+//						citem.updateImage(50, 50, 
+//								(int)this.btnSolControlP5.getPosition()[0]+80, (int)this.btnSolControlP5.getPosition()[1]+130, 
+//								"card2.png" , "card2.png" , "card2.png");
+//						pos[indexHolded] = 2; //pos[card_index] = statue_index
+//						checkWin();
+//						hasCard[2] = true;
+//						indexHolded = -1;
+//						itemBox.useItem(citem);
+						useCard(this, 80, 130);
 					}
 				}
 		   	}
@@ -446,39 +550,41 @@ public class BuddhistTempleApplet extends PApplet{
 			@Override
 				public void controlEvent(CallbackEvent theEvent) {
 					if(theEvent.getController().getName().equals("card2")){
-						if (theEvent.getAction() == 100) {System.out.println("3");
+						if (theEvent.getAction() == 100) {
 							if(!isInBox){
-								itemBox.putinItem(this);
-								if(pos[3]>=0){
-									hasCard[pos[3]] = false; 
-									pos[3] = -1; 
-								}
+//								itemBox.putinItem(this);
+//								if(pos[3]>=0){
+//									hasCard[pos[3]] = false; 
+//									pos[3] = -1; 
+//								}
+								putinCard(this);
 							}else{
-								itemBox.checkItem(this, itemArr);
-								indexHolded = itemArr.indexOf(this);
-								FourthApplet applet = new FourthApplet();
-								applet.init();
-								applet.start();
-								applet.setFocusable(true);
-								
-								JFrame window = new JFrame("WORD");
-								window.setContentPane(applet);
-								window.setSize( 800, 800);
-								window.setVisible(true);
-								
+//								itemBox.checkItem(this, itemArr);
+//								indexHolded = itemArr.indexOf(this);
+//								FourthApplet applet = new FourthApplet();
+//								applet.init();
+//								applet.start();
+//								applet.setFocusable(true);
+//								
+//								JFrame window = new JFrame("WORD");
+//								window.setContentPane(applet);
+//								window.setSize( 800, 800);
+//								window.setVisible(true);
+								checkCard(this);
 							}
 						}
 					}else if(theEvent.getController().getName().equals("solcard2")){
 						if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[3])){ //a statue can only has one card
-							Item citem = itemArr.get(indexHolded);
-							citem.updateImage(50, 50, 
-									(int)this.btnSolControlP5.getPosition()[0]+70, (int)this.btnSolControlP5.getPosition()[1]+120, 
-									"card2.png" , "card2.png" , "card2.png");
-							pos[indexHolded] = 3; //pos[card_index] = statue_index
-							checkWin();
-							hasCard[3] = true;
-							indexHolded = -1;
-							itemBox.useItem(citem);
+//							Item citem = itemArr.get(indexHolded);
+//							citem.updateImage(50, 50, 
+//									(int)this.btnSolControlP5.getPosition()[0]+70, (int)this.btnSolControlP5.getPosition()[1]+120, 
+//									"card2.png" , "card2.png" , "card2.png");
+//							pos[indexHolded] = 3; //pos[card_index] = statue_index
+//							checkWin();
+//							hasCard[3] = true;
+//							indexHolded = -1;
+//							itemBox.useItem(citem);
+							useCard(this, 70, 120);
 						}
 					}
 			   	}
@@ -529,20 +635,20 @@ public class BuddhistTempleApplet extends PApplet{
 //		server_connection();
 		
 	}
-//	public void server_connection(){
-//		if(left_box_status == true){
-//			slash.start();
-//			  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
-//			  baijuyi.controlP5.setVisible(true);	
-//			  dufu.controlP5.setVisible(true);
-//		}
-//		if(right_box_status == true){
-//			slash.start();
-//			  rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
-//			  wangwei.controlP5.setVisible(true);	
-//			  libai.controlP5.setVisible(true);
-//		}
-//	}
+	public void server_connection(){
+		if(left_box_status == true){
+			slash.start();
+			  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+			  libai.controlP5.setVisible(true);	
+			  dufu.controlP5.setVisible(true);
+		}
+		if(right_box_status == true){
+			slash.start();
+			  rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+			  wangwei.controlP5.setVisible(true);	
+			  baijuyi.controlP5.setVisible(true);
+		}
+	}
 	
 	public void draw() {
 		image(imgBackground, 0, 0);
@@ -568,7 +674,7 @@ public class BuddhistTempleApplet extends PApplet{
 	
 	public void checkWin(){
 		System.out.println("ans:" + pos[0] + pos[1]+ pos[2]+ pos[3]);
-		if((pos[0]==3) && (pos[1]==2) && (pos[2]==0) && (pos[3]==1)){
+		if((pos[0]==0) && (pos[1]==1) && (pos[2]==2) && (pos[3]==3)){
 			this.mykey.controlP5.setVisible(true);
 		}
 	}
@@ -581,7 +687,59 @@ public class BuddhistTempleApplet extends PApplet{
 	        ex.printStackTrace();
 	    }
 	}
+	
+	public void putinCard(Item item){
+		itemBox.putinItem(item);
+		int icard = itemArr.indexOf(item);
+		System.out.println(icard);
+		if(pos[icard]>=0){//first card originally at some statue's side
+			hasCard[pos[icard]] = false; //first card is originally at pos[0]-th statue
+			pos[icard] = -1; //first card is no longer besides statues
+		}
+	}
 
+	
+	public void checkCard(Item item){
+		itemBox.checkItem(item, itemArr);
+		indexHolded = itemArr.indexOf(item);
+		PApplet applet = new PApplet();
+		
+		switch(indexHolded){
+		case 0:
+			applet = new ThirdApplet();
+			break;
+		case 1:
+			applet = new FourthApplet();
+			break;
+		case 2:
+			applet = new SecondApplet();
+			break;
+		case 3:
+			applet = new FirstApplet();
+		}
+		
+		applet.init();
+		applet.start();
+		applet.setFocusable(true);
+		
+		JFrame window = new JFrame("WORD");
+		window.setContentPane(applet);
+		window.setSize( 800, 800);
+		window.setVisible(true);
+	}
+	
+	public void useCard(Item item, int xdiff, int ydiff){
+		Item uitem = itemArr.get(indexHolded);
+		uitem.updateImage(50, 50, 
+					(int)item.btnSolControlP5.getPosition()[0]+xdiff, (int)item.btnSolControlP5.getPosition()[1]+ydiff, 
+					"card2.png" , "card2.png" , "card2.png");
+		int istatue = itemArr.indexOf(item);
+		pos[indexHolded] = istatue; //pos[card_index] = statue_index
+		checkWin();
+		hasCard[istatue] = true;
+		indexHolded = -1;
+		itemBox.useItem(uitem);
+	}
 
 }
 
