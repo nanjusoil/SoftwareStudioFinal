@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.JFrame;
 
 import controlP5.CallbackEvent;
@@ -52,12 +53,13 @@ public class BuddhistTempleApplet extends PApplet{
 	private Item libai;
 	
 	private ArrayList<Item> itemArr; 
+	private int indexHolded;
+	private boolean[] hasCard = {false, false, false, false};//whether a statue has a card at its foot
+	private int[] pos = {-1, -1, -1, -1}; //the position of a card being placed(at which statue)
 	//used as second parameter of checkItem(), to make different items' isHolded exclusive
 	//(There is at most only one item's isHolded being true in any given time)
 	
-	private int numSolved;
-	
-	public Clip slash,slash2;
+	public Clip slash,slash2, sutra;
 	
 	private boolean left_box_status = false;//0:box not open 1:box open
 	private boolean right_box_status = false;
@@ -67,23 +69,23 @@ public class BuddhistTempleApplet extends PApplet{
 
 	public BuddhistTempleApplet(JFrame jframe){
 		this.jframe = jframe;
-		Main.socket.on("leftboxopen", new Emitter.Listener() {
-
-			  @Override
-			  public void call(Object... args) {
-				  System.out.println("asc");
-				  left_box_status = true;
-			  }
-
-			});
-		Main.socket.on("rightboxopen", new Emitter.Listener() {
-
-			  @Override
-			  public void call(Object... args) {
-				  right_box_status = true;
-			  }
-
-		});
+//		Main.socket.on("leftboxopen", new Emitter.Listener() {
+//
+//			  @Override
+//			  public void call(Object... args) {
+//				  System.out.println("asc");
+//				  left_box_status = true;
+//			  }
+//
+//			});
+//		Main.socket.on("rightboxopen", new Emitter.Listener() {
+//
+//			  @Override
+//			  public void call(Object... args) {
+//				  right_box_status = true;
+//			  }
+//
+//		});
 		
 	}
 
@@ -95,6 +97,11 @@ public class BuddhistTempleApplet extends PApplet{
 		try{
 			slash = MusicPlay.getMusic("src/" + path + "Sounds/slash.wav");
 			slash2 = MusicPlay.getMusic("src/" + path + "Sounds/slash2.wav");
+			sutra = MusicPlay.getMusic("src/" + path + "Sounds/sutra.wav");
+			sutra.loop(Clip.LOOP_CONTINUOUSLY);
+			//lower the volume of BGM
+			FloatControl volume = (FloatControl) sutra.getControl(FloatControl.Type.MASTER_GAIN);
+			volume.setValue(-20);
 			System.out.println("OK playing sound.");
 		}catch(Exception ex) {
 	        System.out.println("Error with playing sound.");
@@ -103,7 +110,7 @@ public class BuddhistTempleApplet extends PApplet{
 		imgBackground = loadImage(path+"BuddhistTempleWithoutTable.png");
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
-		numSolved = 0;
+		indexHolded = -1;
 		
 		musicPuzzleApplet = new MusicPuzzleApplet(jframe);
 		
@@ -111,6 +118,7 @@ public class BuddhistTempleApplet extends PApplet{
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 		           if (theEvent.getAction() == 100) {
+		        	   sutra.stop();
 		        	   loginapplet.init();
 		        	   loginapplet.start();
 		        	   loginapplet.setFocusable(true);
@@ -131,6 +139,7 @@ public class BuddhistTempleApplet extends PApplet{
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
+					sutra.stop();
 					musicPuzzleApplet.init();
 					musicPuzzleApplet.start();
 					musicPuzzleApplet.setFocusable(true);
@@ -158,6 +167,12 @@ public class BuddhistTempleApplet extends PApplet{
 					wangwei.solControlP5.setVisible(false);
 					libai.solControlP5.setVisible(false);
 					table.controlP5.setVisible(true);
+					
+					baijuyi.updateImage(30, 30, 620, 440,"card2.png" , "card2.png" , "card2.png");
+					dufu.updateImage(30, 30, 500, 440 ,"card2.png" , "card2.png" , "card2.png");
+					wangwei.updateImage(30, 30, 670, 440 ,"card2.png" , "card2.png" , "card2.png");
+					libai.updateImage(30, 30, 550, 440 ,"card2.png" , "card2.png" , "card2.png");
+
 				}
 		    }
 		};
@@ -212,6 +227,12 @@ public class BuddhistTempleApplet extends PApplet{
 							dufu.solControlP5.setVisible(true);
 							wangwei.solControlP5.setVisible(true);
 							libai.solControlP5.setVisible(true);
+							
+							//adjust the cards' position and size
+							baijuyi.updateImage(50, 50, 640, 305 ,"card2.png" , "card2.png" , "card2.png");
+							dufu.updateImage(50, 50, 440, 305 ,"card2.png" , "card2.png" , "card2.png");
+							wangwei.updateImage(50, 50, 740, 305 ,"card2.png" , "card2.png" , "card2.png");
+							libai.updateImage(50, 50, 540, 305 ,"card2.png" , "card2.png" , "card2.png");
 						}
 					}
 				}
@@ -274,117 +295,24 @@ public class BuddhistTempleApplet extends PApplet{
 		
 		//later change the picture to tokens
 		
-		
-		
-		
-		
-		baijuyi = new Item(this , 30 , 30 , 500 , 440 , "card2.png" , "card2.png" , "card2.png", 186 , 240 , 330 , 50, "lucifer.png", Type.TOOL){
+		baijuyi = new Item(this , 30 , 30 , 620 , 440 , "card2.png" , "card2.png" , "card2.png", 186 , 240 , 330 , 50, "lucifer.png", Type.TOOL){
 		
 		@Override
 		
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("card2")){
 					if (theEvent.getAction() == 100) {
-						FirstApplet applet = new FirstApplet();
-						applet.init();
-						applet.start();
-						applet.setFocusable(true);
-						
-						JFrame window = new JFrame("WORD");
-						window.setContentPane(applet);
-						window.setSize( 800, 800);
-						window.setVisible(true);
+						System.out.println("0");
 						if(!isInBox){
 							itemBox.putinItem(this);
+							if(pos[0]>=0){//first card originally at some statue's side
+								hasCard[pos[0]] = false; //first card is originally at pos[0]-th statue
+								pos[0] = -1; //first card is no longer besides statues
+							}
 						}else{
 							itemBox.checkItem(this, itemArr);
-						}
-					}
-				}else if(theEvent.getController().getName().equals("solmonopoly")){
-					if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
-//						itemBox.useItem(this);
-						//use btnControlP5 rather than ControlP5
-//						this.btnControlP5.setPosition((int)this.btnSolControlP5.getPosition()[0]+200,(int)this.btnSolControlP5.getPosition()[1]-20);
-//						this.btnControlP5.setPosition(50,50);
-						itemBox.useItem(this);
-						numSolved ++;
-						checkWin();
-					}
-				}
-		   	}
-		};
-		
-		dufu = new Item(this , 30 , 30 , 550 , 440 , "card2.png" , "card2.png" , "card2.png", 80 , 186 , 520 , 100, "confucius.png", Type.TOOL){
-		
-		@Override
-			public void controlEvent(CallbackEvent theEvent) {
-				if(theEvent.getController().getName().equals("card2")){
-					
-					if (theEvent.getAction() == 100) {
-						SecondApplet applet = new SecondApplet();
-						applet.init();
-						applet.start();
-						applet.setFocusable(true);
-						
-						JFrame window = new JFrame("WORD");
-						window.setContentPane(applet);
-						window.setSize( 800, 800);
-						window.setVisible(true);
-						if(!isInBox){
-							itemBox.putinItem(this);
-						}else{
-							itemBox.checkItem(this, itemArr);
-						}
-					}
-				}else if(theEvent.getController().getName().equals("solmusician")){
-					if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
-						itemBox.useItem(this);
-						numSolved ++;
-						checkWin();
-					}
-				}
-		   	}
-		};
-		
-		wangwei = new Item(this , 30 , 30 , 620 , 440 , "card2.png" , "card2.png" , "card2.png", 110 , 186 , 630 , 105, "buddha.png", Type.TOOL){
-		
-		@Override
-			public void controlEvent(CallbackEvent theEvent) {
-				if(theEvent.getController().getName().equals("card2")){
-					if (theEvent.getAction() == 100) {
-						ThirdApplet applet = new ThirdApplet();
-						applet.init();
-						applet.start();
-						applet.setFocusable(true);
-						
-						JFrame window = new JFrame("WORD");
-						window.setContentPane(applet);
-						window.setSize( 800, 800);
-						window.setVisible(true);
-						if(!isInBox){
-							itemBox.putinItem(this);
-						}else{
-							itemBox.checkItem(this, itemArr);
-						}
-					}
-				}else if(theEvent.getController().getName().equals("solNapoleon")){
-					if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
-						itemBox.useItem(this);
-						numSolved ++;
-						checkWin();
-					}
-				}
-		   	}
-		};
-		
-		
-		libai = new Item(this , 30 , 30 , 670 , 440 , "card2.png" , "card2.png" , "card2.png", 118 , 186 , 750 , 105, "ludongbin.png", Type.TOOL){
-			
-			@Override
-				public void controlEvent(CallbackEvent theEvent) {
-					if(theEvent.getController().getName().equals("card2")){
-						if (theEvent.getAction() == 100) {
-							FourthApplet applet = new FourthApplet();
+							indexHolded = itemArr.indexOf(this);
+							FirstApplet applet = new FirstApplet();
 							applet.init();
 							applet.start();
 							applet.setFocusable(true);
@@ -393,17 +321,164 @@ public class BuddhistTempleApplet extends PApplet{
 							window.setContentPane(applet);
 							window.setSize( 800, 800);
 							window.setVisible(true);
+						}
+					}
+				}else if(theEvent.getController().getName().equals("solcard2")){
+					if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[0])){ //a statue can only has one card
+						Item citem = itemArr.get(indexHolded);
+						
+//						System.out.println("indexHolded: " + indexHolded);
+//						System.out.println("X: " + citem.btnControlP5.getPosition()[0] + 
+//								"Y: " + citem.btnControlP5.getPosition()[1]);
+//						
+						//set the card besides the statue
+						citem.updateImage(50, 50, 
+								(int)this.btnSolControlP5.getPosition()[0]+10, (int)this.btnSolControlP5.getPosition()[1]+180, 
+								"card2.png" , "card2.png" , "card2.png");
+//						System.out.println(numSolved);
+						
+//						System.out.println(numSolved);
+//						System.out.println("X: " + citem.btnControlP5.getPosition()[0] + 
+//								"Y: " + citem.btnControlP5.getPosition()[1]);
+//						System.out.println("SolX: " + citem.btnSolControlP5.getPosition()[0] + 
+//								"SolY: " + citem.btnSolControlP5.getPosition()[1]);
+						
+						pos[indexHolded] = 0; //pos[card_index] = statue_index
+						checkWin();
+						hasCard[0] = true;
+						indexHolded = -1;
+						itemBox.useItem(citem);
+					}
+				}
+		   	}
+		};
+		
+		dufu = new Item(this , 30 , 30 , 500 , 440 , "card2.png" , "card2.png" , "card2.png", 80 , 186 , 520 , 100, "confucius.png", Type.TOOL){
+		
+		@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if(theEvent.getController().getName().equals("card2")){
+					
+					if (theEvent.getAction() == 100) {System.out.println("1");
+						if(!isInBox){
+							itemBox.putinItem(this);
+							if(pos[1]>=0){
+								hasCard[pos[1]] = false; 
+								pos[1] = -1; 
+							}
+						}else{
+							itemBox.checkItem(this, itemArr);
+							indexHolded = itemArr.indexOf(this);
+							System.out.println("indexHolded: " + indexHolded);
+							
+							SecondApplet applet = new SecondApplet();
+							applet.init();
+							applet.start();
+							applet.setFocusable(true);
+							
+							JFrame window = new JFrame("WORD");
+							window.setContentPane(applet);
+							window.setSize( 800, 800);
+							window.setVisible(true);
+						}
+					}
+				}else if(theEvent.getController().getName().equals("solcard2")){
+					if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[1])){ //a statue can only has one card
+						Item citem = itemArr.get(indexHolded);
+						citem.updateImage(50, 50, 
+								(int)this.btnSolControlP5.getPosition()[0]-10, (int)this.btnSolControlP5.getPosition()[1]+130, 
+								"card2.png" , "card2.png" , "card2.png");
+						pos[indexHolded] = 1; //pos[card_index] = statue_index
+						checkWin();
+						hasCard[1] = true;
+						indexHolded = -1;
+						itemBox.useItem(citem);
+					}
+				}
+		   	}
+		};
+		
+		wangwei = new Item(this , 30 , 30 , 670 , 440 , "card2.png" , "card2.png" , "card2.png", 110 , 186 , 630 , 105, "buddha.png", Type.TOOL){
+		
+		@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if(theEvent.getController().getName().equals("card2")){
+					if (theEvent.getAction() == 100) {System.out.println("2");
+						if(!isInBox){
+							itemBox.putinItem(this);
+							if(pos[2]>=0){
+								hasCard[pos[2]] = false; 
+								pos[2] = -1; 
+							}
+						}else{
+							itemBox.checkItem(this, itemArr);
+							indexHolded = itemArr.indexOf(this);
+							ThirdApplet applet = new ThirdApplet();
+							applet.init();
+							applet.start();
+							applet.setFocusable(true);
+							
+							JFrame window = new JFrame("WORD");
+							window.setContentPane(applet);
+							window.setSize( 800, 800);
+							window.setVisible(true);
+						}
+					}
+				}else if(theEvent.getController().getName().equals("solcard2")){
+					if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[2])){ //a statue can only has one card
+						Item citem = itemArr.get(indexHolded);
+						citem.updateImage(50, 50, 
+								(int)this.btnSolControlP5.getPosition()[0]+80, (int)this.btnSolControlP5.getPosition()[1]+130, 
+								"card2.png" , "card2.png" , "card2.png");
+						pos[indexHolded] = 2; //pos[card_index] = statue_index
+						checkWin();
+						hasCard[2] = true;
+						indexHolded = -1;
+						itemBox.useItem(citem);
+					}
+				}
+		   	}
+		};
+		
+		
+		libai = new Item(this , 30 , 30 ,  550 , 440, "card2.png" , "card2.png" , "card2.png", 118 , 186 , 750 , 105, "ludongbin.png", Type.TOOL){
+			
+			@Override
+				public void controlEvent(CallbackEvent theEvent) {
+					if(theEvent.getController().getName().equals("card2")){
+						if (theEvent.getAction() == 100) {System.out.println("3");
 							if(!isInBox){
 								itemBox.putinItem(this);
+								if(pos[3]>=0){
+									hasCard[pos[3]] = false; 
+									pos[3] = -1; 
+								}
 							}else{
 								itemBox.checkItem(this, itemArr);
+								indexHolded = itemArr.indexOf(this);
+								FourthApplet applet = new FourthApplet();
+								applet.init();
+								applet.start();
+								applet.setFocusable(true);
+								
+								JFrame window = new JFrame("WORD");
+								window.setContentPane(applet);
+								window.setSize( 800, 800);
+								window.setVisible(true);
+								
 							}
 						}
-					}else if(theEvent.getController().getName().equals("solcarpet")){
-						if ((theEvent.getAction() == 100) && isInBox && isHolded){ //later change
-							itemBox.useItem(this);
-							numSolved ++;
+					}else if(theEvent.getController().getName().equals("solcard2")){
+						if ((theEvent.getAction() == 100) && (indexHolded!=-1) && (!hasCard[3])){ //a statue can only has one card
+							Item citem = itemArr.get(indexHolded);
+							citem.updateImage(50, 50, 
+									(int)this.btnSolControlP5.getPosition()[0]+70, (int)this.btnSolControlP5.getPosition()[1]+120, 
+									"card2.png" , "card2.png" , "card2.png");
+							pos[indexHolded] = 3; //pos[card_index] = statue_index
 							checkWin();
+							hasCard[3] = true;
+							indexHolded = -1;
+							itemBox.useItem(citem);
 						}
 					}
 			   	}
@@ -415,9 +490,9 @@ public class BuddhistTempleApplet extends PApplet{
 					if(theEvent.getController().getName().equals("buddaSafe_nomove")){
 						if (theEvent.getAction() == 100) {
 							slash.start();
-							leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
-							baijuyi.controlP5.setVisible(true);	
+							this.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
 							dufu.controlP5.setVisible(true);
+							libai.controlP5.setVisible(true);
 						}
 					}
 			   	}
@@ -429,9 +504,9 @@ public class BuddhistTempleApplet extends PApplet{
 						if(theEvent.getController().getName().equals("buddaSafe_nomove")){
 							if (theEvent.getAction() == 100) {
 								slash2.start();
-								rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+								this.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+								baijuyi.controlP5.setVisible(true);	
 								wangwei.controlP5.setVisible(true);
-								libai.controlP5.setVisible(true);
 							}
 						}
 					   }
@@ -451,23 +526,23 @@ public class BuddhistTempleApplet extends PApplet{
 		mykey.controlP5.setVisible(false);
 		itemArr = new ArrayList<Item>(Arrays.asList(baijuyi, dufu, wangwei, libai, mykey));
 		
-		server_connection();
+//		server_connection();
 		
 	}
-	public void server_connection(){
-		if(left_box_status == true){
-			slash.start();
-			  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
-			  baijuyi.controlP5.setVisible(true);	
-			  dufu.controlP5.setVisible(true);
-		}
-		if(right_box_status == true){
-			slash.start();
-			  rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
-			  wangwei.controlP5.setVisible(true);	
-			  libai.controlP5.setVisible(true);
-		}
-	}
+//	public void server_connection(){
+//		if(left_box_status == true){
+//			slash.start();
+//			  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+//			  baijuyi.controlP5.setVisible(true);	
+//			  dufu.controlP5.setVisible(true);
+//		}
+//		if(right_box_status == true){
+//			slash.start();
+//			  rightBox.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
+//			  wangwei.controlP5.setVisible(true);	
+//			  libai.controlP5.setVisible(true);
+//		}
+//	}
 	
 	public void draw() {
 		image(imgBackground, 0, 0);
@@ -492,7 +567,8 @@ public class BuddhistTempleApplet extends PApplet{
 	}
 	
 	public void checkWin(){
-		if(numSolved == 4){
+		System.out.println("ans:" + pos[0] + pos[1]+ pos[2]+ pos[3]);
+		if((pos[0]==3) && (pos[1]==2) && (pos[2]==0) && (pos[3]==1)){
 			this.mykey.controlP5.setVisible(true);
 		}
 	}

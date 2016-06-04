@@ -80,16 +80,17 @@ public class ItemBox extends PApplet implements CallbackListener{
 				neww = initem.imgItem.width*(cellWidth*8/10)/max;
 				newh = initem.imgItem.height*(cellWidth*8/10)/max;
 
-				initem.imgItem.resize(neww,newh);
-				initem.imgItemHover.resize(neww,newh);
-				initem.imgItemOnclick.resize(neww,newh);
-				//the size of button muse be updated correspondingly
-				initem.btnControlP5.updateSize();
+//				initem.imgItem.resize(neww,newh);
+//				initem.imgItemHover.resize(neww,newh);
+//				initem.imgItemOnclick.resize(neww,newh);
+//				//the size of button muse be updated correspondingly
+//				initem.btnControlP5.updateSize();
 				items.set(i, initem);
 				initem.isInBox = true;
 				initem.colIndex = i;
 				
-				initem.controlP5.setPosition(this.x-initem.x+10, this.y - initem.y+10 + this.cellHeight*i);
+				initem.updateImage(neww, newh, this.x+10, this.y +10 + this.cellHeight*i);
+//				initem.controlP5.setPosition(this.x-initem.x+10, this.y - initem.y+10 + this.cellHeight*i);
 //				this.parent.image(initem.imgItem, this.x - this.cellWidth/2, this.y + this.cellHeight*i - this.height/2);
 				break;
 			}
@@ -150,9 +151,9 @@ public class ItemBox extends PApplet implements CallbackListener{
 	public Item useItem(Item uitem){
 		Item img = items.get(uitem.colIndex);
 		items.set(uitem.colIndex, null);
-		uitem.controlP5.setVisible(false);
+//		uitem.controlP5.setVisible(false);
 		uitem.isHolded = false;
-		System.out.println("you solve the problem");
+		uitem.isInBox = false;
 		return uitem;
 	}
 

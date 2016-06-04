@@ -114,7 +114,7 @@ public Item (PApplet parent ,int sizeX, int sizeY, int x , int y ,  String sImgI
 		imgItem = loadImage(path+string);
 		imgItemHover = loadImage(path+string2);
 		imgItemOnclick = loadImage(path+string3); 
-		controlP5.addButton(this.getName())
+		btnControlP5
 	       .setPosition(this.x,this.y)
 	       .setImages(imgItem, imgItemHover, imgItemOnclick)
 	       .updateSize()
@@ -131,7 +131,21 @@ public Item (PApplet parent ,int sizeX, int sizeY, int x , int y ,  String sImgI
 		
 		this.x = x;
 		this.y = y;
-		controlP5.addButton(this.getName())
+		btnControlP5 //use the old button
+	       .setPosition(this.x,this.y)
+	       .setImages(imgItem, imgItemHover, imgItemOnclick)
+	       .updateSize()
+	       .addCallback(this);
+	}
+	
+	public void updateImage(int sizeX, int sizeY, int x , int y){
+		imgItem.resize(sizeX, sizeY);
+		imgItemHover.resize(sizeX, sizeY);
+		imgItemOnclick.resize(sizeX, sizeY);
+		
+		this.x = x;
+		this.y = y;
+		btnControlP5 //use the old button
 	       .setPosition(this.x,this.y)
 	       .setImages(imgItem, imgItemHover, imgItemOnclick)
 	       .updateSize()
