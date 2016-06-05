@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class Keyboard extends JFrame{
 	
-	private Item safe;
+	public Item safe;
 	private Board board;
 	private Key key;
 	//private Safe safe;

@@ -34,7 +34,7 @@ public class MusicPuzzleApplet extends PApplet{
 	private String[] filenameRooms = {"BedRoom.jpg" , "LivingRoom.jpg" , "Kitchen.jpg"};
 	private Item buttonRight;
 	private Item buttonLeft;
-	private Item key;
+	private Item mykey;
 	private Item paperball;
 	private ItemBox itemBox;
 	private Item microwave;
@@ -56,7 +56,7 @@ public class MusicPuzzleApplet extends PApplet{
 	
 	AstronomyApplet astronomyApplet;
 	
-	private boolean safe_status = false;//false:safe關著   true:safe 打開
+	public boolean safe_status = false;//false:safe關著   true:safe 打開
 	
 	public MusicPuzzleApplet(JFrame jframe){
 		this.jframe = jframe;
@@ -232,10 +232,10 @@ public class MusicPuzzleApplet extends PApplet{
 		};
 		
 		
-		/*key = new Item(this , 56, 56, 800 , 600 , "key.png" , "key.png" , "key.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
+		mykey = new Item(this , 56, 56, 400 , 450 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
-				if(theEvent.getController().getName().equals("key")){
+				if(theEvent.getController().getName().equals("mykey")){
 					if (theEvent.getAction() == 100) {
 						if(!isInBox){
 							itemBox.putinItem(this);
@@ -243,13 +243,14 @@ public class MusicPuzzleApplet extends PApplet{
 							itemBox.checkItem(this, itemArr);
 						}
 					}
-				}else if(theEvent.getController().getName().equals("solkey")){
+				}else if(theEvent.getController().getName().equals("solmykey")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){
 						itemBox.useItem(this);
+						this.controlP5.setVisible(false);
 					}
 				}
 		    }
-		};*/
+		};
 		
 		safe = new Item(this , 235, 161, 490 , 450 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.FURNITURE){
 			
@@ -257,15 +258,17 @@ public class MusicPuzzleApplet extends PApplet{
 			
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
-					keyboard = new Keyboard(safe,"5396",safe_status);
+					keyboard = new Keyboard(safe,"3596",safe_status);
 					
 					keyboard.setVisible(true);
 					System.out.println("SAFE CLICK");
+					
+					System.out.println("safe_status: "+ safe_status);
 				}
 		    }
 		};
 		
-		/*paperball = new Item(this , 70, 76, 800 , 500 , "paperball.png" , "paperball.png" , "paperball.png", Type.MESSAGE){
+		paperball = new Item(this , 70, 76, 800 , 500 , "paperball.png" , "paperball.png" , "paperball.png", Type.MESSAGE){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("paperball")){
@@ -274,15 +277,36 @@ public class MusicPuzzleApplet extends PApplet{
 							itemBox.putinItem(this);
 						}else{
 							itemBox.checkItem(this, itemArr);
+							PApplet applet = new PApplet(){
+								private PImage paperball_unfolded;
+								public void setup(){
+									paperball_unfolded = loadImage(path+"paperball_unfolded.png");
+									paperball_unfolded.resize(100, 100);
+									System.out.println("X:" + paperball_unfolded.width);
+									System.out.println("Y:" + paperball_unfolded.height);
+								};
+								public void draw(){
+									background(255);
+									image(paperball_unfolded, 30, 0, 100, 100);
+								};
+							};
+							applet.init();
+							applet.start();
+							applet.setFocusable(true);
+							
+							JFrame window = new JFrame("BALL");
+							window.setContentPane(applet);
+							window.setSize( 100, 150);
+							window.setVisible(true);
 						}
 					}
 				}
 		    }
-		};*/
+		};
 		
-		//itemArr = new ArrayList<Item>(Arrays.asList(key, paperball));
+		itemArr = new ArrayList<Item>(Arrays.asList(mykey, paperball));
 		server_connection();
-		
+		mykey.controlP5.setVisible(false);
 		
 	}
 	public void server_connection(){
@@ -310,6 +334,16 @@ public class MusicPuzzleApplet extends PApplet{
 	
 	public void keyPressed(){
 		
+	}
+	
+	public void showkey(){
+		if(safe_status){
+			if(paperball.isInBox){
+				itemBox.useItem(paperball);
+				paperball.controlP5.setVisible(false);
+			}
+			mykey.controlP5.setVisible(true);
+		}
 	}
 
 }

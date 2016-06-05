@@ -172,6 +172,8 @@ public class Key extends JPanel implements ActionListener{
         	;
         	if(inputCode.toString().equals(keyboard.getPassword())|| safe_status == true){
         		safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
+        		((MusicPuzzleApplet)keyboard.safe.parent).safe_status = true;
+        		((MusicPuzzleApplet)keyboard.safe.parent).showkey();
         	}else{
         		safe.updateImage("safe_close.png", "safe_close.png", "safe_close.png");
         	}

@@ -44,11 +44,12 @@ public class Item extends PApplet implements CallbackListener{
 	public int colIndex; //become 0~7 when putinItem() called
 	public boolean isHolded; //become true when checkItem() called
 	public Type type; //TOOL or MESSAGE 
-	
+	public PApplet parent;
        
 //called if the item's type isn't TOOL
 public Item (PApplet parent ,int sizeX, int sizeY, int x , int y ,  String sImgItem , String sImgItemHover , String sImgItemOnclick,  Type type) {
-		
+		this.parent = parent;
+	
 		imgItem = loadImage(path+sImgItem);
 		imgItemHover = loadImage(path+sImgItemHover);
 		imgItemOnclick = loadImage(path+sImgItemOnclick);   
