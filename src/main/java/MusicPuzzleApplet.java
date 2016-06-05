@@ -231,8 +231,23 @@ public class MusicPuzzleApplet extends PApplet{
 		    }
 		};
 		
+		safe = new Item(this , 235, 161, 490 , 450 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.FURNITURE){
+			
+			@Override
+			
+			public void controlEvent(CallbackEvent theEvent) {
+				if (theEvent.getAction() == 100) {
+					keyboard = new Keyboard(safe,"3596",safe_status);
+					
+					keyboard.setVisible(true);
+					System.out.println("SAFE CLICK");
+					
+					System.out.println("safe_status: "+ safe_status);
+				}
+		    }
+		};
 		
-		mykey = new Item(this , 56, 56, 400 , 450 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
+		mykey = new Item(this , 56, 56, 560 , 500 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("mykey")){
@@ -248,22 +263,6 @@ public class MusicPuzzleApplet extends PApplet{
 						itemBox.useItem(this);
 						this.controlP5.setVisible(false);
 					}
-				}
-		    }
-		};
-		
-		safe = new Item(this , 235, 161, 490 , 450 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.FURNITURE){
-			
-			@Override
-			
-			public void controlEvent(CallbackEvent theEvent) {
-				if (theEvent.getAction() == 100) {
-					keyboard = new Keyboard(safe,"3596",safe_status);
-					
-					keyboard.setVisible(true);
-					System.out.println("SAFE CLICK");
-					
-					System.out.println("safe_status: "+ safe_status);
 				}
 		    }
 		};
