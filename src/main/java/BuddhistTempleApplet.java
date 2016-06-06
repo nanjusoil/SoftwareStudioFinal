@@ -164,6 +164,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
+				  System.out.println("putinCardlibai");
 				  putinCard(libai); 
 			  };
 
@@ -211,47 +212,35 @@ public class BuddhistTempleApplet extends PApplet{
 		
 		musicPuzzleApplet = new MusicPuzzleApplet(jframe);
 		
-		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
-			@Override
-			public void controlEvent(CallbackEvent theEvent) {
-		           if (theEvent.getAction() == 100) {
-		        	   sutra.stop();
-		        	   loginapplet.init();
-		        	   loginapplet.start();
-		        	   loginapplet.setFocusable(true);
-		        	   jframe.setContentPane(loginapplet);
-		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        	   jframe.setSize(windowWidth, windowHeight);
-		        	   jframe.setVisible(true);
-		       		  if(currentRoom!=0)
-		    		  {
-		    			 imgBackground = loadImage(path+filenameRooms[--currentRoom]);
-		    			 imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
-		    		  }
-		           }
-		       }
-		};
+//		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
+//			@Override
+//			public void controlEvent(CallbackEvent theEvent) {
+//		           if (theEvent.getAction() == 100) {
+//		        	   sutra.stop();
+//		        	   loginapplet.init();
+//		        	   loginapplet.start();
+//		        	   loginapplet.setFocusable(true);
+//		        	   jframe.setContentPane(loginapplet);
+//		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		        	   jframe.setSize(windowWidth, windowHeight);
+//		        	   jframe.setVisible(true);
+//		       		  if(currentRoom!=0)
+//		    		  {
+//		    			 imgBackground = loadImage(path+filenameRooms[--currentRoom]);
+//		    			 imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
+//		    		  }
+//		           }
+//		       }
+//		};
 		
-		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
-			@Override
-			public void controlEvent(CallbackEvent theEvent) {
-				if (theEvent.getAction() == 100) {
-					sutra.stop();
-					musicPuzzleApplet.init();
-					musicPuzzleApplet.start();
-					musicPuzzleApplet.setFocusable(true);
-		        	   jframe.setContentPane(musicPuzzleApplet);
-		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        	   jframe.setSize(windowWidth, windowHeight);
-		        	   jframe.setVisible(true);
-					if(currentRoom!=2)
-					{
-					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
-					    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
-					}
-				}
-		    }
-		};
+//		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
+//			@Override
+//			public void controlEvent(CallbackEvent theEvent) {
+//				if (theEvent.getAction() == 100) {
+//					nextRoom();
+//				}
+//		    }
+//		};
 		
 		buttonReturn = new Item(this , 128, 128, 0 , 572 , "arrowReturn.png" , "arrowReturn.png" , "arrowReturnPressed.png", Type.CONTROL){
 			@Override
@@ -284,7 +273,7 @@ public class BuddhistTempleApplet extends PApplet{
 		};
 		
 		
-		mykey = new Item(this , 56, 56, 500 , 600 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
+		mykey = new Item(this , 56, 56, 500 , 600 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 1140, 640, "exit.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("mykey")){
@@ -298,6 +287,7 @@ public class BuddhistTempleApplet extends PApplet{
 				}else if(theEvent.getController().getName().equals("solmykey")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){
 						itemBox.useItem(this);
+						nextRoom();
 					}
 				}
 		    }
@@ -406,6 +396,7 @@ public class BuddhistTempleApplet extends PApplet{
 //								pos[0] = -1; //first card is no longer besides statues
 //							}
 							putinCard(this);
+							Main.socket.emit("putinCardbaijuyi","data");
 						}else{
 //							itemBox.checkItem(this, itemArr);
 //							indexHolded = itemArr.indexOf(this);
@@ -595,6 +586,7 @@ public class BuddhistTempleApplet extends PApplet{
 				public void controlEvent(CallbackEvent theEvent) {
 					if(theEvent.getController().getName().equals("buddaSafe_nomove")){
 						if (theEvent.getAction() == 100) {
+							Main.socket.emit("leftboxopen","data");
 							slash.start();
 							this.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
 							dufu.controlP5.setVisible(true);
@@ -638,6 +630,7 @@ public class BuddhistTempleApplet extends PApplet{
 	public void server_connection(){
 		if(left_box_status == true){
 			slash.start();
+			//Main.socket.emit("leftboxopen","data");
 			  leftBox.updateImage(100 , 100 , 300 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
 			  libai.controlP5.setVisible(true);	
 			  dufu.controlP5.setVisible(true);
@@ -739,6 +732,25 @@ public class BuddhistTempleApplet extends PApplet{
 		hasCard[istatue] = true;
 		indexHolded = -1;
 		itemBox.useItem(uitem);
+	}
+	
+	public void nextRoom(){
+		//JSONObject obj = new JSONObject();
+		//obj.put("data" , "server");
+		
+		sutra.stop();
+		musicPuzzleApplet.init();
+		musicPuzzleApplet.start();
+		musicPuzzleApplet.setFocusable(true);
+    	   jframe.setContentPane(musicPuzzleApplet);
+    	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	   jframe.setSize(windowWidth, windowHeight);
+    	   jframe.setVisible(true);
+		if(currentRoom!=2)
+		{
+		    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
+		    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
+		}
 	}
 
 }

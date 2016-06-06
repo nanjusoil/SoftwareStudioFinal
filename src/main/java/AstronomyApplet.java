@@ -1,5 +1,7 @@
 package main.java;
 
+import io.socket.emitter.Emitter;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,6 +13,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 
@@ -59,6 +62,14 @@ public class AstronomyApplet extends PApplet implements Runnable{
 
 	public AstronomyApplet(JFrame jframe){
 		this.jframe = jframe;
+		Main.socket.on("safeopenastronomy", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+//				 server_connection();
+//				  System.out.println("server");
+			  }
+		});
 	}
 	
 	
@@ -89,9 +100,8 @@ public class AstronomyApplet extends PApplet implements Runnable{
 				@Override
 				public void controlEvent(CallbackEvent theEvent) {
 					if(theEvent.getController().getValue() >= 99 && theEvent.getController().getValue() <= 102){
-						safe.controlP5.setVisible(false);
-						open.controlP5.setVisible(true);
-						mykey.controlP5.setVisible(true);
+						server_connection();
+						
 						
 					}
 					
@@ -100,51 +110,41 @@ public class AstronomyApplet extends PApplet implements Runnable{
 			    }
 		  });
 	
-		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
-			@Override
-			public void controlEvent(CallbackEvent theEvent) {
-		           if (theEvent.getAction() == 100) {
-		        	   loginapplet.init();
-		        	   loginapplet.start();
-		        	   loginapplet.setFocusable(true);
-		        	   jframe.setContentPane(loginapplet);
-		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        	   jframe.setSize(windowWidth, windowHeight);
-		        	   jframe.setVisible(true);
-		       		  if(currentRoom!=0)
-		    		  {
-		    			 imgBackground = loadImage(path+filenameRooms[--currentRoom]);
-		    			 imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
-		    		  }
-		           }
-		       }
-		};
-		
-		buttonRight = new Item(this , 128, 128, 1000 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
-			@Override
-			public void controlEvent(CallbackEvent theEvent) {
-				if (theEvent.getAction() == 100) {
-					if(currentRoom!=2)
-					{
-					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
-					    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
-					}
-				}
-		    }
-		};
-		
-		buttonReturn = new Item(this , 128, 128, 0 , 572 , "arrowReturn.png" , "arrowReturn.png" , "arrowReturnPressed.png", Type.CONTROL){
-			@Override
-			public void controlEvent(CallbackEvent theEvent) {
-				if (theEvent.getAction() == 100) {
-					imgBackground = loadImage(path+"BuddhistTempleWithoutTable.png");
-					imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
-					
-				}
-		    }
-		};
-		
-		
+//		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
+//			@Override
+//			public void controlEvent(CallbackEvent theEvent) {
+//		           if (theEvent.getAction() == 100) {
+//		        	   loginapplet.init();
+//		        	   loginapplet.start();
+//		        	   loginapplet.setFocusable(true);
+//		        	   jframe.setContentPane(loginapplet);
+//		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		        	   jframe.setSize(windowWidth, windowHeight);
+//		        	   jframe.setVisible(true);
+//		       		  if(currentRoom!=0)
+//		    		  {
+//		    			 imgBackground = loadImage(path+filenameRooms[--currentRoom]);
+//		    			 imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
+//		    		  }
+//		           }
+//		       }
+//		};
+//		
+//		buttonRight = new Item(this , 128, 128, 1000 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
+//			@Override
+//			public void controlEvent(CallbackEvent theEvent) {
+//				if (theEvent.getAction() == 100) {
+//					if(currentRoom!=2)
+//					{
+//					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
+//					    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);	
+//					    controlP5.setVisible(false);
+//					    open.controlP5.setVisible(false);
+//					    
+//					}
+//				}
+//		    }
+//		};
 
 		open = new Item(this ,140,100,300 ,550 , "safe_open2.png" , "safe_open2.png" , "safe_open2.png", Type.FURNITURE){
 		@Override
@@ -170,7 +170,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 		};
 		
 		
-		mykey = new Item(this , 40, 40, 350 , 580 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
+		mykey = new Item(this , 40, 40, 350 , 580 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 1140, 640, "exit.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("mykey")){
@@ -244,6 +244,15 @@ public class AstronomyApplet extends PApplet implements Runnable{
 	
 	
 	
+	protected void server_connection() {
+		// TODO Auto-generated method stub
+		safe.controlP5.setVisible(false);
+		open.controlP5.setVisible(true);
+		mykey.controlP5.setVisible(true);
+	}
+
+
+
 	public void draw() {
 		image(imgBackground,0,0,1286,700);
 		 

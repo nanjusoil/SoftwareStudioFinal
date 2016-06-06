@@ -64,11 +64,14 @@ public class MusicPuzzleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
+				  System.out.println("asc");
 				  safe_status = true;
+//				  server_connection();
+				  
 			  }
 
-		})
-		.on("faithPlay", new Emitter.Listener() {
+		});
+		Main.socket.on("faithPlay", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -78,9 +81,9 @@ public class MusicPuzzleApplet extends PApplet{
 					faith.start();
 					faith.loop(Clip.LOOP_CONTINUOUSLY);
 			  }
-		})
+		});
 		
-		.on("heroPlay", new Emitter.Listener() {
+		Main.socket.on("heroPlay", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -90,9 +93,9 @@ public class MusicPuzzleApplet extends PApplet{
 					hero.start();
 					hero.loop(Clip.LOOP_CONTINUOUSLY);
 			  }
-		})
+		});
 		
-		.on("vocalPlay", new Emitter.Listener() {
+		Main.socket.on("vocalPlay", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -102,9 +105,9 @@ public class MusicPuzzleApplet extends PApplet{
 					vocal.start();
 					vocal.loop(Clip.LOOP_CONTINUOUSLY);
 			  }
-		})
+		});
 		
-		.on("ruralsPlay", new Emitter.Listener() {
+		Main.socket.on("ruralsPlay", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -114,64 +117,70 @@ public class MusicPuzzleApplet extends PApplet{
 					rurals.start();
 					rurals.loop(Clip.LOOP_CONTINUOUSLY);
 			  }
-		})
+		});
 		
-		.on("faithStop", new Emitter.Listener() {
+		Main.socket.on("faithStop", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
 				 	faith.stop();
 			  }
-		})
-		.on("heroStop", new Emitter.Listener() {
+		});
+		
+		Main.socket.on("heroStop", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
 				 hero.stop();
 			  }
-		})
-		.on("vocalStop", new Emitter.Listener() {
+		});
+		
+		Main.socket.on("vocalStop", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
 				 	vocal.stop();
 			  }
-		})
-		.on("ruralsStop", new Emitter.Listener() {
+		});
+
+		
+		Main.socket.on("ruralsStop", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
 					rurals.stop();
 			  }
-		})
+		});
 		
-		.on("putKey", new Emitter.Listener() {
+		
+		Main.socket.on("putKey", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
 				 itemBox.putinItem(mykey);
 			  }
-		})
+		});
 		
-		.on("checkKey", new Emitter.Listener() {
+
+		Main.socket.on("checkKey", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
 				 itemBox.checkItem(mykey, itemArr);
 			  }
-		})
+		});
 		
 		
-		.on("useKey", new Emitter.Listener() {
+		Main.socket.on("useKey", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
 				 	itemBox.useItem(mykey);
 				 	mykey.controlP5.setVisible(false);
 			  }
-		})
+		});
 		
-		.on("putPaperball", new Emitter.Listener() {
+		Main.socket.on("putPaperball", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -179,9 +188,9 @@ public class MusicPuzzleApplet extends PApplet{
 						itemBox.putinItem(paperball);
 					}
 			  }
-		})
+		});
 		
-		.on("checkPaperball", new Emitter.Listener() {
+		Main.socket.on("checkPaperball", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -323,46 +332,47 @@ public class MusicPuzzleApplet extends PApplet{
 		
 		
 		
-		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
-			@Override
-			public void controlEvent(CallbackEvent theEvent) {
-		           if (theEvent.getAction() == 100) {
-		        	   loginapplet.init();
-		        	   loginapplet.start();
-		        	   loginapplet.setFocusable(true);
-		        	   jframe.setContentPane(loginapplet);
-		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        	   jframe.setSize(windowWidth, windowHeight);
-		        	   jframe.setVisible(true);
-		       		  if(currentRoom!=0)
-		    		  {
-		    			 imgBackground = loadImage(path+filenameRooms[--currentRoom]);
-		    			 imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
-		    		  }
-		           }
-		       }
-		};
+//		buttonLeft = new Item(this , 128, 128, 0 , 275 , "arrowLeft.png" , "arrowLeft.png" , "arrowLeftPressed.png", Type.CONTROL){
+//			@Override
+//			public void controlEvent(CallbackEvent theEvent) {
+//		           if (theEvent.getAction() == 100) {
+//		        	   loginapplet.init();
+//		        	   loginapplet.start();
+//		        	   loginapplet.setFocusable(true);
+//		        	   jframe.setContentPane(loginapplet);
+//		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		        	   jframe.setSize(windowWidth, windowHeight);
+//		        	   jframe.setVisible(true);
+//		       		  if(currentRoom!=0)
+//		    		  {
+//		    			 imgBackground = loadImage(path+filenameRooms[--currentRoom]);
+//		    			 imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
+//		    		  }
+//		           }
+//		       }
+//		};
 		
-		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
-			@Override
-			public void controlEvent(CallbackEvent theEvent) {
-				if (theEvent.getAction() == 100) {
-				
-		        	   astronomyApplet.init();
-		        	   astronomyApplet.start();
-		        	   astronomyApplet.setFocusable(true);
-		        	   jframe.setContentPane(astronomyApplet);
-		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        	   jframe.setSize(windowWidth, windowHeight);
-		        	   jframe.setVisible(true);
-					if(currentRoom!=2)
-					{
-					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
-					    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
-					}
-				}
-		    }
-		};
+//		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
+//			@Override
+//			public void controlEvent(CallbackEvent theEvent) {
+//				if (theEvent.getAction() == 100) {
+//				
+//		        	   astronomyApplet.init();
+//		        	   astronomyApplet.start();
+//		        	   astronomyApplet.setFocusable(true);
+//		        	   jframe.setContentPane(astronomyApplet);
+//		        	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		        	   jframe.setSize(windowWidth, windowHeight);
+//		        	   jframe.setVisible(true);
+//					if(currentRoom!=2)
+//					{
+//					    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
+//					    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
+//					}
+//					nextRoom();
+//				}
+//		    }
+//		};
 		
 		itemBox = new ItemBox(this, 1200, 0, "propsColumn.png"){
 			@Override
@@ -389,7 +399,7 @@ public class MusicPuzzleApplet extends PApplet{
 		    }
 		};
 		
-		mykey = new Item(this , 56, 56, 560 , 500 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 900, 600, "cabinet.png", Type.TOOL){
+		mykey = new Item(this , 56, 56, 560 , 500 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 1140, 640, "exit.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("mykey")){
@@ -404,6 +414,7 @@ public class MusicPuzzleApplet extends PApplet{
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){
 						itemBox.useItem(this);
 						this.controlP5.setVisible(false);
+						nextRoom();
 					}
 				}
 		    }
@@ -452,7 +463,9 @@ public class MusicPuzzleApplet extends PApplet{
 	}
 	public void server_connection(){
 		if(safe_status == true){
-			safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
+			
+			System.out.println("hello");
+			
 		}
 	}
 	public void draw() {
@@ -484,6 +497,21 @@ public class MusicPuzzleApplet extends PApplet{
 				paperball.controlP5.setVisible(false);
 			}
 			mykey.controlP5.setVisible(true);
+		}
+	}
+	
+	public void nextRoom(){
+	   astronomyApplet.init();
+ 	   astronomyApplet.start();
+ 	   astronomyApplet.setFocusable(true);
+ 	   jframe.setContentPane(astronomyApplet);
+ 	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 	   jframe.setSize(windowWidth, windowHeight);
+ 	   jframe.setVisible(true);
+		if(currentRoom!=2)
+		{
+		    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
+		    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
 		}
 	}
 
