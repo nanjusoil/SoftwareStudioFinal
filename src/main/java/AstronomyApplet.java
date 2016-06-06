@@ -45,6 +45,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 
 	private JFrame jframe;
 	private LoginApplet loginapplet;
+	private GameWinApplet gameWinApplet;
 	private Keyboard keyboard;
 	private Item safe;
 	private Item open;
@@ -85,6 +86,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 		
 		
 		loginapplet = new LoginApplet(jframe);
+		gameWinApplet = new GameWinApplet(jframe);
 		numSolved = 0;
 		
 		controlP5 = new ControlP5(this);
@@ -142,6 +144,13 @@ public class AstronomyApplet extends PApplet implements Runnable{
 //					    open.controlP5.setVisible(false);
 //					    
 //					}
+					gameWinApplet.init();
+					gameWinApplet.start();
+					gameWinApplet.setFocusable(true);
+					jframe.setContentPane(gameWinApplet);
+					jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					jframe.setSize(windowWidth, windowHeight);
+					jframe.setVisible(true);
 //				}
 //		    }
 //		};
