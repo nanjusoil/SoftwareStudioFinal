@@ -507,7 +507,7 @@ public class MusicPuzzleApplet extends PApplet{
  	   astronomyApplet.setFocusable(true);
  	   jframe.setContentPane(astronomyApplet);
  	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 	   jframe.setSize(windowWidth, windowHeight);
+ 	   jframe.setSize(1303, 745);
  	   jframe.setVisible(true);
 //		if(currentRoom!=2)
 //		{

@@ -233,14 +233,14 @@ public class BuddhistTempleApplet extends PApplet{
 //		       }
 //		};
 		
-//		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
-//			@Override
-//			public void controlEvent(CallbackEvent theEvent) {
-//				if (theEvent.getAction() == 100) {
-//					nextRoom();
-//				}
-//		    }
-//		};
+		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
+			@Override
+			public void controlEvent(CallbackEvent theEvent) {
+				if (theEvent.getAction() == 100) {
+					nextRoom();
+				}
+		    }
+		};
 		
 		buttonReturn = new Item(this , 128, 128, 0 , 572 , "arrowReturn.png" , "arrowReturn.png" , "arrowReturnPressed.png", Type.CONTROL){
 			@Override
@@ -744,7 +744,7 @@ public class BuddhistTempleApplet extends PApplet{
 		musicPuzzleApplet.setFocusable(true);
     	   jframe.setContentPane(musicPuzzleApplet);
     	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    	   jframe.setSize(windowWidth, windowHeight);
+    	   jframe.setSize(1303, 745);
     	   jframe.setVisible(true);
 		if(currentRoom!=2)
 		{
