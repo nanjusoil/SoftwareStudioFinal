@@ -399,7 +399,7 @@ public class MusicPuzzleApplet extends PApplet{
 			
 			public void controlEvent(CallbackEvent theEvent) {
 				if ((theEvent.getAction() == 100) && (!safe_status)){
-					keyboard = new Keyboard(safe,"3596",safe_status);
+					keyboard = new Keyboard(safe,"5963",safe_status);
 					
 					keyboard.setVisible(true);
 					System.out.println("SAFE CLICK");
