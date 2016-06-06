@@ -52,6 +52,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 	
 	// parameter::  sizex, sizey , x , y
 	private Item table;//200, 200, 0, 0
+	private Item stage;
 	
 	//the token which ...'s phrase is written on
 	
@@ -239,6 +240,17 @@ public class AstronomyApplet extends PApplet implements Runnable{
 					}
 			   	}
 		};
+		stage = new Item(this , 100 , 200 , 1100 , 400 , "stage3.png" , "stage3.png" , "stage3.png", Type.FURNITURE){
+			
+			@Override
+				public void controlEvent(CallbackEvent theEvent) {
+					if(theEvent.getController().getName().equals("stage1")){
+						if (theEvent.getAction() == 100) {
+							
+						}
+					}
+			   	}
+			};
 		
 	
 		mykey.controlP5.setVisible(false);

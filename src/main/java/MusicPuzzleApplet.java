@@ -50,6 +50,7 @@ public class MusicPuzzleApplet extends PApplet{
 	private Item Napoleon;//190, 150, 600, 60
 	private Item pentatonix;//190, 150, 385, 250
 	private Item rural;//190, 150, 600, 250
+	private Item stage;
 	private ArrayList<Item> itemArr;
 	
 	Clip faith, hero, vocal, rurals,toast;   
@@ -455,6 +456,17 @@ public class MusicPuzzleApplet extends PApplet{
 				}
 		    }
 		};
+		stage = new Item(this , 100 , 200 , 1100 , 400 , "stage2.png" , "stage2.png" , "stage2.png", Type.FURNITURE){
+			
+			@Override
+				public void controlEvent(CallbackEvent theEvent) {
+					if(theEvent.getController().getName().equals("stage1")){
+						if (theEvent.getAction() == 100) {
+							
+						}
+					}
+			   	}
+			};
 		
 		itemArr = new ArrayList<Item>(Arrays.asList(mykey, paperball));
 		server_connection();

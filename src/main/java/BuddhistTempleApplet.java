@@ -46,7 +46,7 @@ public class BuddhistTempleApplet extends PApplet{
 	private Item leftBox;
 	private Item rightBox;
 	
-	
+	private Item stage;
 	private Item baijuyi;
 	private Item dufu;
 	private Item wangwei;
@@ -609,7 +609,17 @@ public class BuddhistTempleApplet extends PApplet{
 						}
 					   }
 			};
-		
+			stage = new Item(this , 100 , 200 , 1100 , 400 , "stage1.png" , "stage1.png" , "stage1.png", Type.FURNITURE){
+				
+				@Override
+					public void controlEvent(CallbackEvent theEvent) {
+						if(theEvent.getController().getName().equals("stage1")){
+							if (theEvent.getAction() == 100) {
+								
+							}
+						}
+				   	}
+				};
 		
 		//they are deactivated until changing to the table background
 		baijuyi.controlP5.setVisible(false);	

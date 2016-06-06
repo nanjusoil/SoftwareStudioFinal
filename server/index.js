@@ -30,4 +30,7 @@ io.on('connection', function (socket) {
   socket.on('message', function (data) {
   console.log(data);
   });
+  socket.on('safeopen', function (data) {
+	socket.broadcast.emit('safeopen', { hello: 'world' });
+  });
 });
