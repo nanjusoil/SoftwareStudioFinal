@@ -38,7 +38,7 @@ import processing.core.PImage;
 		astronomyapplet = new AstronomyApplet(jframe);
 		musicPuzzleApplet = new MusicPuzzleApplet(jframe);
 		
-		stage1 = new Item(this , 78, 83, 650 , 550 , "stageSelect.png" , "stageSelect.png" , "stageSelect.png", Type.CONTROL){
+		stage1 = new Item(this ,300, 100, 470 , 530 , "transparent.png" , "transparent.png" , "transparent.png", Type.CONTROL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 		           if (theEvent.getAction() == 100) {
@@ -75,11 +75,18 @@ import processing.core.PImage;
 	public void draw(){
 		image(imgBackground,0,0,1286,700);
 		
-		PFont wordstyle;
-		wordstyle = createFont("Blood Lust",72,true);
-		textFont(wordstyle,150);
+		PFont wordstyle1;
+		wordstyle1 = createFont("Blood Lust",72,true);
+		textFont(wordstyle1,150);
 		this.fill(250,0,0);
 		this.text("ESCAPE THE ROOM",100,400);
+		this.fill(250,250,250);
+		this.text("START", 460, 600);
+		
+		
+		
+		
+		
 		
 	}
 	

@@ -256,9 +256,9 @@ public class MusicPuzzleApplet extends PApplet{
 	  
 
 		
-		musician = new Item(this , 200 , 200 , 0 , 0 , "musician.png" , "musician.png" , "musician.png", Type.FURNITURE);
-		cabinet = new Item(this , 1200 , 700 , 0 , 0 , "cabinet.png" , "cabinet.png" , "cabinet.png", Type.FURNITURE);
-		monopoly = new Item(this , 190 , 150 , 385 , 60, "monopoly.png" , "monopoly.png" , "monopoly.png", Type.FURNITURE){
+		musician = new Item(this , 100 , 100 , 1000, 120 , "musician.png" , "musician.png" , "musician.png", Type.FURNITURE);
+		//cabinet = new Item(this , 1200 , 700 , 0 , 0 , "cabinet.png" , "cabinet.png" , "cabinet.png", Type.FURNITURE);
+		monopoly = new Item(this , 120 , 210 , 120 , 200, "fortune.jpg" , "fortune.jpg" , "fortune.jpg", Type.FURNITURE){
 		@Override
 		public void controlEvent(CallbackEvent theEvent) {
 			if (theEvent.getAction() == 100) {
@@ -276,7 +276,7 @@ public class MusicPuzzleApplet extends PApplet{
 				}
 	    	}
 		};
-		Napoleon = new Item(this , 190 , 150 , 600 , 60 , "Napoleon.png" , "Napoleon.png" , "Napoleon.png", Type.FURNITURE){
+		Napoleon = new Item(this , 100 , 100 , 850 , 130 , "Napoleon.png" , "Napoleon.png" , "Napoleon.png", Type.FURNITURE){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
@@ -295,7 +295,7 @@ public class MusicPuzzleApplet extends PApplet{
 		    }
 		};
 	
-		pentatonix = new Item(this , 190 , 150 , 385 , 250 , "pentatonix.png" , "pentatonix.png" , "pentatonix.png", Type.FURNITURE){
+		pentatonix = new Item(this , 100 , 100 , 500 , 465 , "eew.png" , "eew.png" , "eew.png", Type.FURNITURE){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
@@ -313,7 +313,7 @@ public class MusicPuzzleApplet extends PApplet{
 		    }
 		};
 		
-		rural = new Item(this , 190 , 150 , 600 , 250, "rural.png" , "rural.png" , "rural.png", Type.FURNITURE){
+		rural = new Item(this , 200 , 120 , 900 , 230, "rural.jpg" , "rural.jpg" , "rural.jpg", Type.FURNITURE){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
@@ -383,7 +383,7 @@ public class MusicPuzzleApplet extends PApplet{
 		    }
 		};
 		
-		safe = new Item(this , 235, 161, 490 , 450 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.FURNITURE){
+		safe = new Item(this , 120, 130, 165 , 430 , "safe_nomove.png" , "safe_nomove.png" , "safe_nomove.png", Type.FURNITURE){
 			
 			@Override
 			
@@ -420,7 +420,7 @@ public class MusicPuzzleApplet extends PApplet{
 		    }
 		};
 		
-		paperball = new Item(this , 70, 76, 800 , 500 , "paperball.png" , "paperball.png" , "paperball.png", Type.MESSAGE){
+		paperball = new Item(this , 20, 20, 900 , 380 , "paperball.png" , "paperball.png" , "paperball.png", Type.MESSAGE){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("paperball")){
