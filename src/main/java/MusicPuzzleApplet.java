@@ -446,13 +446,13 @@ public class MusicPuzzleApplet extends PApplet{
 								private PImage paperball_unfolded;
 								public void setup(){
 									paperball_unfolded = loadImage(path+"paperball_unfolded.png");
-									paperball_unfolded.resize(100, 100);
+									paperball_unfolded.resize(400, 400);
 									System.out.println("X:" + paperball_unfolded.width);
 									System.out.println("Y:" + paperball_unfolded.height);
 								};
 								public void draw(){
 									background(255);
-									image(paperball_unfolded, 30, 0, 100, 100);
+									image(paperball_unfolded, 30, 0, 400, 400);
 								};
 							};
 							applet.init();
@@ -461,7 +461,7 @@ public class MusicPuzzleApplet extends PApplet{
 							
 							JFrame window = new JFrame("BALL");
 							window.setContentPane(applet);
-							window.setSize( 100, 150);
+							window.setSize( 450, 450);
 							window.setVisible(true);
 							Main.socket.emit("checkItempaperball","data");
 						}
