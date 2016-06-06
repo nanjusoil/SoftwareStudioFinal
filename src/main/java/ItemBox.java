@@ -125,19 +125,19 @@ public class ItemBox extends PApplet implements CallbackListener{
 //			this.parent.rect(20,20,20,20);
 		}else if(citem.type == Type.MESSAGE){
 		//group two : show its content
-			JOptionPane.showMessageDialog(parent, "Here's the hint.");
-			//still can't show picture in the dialog box?
-			JDialog dialog = new JDialog();
-			
-			dialog.setBounds(this.parent.getWidth()/2 - 150, this.parent.getHeight()/2 - 100, 300, 200); 
-			dialog.setVisible(true);
-//			dialog.setUndecorated(true);
-			JLabel label = new JLabel( new ImageIcon(path + "key.png") );
-			label.setSize(100, 100);
-			label.setVisible(true);
-			dialog.add( label );
-			dialog.pack();
-			dialog.setSize(300, 200); 
+//			JOptionPane.showMessageDialog(parent, "Here's the hint.");
+//			//still can't show picture in the dialog box?
+//			JDialog dialog = new JDialog();
+//			
+//			dialog.setBounds(this.parent.getWidth()/2 - 150, this.parent.getHeight()/2 - 100, 300, 200); 
+//			dialog.setVisible(true);
+////			dialog.setUndecorated(true);
+//			JLabel label = new JLabel( new ImageIcon(path + "key.png") );
+//			label.setSize(100, 100);
+//			label.setVisible(true);
+//			dialog.add( label );
+//			dialog.pack();
+//			dialog.setSize(300, 200); 
 		}
 	
 	}
