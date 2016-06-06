@@ -400,7 +400,7 @@ public class MusicPuzzleApplet extends PApplet{
 		    }
 		};
 		
-		mykey = new Item(this , 56, 56, 560 , 500 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 1140, 640, "exit.png", Type.TOOL){
+		mykey = new Item(this , 56, 56, 220 , 500 , "mykey.png" , "mykey.png" , "mykey.png", 60, 60, 1140, 640, "exit.png", Type.TOOL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if(theEvent.getController().getName().equals("mykey")){

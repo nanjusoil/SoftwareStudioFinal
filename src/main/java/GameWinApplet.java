@@ -33,8 +33,8 @@ public class GameWinApplet extends PApplet{
 	
 	public void draw() {
 		image(imgBackground, 0, 0);
-		text("Congratulation You Win !!!!!", 0, 350 );
-		textSize(100);
+		text("Congratulation,You're OUT !!!!!", 100, 350 );
+		textSize(72);
 	}
 	
 	

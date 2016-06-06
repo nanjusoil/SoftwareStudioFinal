@@ -233,7 +233,7 @@ public class BuddhistTempleApplet extends PApplet{
 //		       }
 //		};
 		
-		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
+		/*buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
@@ -262,7 +262,7 @@ public class BuddhistTempleApplet extends PApplet{
 				}
 		    }
 		};
-		
+		*/
 		itemBox = new ItemBox(this, 1200, 0, "propsColumn.png"){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {

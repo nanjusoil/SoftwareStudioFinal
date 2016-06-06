@@ -103,7 +103,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 				@Override
 				public void controlEvent(CallbackEvent theEvent) {
 					if (theEvent.getAction() == ControlP5.ACTION_RELEASE) {
-						if(theEvent.getController().getValue() >= 99 && theEvent.getController().getValue() <= 102){
+						if(theEvent.getController().getValue() >= 98 && theEvent.getController().getValue() <= 100){
 							server_connection();	
 						}
 					}
