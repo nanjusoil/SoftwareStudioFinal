@@ -61,13 +61,14 @@ public class MusicPuzzleApplet extends PApplet{
 	
 	public MusicPuzzleApplet(JFrame jframe){
 		this.jframe = jframe;
+		
 		Main.socket.on("safeopen", new Emitter.Listener() {
 
 			  @Override
 			  public void call(Object... args) {
 				  System.out.println("asc");
 				  safe_status = true;
-//				  server_connection();
+				  server_connection();
 				  
 			  }
 
@@ -81,6 +82,8 @@ public class MusicPuzzleApplet extends PApplet{
 				 	rurals.stop();
 					faith.start();
 					faith.loop(Clip.LOOP_CONTINUOUSLY);
+					
+				
 			  }
 		});
 		
@@ -88,7 +91,7 @@ public class MusicPuzzleApplet extends PApplet{
 			
 			 @Override
 			  public void call(Object... args) {
-				 faith.stop();
+				 	faith.stop();
 				 	vocal.stop();
 				 	rurals.stop();
 					hero.start();
@@ -154,7 +157,7 @@ public class MusicPuzzleApplet extends PApplet{
 		});
 		
 		
-		Main.socket.on("putKey", new Emitter.Listener() {
+		Main.socket.on("putinItemmykey", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -163,7 +166,7 @@ public class MusicPuzzleApplet extends PApplet{
 		});
 		
 
-		Main.socket.on("checkKey", new Emitter.Listener() {
+		Main.socket.on("checkItemmykey", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -172,7 +175,7 @@ public class MusicPuzzleApplet extends PApplet{
 		});
 		
 		
-		Main.socket.on("useKey", new Emitter.Listener() {
+		Main.socket.on("useItemmykey", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -181,7 +184,7 @@ public class MusicPuzzleApplet extends PApplet{
 			  }
 		});
 		
-		Main.socket.on("putPaperball", new Emitter.Listener() {
+		Main.socket.on("putinItempaperball", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -191,7 +194,7 @@ public class MusicPuzzleApplet extends PApplet{
 			  }
 		});
 		
-		Main.socket.on("checkPaperball", new Emitter.Listener() {
+		Main.socket.on("checkItempaperball", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -282,14 +285,16 @@ public class MusicPuzzleApplet extends PApplet{
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
 					
-					if( hero.isRunning() )
+					if( hero.isRunning() ){
 						hero.stop();
-					else{
+						Main.socket.emit("heroStop","data");
+					}else{
 					faith.stop();
 				 	vocal.stop();
 				 	rurals.stop();
 					hero.start();
 					hero.loop(Clip.LOOP_CONTINUOUSLY);
+					Main.socket.emit("heroPlay","data");
 					}
 					
 				}
@@ -301,14 +306,16 @@ public class MusicPuzzleApplet extends PApplet{
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
 					
-					if( vocal.isRunning() )
+					if( vocal.isRunning() ){
 						vocal.stop();
-					else{
+						Main.socket.emit("vocalStop","data");
+					}else{
 					faith.stop();
 				 	hero.stop();
 				 	rurals.stop();
 					vocal.start();
 					vocal.loop(Clip.LOOP_CONTINUOUSLY);
+					Main.socket.emit("vocalStop","data");
 					}
 				}
 		    }
@@ -318,14 +325,16 @@ public class MusicPuzzleApplet extends PApplet{
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
-					if( rurals.isRunning() )
+					if( rurals.isRunning() ){
 						rurals.stop();
-					else{
+						Main.socket.emit("ruralsStop","data");
+					}else{
 					hero.stop();
 				 	vocal.stop();
 				 	faith.stop();
 					rurals.start();
 					rurals.loop(Clip.LOOP_CONTINUOUSLY);
+					Main.socket.emit("ruralsPlay","data");
 					}
 				}
 		    }
@@ -394,7 +403,7 @@ public class MusicPuzzleApplet extends PApplet{
 					
 					keyboard.setVisible(true);
 					System.out.println("SAFE CLICK");
-					
+					Main.socket.emit("safeopen","data");
 					System.out.println("safe_status: "+ safe_status);
 				}
 		    }
@@ -407,15 +416,17 @@ public class MusicPuzzleApplet extends PApplet{
 					if (theEvent.getAction() == 100) {
 						if(!isInBox){
 							itemBox.putinItem(this);
+							Main.socket.emit("putinItemmykey","data");
 						}else{
 							itemBox.checkItem(this, itemArr);
+							Main.socket.emit("checkItemmykey","data");
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solmykey")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){
 						itemBox.useItem(this);
-						this.controlP5.setVisible(false);
 						nextRoom();
+						Main.socket.emit("useItemmykey","data");
 					}
 				}
 		    }
@@ -428,6 +439,7 @@ public class MusicPuzzleApplet extends PApplet{
 					if (theEvent.getAction() == 100) {
 						if(!isInBox){
 							itemBox.putinItem(this);
+							Main.socket.emit("putinItempaperball","data");
 						}else{
 							itemBox.checkItem(this, itemArr);
 							PApplet applet = new PApplet(){
@@ -451,6 +463,7 @@ public class MusicPuzzleApplet extends PApplet{
 							window.setContentPane(applet);
 							window.setSize( 100, 150);
 							window.setVisible(true);
+							Main.socket.emit("checkItempaperball","data");
 						}
 					}
 				}
@@ -466,7 +479,7 @@ public class MusicPuzzleApplet extends PApplet{
 						}
 					}
 			   	}
-			};
+		};
 		
 		itemArr = new ArrayList<Item>(Arrays.asList(mykey, paperball));
 		server_connection();
@@ -475,13 +488,19 @@ public class MusicPuzzleApplet extends PApplet{
 	}
 	public void server_connection(){
 		if(safe_status == true){
-			
-			System.out.println("hello");
+			Clip cheer;
+			       
+			cheer = MusicPlay.getMusic("src/" + path + "Sounds/cheers.wav");
+	     	cheer.start();
+    		safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
+    		((MusicPuzzleApplet)keyboard.safe.parent).safe_status = true;
+    		((MusicPuzzleApplet)keyboard.safe.parent).showkey();
+    		keyboard.dispose();
 			
 		}
 	}
 	public void draw() {
-		image(imgBackground, 0, 0);
+		image(imgBackground, 0, 0, 1286,700);
 		
 	}
 

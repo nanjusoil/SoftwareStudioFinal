@@ -117,6 +117,7 @@ public class BuddhistTempleApplet extends PApplet{
 			  @Override
 			  public void call(Object... args) {
 				  putinCard(dufu); 
+				  System.out.println("putinCarddufu");
 			  };
 
 		});
@@ -185,6 +186,39 @@ public class BuddhistTempleApplet extends PApplet{
 			  };
 
 		});
+		Main.socket.on("putinItemmykey", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  itemBox.putinItem(mykey);
+			  };
+
+		});
+		Main.socket.on("checkItemmykey", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  itemBox.checkItem(mykey, itemArr);
+			  };
+
+		});
+		Main.socket.on("useItemmykey", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  itemBox.useItem(mykey);
+					nextRoom();
+			  };
+
+		});
+		Main.socket.on("nextRoom", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  nextRoom();
+			  };
+
+		});
 	}
 
 	
@@ -233,11 +267,12 @@ public class BuddhistTempleApplet extends PApplet{
 //		       }
 //		};
 		
-		/*buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
+		buttonRight = new Item(this , 128, 128, 900 , 275 , "arrowRight.png" , "arrowRight.png" , "arrowRightPressed.png", Type.CONTROL){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
 				if (theEvent.getAction() == 100) {
 					nextRoom();
+					Main.socket.emit("nextRoom","data");
 				}
 		    }
 		};
@@ -262,7 +297,7 @@ public class BuddhistTempleApplet extends PApplet{
 				}
 		    }
 		};
-		*/
+		
 		itemBox = new ItemBox(this, 1200, 0, "propsColumn.png"){
 			@Override
 			public void controlEvent(CallbackEvent theEvent) {
@@ -280,14 +315,17 @@ public class BuddhistTempleApplet extends PApplet{
 					if (theEvent.getAction() == 100) {
 						if(!isInBox){
 							itemBox.putinItem(this);
+							Main.socket.emit("putinItemmykey","data");
 						}else{
 							itemBox.checkItem(this, itemArr);
+							Main.socket.emit("checkItemmykey","data");
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solmykey")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){
 						itemBox.useItem(this);
 						nextRoom();
+						Main.socket.emit("useItemmykey","data");
 					}
 				}
 		    }
@@ -410,6 +448,7 @@ public class BuddhistTempleApplet extends PApplet{
 //							window.setSize( 800, 800);
 //							window.setVisible(true);
 							checkCard(this);
+							Main.socket.emit("checkCardbaijuyi","data");
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solcard2")){
@@ -438,6 +477,7 @@ public class BuddhistTempleApplet extends PApplet{
 //						indexHolded = -1;
 //						itemBox.useItem(citem);
 						useCard(this, 10, 180);
+						Main.socket.emit("useCardbaijuyi","data");
 					}
 				}
 		   	}
@@ -457,6 +497,7 @@ public class BuddhistTempleApplet extends PApplet{
 //								pos[1] = -1; 
 //							}
 							putinCard(this);
+							Main.socket.emit("putinCarddufu","data");
 						}else{
 //							itemBox.checkItem(this, itemArr);
 //							indexHolded = itemArr.indexOf(this);
@@ -471,6 +512,7 @@ public class BuddhistTempleApplet extends PApplet{
 //							window.setSize( 800, 800);
 //							window.setVisible(true);
 							checkCard(this);
+							Main.socket.emit("checkCarddufu","data");
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solcard2")){
@@ -485,6 +527,7 @@ public class BuddhistTempleApplet extends PApplet{
 //						indexHolded = -1;
 //						itemBox.useItem(citem);
 						useCard(this, -10, 130);
+						Main.socket.emit("useCarddufu","data");
 					}
 				}
 		   	}
@@ -503,6 +546,7 @@ public class BuddhistTempleApplet extends PApplet{
 //								pos[2] = -1; 
 //							}
 							putinCard(this);
+							Main.socket.emit("putinCardwangwei","data");
 						}else{
 //							itemBox.checkItem(this, itemArr);
 //							indexHolded = itemArr.indexOf(this);
@@ -516,6 +560,7 @@ public class BuddhistTempleApplet extends PApplet{
 //							window.setSize( 800, 800);
 //							window.setVisible(true);
 							checkCard(this);
+							Main.socket.emit("checkCarddufu","data");
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solcard2")){
@@ -530,6 +575,7 @@ public class BuddhistTempleApplet extends PApplet{
 //						indexHolded = -1;
 //						itemBox.useItem(citem);
 						useCard(this, 80, 130);
+						Main.socket.emit("useCarddufu","data");
 					}
 				}
 		   	}
@@ -549,6 +595,7 @@ public class BuddhistTempleApplet extends PApplet{
 //									pos[3] = -1; 
 //								}
 								putinCard(this);
+								Main.socket.emit("putinCardlibai","data");
 							}else{
 //								itemBox.checkItem(this, itemArr);
 //								indexHolded = itemArr.indexOf(this);
@@ -562,6 +609,7 @@ public class BuddhistTempleApplet extends PApplet{
 //								window.setSize( 800, 800);
 //								window.setVisible(true);
 								checkCard(this);
+								Main.socket.emit("checkCardlibai","data");
 							}
 						}
 					}else if(theEvent.getController().getName().equals("solcard2")){
@@ -576,6 +624,7 @@ public class BuddhistTempleApplet extends PApplet{
 //							indexHolded = -1;
 //							itemBox.useItem(citem);
 							useCard(this, 70, 120);
+							Main.socket.emit("useCardlibai","data");
 						}
 					}
 			   	}
@@ -601,6 +650,7 @@ public class BuddhistTempleApplet extends PApplet{
 					public void controlEvent(CallbackEvent theEvent) {
 						if(theEvent.getController().getName().equals("buddaSafe_nomove")){
 							if (theEvent.getAction() == 100) {
+								Main.socket.emit("rightboxopen","data");
 								slash2.start();
 								this.updateImage(100 , 100 , 800 , 500 ,"buddaSafe_open.png", "buddaSafe_open.png", "buddaSafe_open.png");
 								baijuyi.controlP5.setVisible(true);	
@@ -609,6 +659,7 @@ public class BuddhistTempleApplet extends PApplet{
 						}
 					   }
 			};
+		
 			stage = new Item(this , 100 , 200 , 1100 , 400 , "stage1.png" , "stage1.png" , "stage1.png", Type.FURNITURE){
 				
 				@Override
@@ -654,7 +705,7 @@ public class BuddhistTempleApplet extends PApplet{
 	}
 	
 	public void draw() {
-		image(imgBackground, 0, 0);
+		image(imgBackground, 0, 0, 1286,700);
 		
 	}
 
@@ -695,6 +746,7 @@ public class BuddhistTempleApplet extends PApplet{
 		itemBox.putinItem(item);
 		int icard = itemArr.indexOf(item);
 		System.out.println(icard);
+		System.out.println("putincard");
 		if(pos[icard]>=0){//first card originally at some statue's side
 			hasCard[pos[icard]] = false; //first card is originally at pos[0]-th statue
 			pos[icard] = -1; //first card is no longer besides statues

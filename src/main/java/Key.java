@@ -285,6 +285,8 @@ public class Key extends JPanel implements ActionListener{
         		safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
         		((MusicPuzzleApplet)keyboard.safe.parent).safe_status = true;
         		((MusicPuzzleApplet)keyboard.safe.parent).showkey();
+        		keyboard.dispose();
+        		Main.socket.emit("safeopen","data");
         	}else{
         		safe.updateImage("safe_close.png", "safe_close.png", "safe_close.png");
         		try {       

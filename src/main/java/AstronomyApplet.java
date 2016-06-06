@@ -64,13 +64,39 @@ public class AstronomyApplet extends PApplet implements Runnable{
 
 	public AstronomyApplet(JFrame jframe){
 		this.jframe = jframe;
-		Main.socket.on("safeopenastronomy", new Emitter.Listener() {
+		Main.socket.on("safeopenastro", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
-//				 server_connection();
+				 server_connection();
 //				  System.out.println("server");
 			  }
+		});
+		
+		Main.socket.on("putinItemmykey", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  itemBox.putinItem(mykey);
+			  };
+
+		});
+		Main.socket.on("checkItemmykey", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  itemBox.checkItem(mykey, itemArr);
+			  };
+
+		});
+		Main.socket.on("useItemmykey", new Emitter.Listener() {
+
+			  @Override
+			  public void call(Object... args) {
+				  itemBox.useItem(mykey);
+				  nextRoom();
+			  };
+
 		});
 	}
 	
@@ -105,6 +131,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 					if (theEvent.getAction() == ControlP5.ACTION_RELEASE) {
 						if(theEvent.getController().getValue() >= 98 && theEvent.getController().getValue() <= 100){
 							server_connection();	
+							Main.socket.emit("safeopenastro","data");
 						}
 					}
 			    }
@@ -184,8 +211,10 @@ public class AstronomyApplet extends PApplet implements Runnable{
 					if (theEvent.getAction() == 100) {
 						if(!isInBox){
 							itemBox.putinItem(this);
+							Main.socket.emit("putinItemmykey","data");
 						}else{
 							itemBox.checkItem(this, itemArr);
+							Main.socket.emit("checkItemmykey","data");
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solmykey")){
@@ -194,6 +223,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 						this.controlP5.setVisible(false);
 						System.out.println("You win the game.");
 						nextRoom();
+						Main.socket.emit("useItemmykey","data");
 					}
 				}
 		    }
@@ -240,6 +270,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 					}
 			   	}
 		};
+		
 		stage = new Item(this , 100 , 200 , 1100 , 400 , "stage3.png" , "stage3.png" , "stage3.png", Type.FURNITURE){
 			
 			@Override
@@ -251,7 +282,6 @@ public class AstronomyApplet extends PApplet implements Runnable{
 					}
 			   	}
 			};
-		
 	
 		mykey.controlP5.setVisible(false);
 		itemArr = new ArrayList<Item>(Arrays.asList(mykey));
