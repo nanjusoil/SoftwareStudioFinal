@@ -67,7 +67,149 @@ public class MusicPuzzleApplet extends PApplet{
 				  safe_status = true;
 			  }
 
+		})
+		.on("faithPlay", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 	hero.stop();
+				 	vocal.stop();
+				 	rurals.stop();
+					faith.start();
+					faith.loop(Clip.LOOP_CONTINUOUSLY);
+			  }
+		})
+		
+		.on("heroPlay", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 faith.stop();
+				 	vocal.stop();
+				 	rurals.stop();
+					hero.start();
+					hero.loop(Clip.LOOP_CONTINUOUSLY);
+			  }
+		})
+		
+		.on("vocalPlay", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 faith.stop();
+				 	hero.stop();
+				 	rurals.stop();
+					vocal.start();
+					vocal.loop(Clip.LOOP_CONTINUOUSLY);
+			  }
+		})
+		
+		.on("ruralsPlay", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 hero.stop();
+				 	vocal.stop();
+				 	faith.stop();
+					rurals.start();
+					rurals.loop(Clip.LOOP_CONTINUOUSLY);
+			  }
+		})
+		
+		.on("faithStop", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 	faith.stop();
+			  }
+		})
+		.on("heroStop", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 hero.stop();
+			  }
+		})
+		.on("vocalStop", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 	vocal.stop();
+			  }
+		})
+		.on("ruralsStop", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+					rurals.stop();
+			  }
+		})
+		
+		.on("putKey", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 itemBox.putinItem(mykey);
+			  }
+		})
+		
+		.on("checkKey", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 itemBox.checkItem(mykey, itemArr);
+			  }
+		})
+		
+		
+		.on("useKey", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 	itemBox.useItem(mykey);
+				 	mykey.controlP5.setVisible(false);
+			  }
+		})
+		
+		.on("putPaperball", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 if(!paperball.isInBox){
+						itemBox.putinItem(paperball);
+					}
+			  }
+		})
+		
+		.on("checkPaperball", new Emitter.Listener() {
+			
+			 @Override
+			  public void call(Object... args) {
+				 itemBox.checkItem(paperball, itemArr);
+					PApplet applet = new PApplet(){
+						private PImage paperball_unfolded;
+						public void setup(){
+							paperball_unfolded = loadImage(path+"paperball_unfolded.png");
+							paperball_unfolded.resize(100, 100);
+							System.out.println("X:" + paperball_unfolded.width);
+							System.out.println("Y:" + paperball_unfolded.height);
+						};
+						public void draw(){
+							background(255);
+							image(paperball_unfolded, 30, 0, 100, 100);
+						};
+					};
+					applet.init();
+					applet.start();
+					applet.setFocusable(true);
+					
+					JFrame window = new JFrame("BALL");
+					window.setContentPane(applet);
+					window.setSize( 100, 150);
+					window.setVisible(true);
+			  }
 		});
+		
 	}
 
 	
