@@ -101,14 +101,11 @@ public class AstronomyApplet extends PApplet implements Runnable{
 		  .addCallback(new CallbackListener(){
 				@Override
 				public void controlEvent(CallbackEvent theEvent) {
-					if(theEvent.getController().getValue() >= 99 && theEvent.getController().getValue() <= 102){
-						server_connection();
-						
-						
+					if (theEvent.getAction() == ControlP5.ACTION_RELEASE) {
+						if(theEvent.getController().getValue() >= 99 && theEvent.getController().getValue() <= 102){
+							server_connection();	
+						}
 					}
-					
-						
-					
 			    }
 		  });
 	
@@ -294,7 +291,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 		gameWinApplet.setFocusable(true);
 		jframe.setContentPane(gameWinApplet);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jframe.setSize(windowWidth, windowHeight);
+		jframe.setSize(1303, 745);
 		jframe.setVisible(true);
 	}
 
