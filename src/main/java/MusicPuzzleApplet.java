@@ -501,6 +501,7 @@ public class MusicPuzzleApplet extends PApplet{
 	}
 	
 	public void nextRoom(){
+		System.out.println("music");
 	   astronomyApplet.init();
  	   astronomyApplet.start();
  	   astronomyApplet.setFocusable(true);
@@ -508,11 +509,11 @@ public class MusicPuzzleApplet extends PApplet{
  	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  	   jframe.setSize(windowWidth, windowHeight);
  	   jframe.setVisible(true);
-		if(currentRoom!=2)
-		{
-		    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
-		    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
-		}
+//		if(currentRoom!=2)
+//		{
+//		    imgBackground = loadImage(path+filenameRooms[++currentRoom]);
+//		    imgBackground.resize(windowWidth-itemboxWidth, windowHeight);			
+//		}
 	}
 
 }

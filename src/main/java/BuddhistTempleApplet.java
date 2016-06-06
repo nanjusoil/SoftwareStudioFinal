@@ -740,7 +740,7 @@ public class BuddhistTempleApplet extends PApplet{
 		
 		sutra.stop();
 		musicPuzzleApplet.init();
-		musicPuzzleApplet.start();
+		musicPuzzleApplet.start(); 
 		musicPuzzleApplet.setFocusable(true);
     	   jframe.setContentPane(musicPuzzleApplet);
     	   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

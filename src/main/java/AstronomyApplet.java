@@ -144,13 +144,13 @@ public class AstronomyApplet extends PApplet implements Runnable{
 //					    open.controlP5.setVisible(false);
 //					    
 //					}
-					gameWinApplet.init();
-					gameWinApplet.start();
-					gameWinApplet.setFocusable(true);
-					jframe.setContentPane(gameWinApplet);
-					jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					jframe.setSize(windowWidth, windowHeight);
-					jframe.setVisible(true);
+//					gameWinApplet.init();
+//					gameWinApplet.start();
+//					gameWinApplet.setFocusable(true);
+//					jframe.setContentPane(gameWinApplet);
+//					jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//					jframe.setSize(windowWidth, windowHeight);
+//					jframe.setVisible(true);
 //				}
 //		    }
 //		};
@@ -194,7 +194,8 @@ public class AstronomyApplet extends PApplet implements Runnable{
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){
 						itemBox.useItem(this);
 						this.controlP5.setVisible(false);
-						System.out.println("You open the door.");
+						System.out.println("You win the game.");
+						nextRoom();
 					}
 				}
 		    }
@@ -287,7 +288,15 @@ public class AstronomyApplet extends PApplet implements Runnable{
 		
 	}
 	
-	
+	public void nextRoom(){
+		gameWinApplet.init();
+		gameWinApplet.start();
+		gameWinApplet.setFocusable(true);
+		jframe.setContentPane(gameWinApplet);
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jframe.setSize(windowWidth, windowHeight);
+		jframe.setVisible(true);
+	}
 
 
 }
