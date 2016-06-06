@@ -388,7 +388,7 @@ public class MusicPuzzleApplet extends PApplet{
 			@Override
 			
 			public void controlEvent(CallbackEvent theEvent) {
-				if (theEvent.getAction() == 100) {
+				if ((theEvent.getAction() == 100) && (!safe_status)){
 					keyboard = new Keyboard(safe,"3596",safe_status);
 					
 					keyboard.setVisible(true);
