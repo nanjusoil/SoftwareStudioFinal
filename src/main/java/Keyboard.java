@@ -26,7 +26,7 @@ public class Keyboard extends JFrame{
 	
 	public Keyboard(Item i,String p,boolean safe_s){
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(400, 300);
+		this.setSize(200, 300);
 		this.setLayout(null);
 		this.safe = i;
 		this.password = p;

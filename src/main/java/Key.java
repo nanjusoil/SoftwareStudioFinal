@@ -29,6 +29,7 @@ public class Key extends JPanel implements ActionListener{
 	private String path = "main/resources/";
 	Clip press;
 	Clip close;
+	Clip cheer;
 	
 	private int numberOfButton = 12;
 	private Icon number_0;
@@ -273,6 +274,14 @@ public class Key extends JPanel implements ActionListener{
         	System.out.println(keyboard.getPassword())
         	;
         	if(inputCode.toString().equals(keyboard.getPassword())|| safe_status == true){
+        		try {       
+    				cheer = MusicPlay.getMusic("src/" + path + "Sounds/cheers.wav");
+    	     	        
+    			    } catch(Exception ex) {
+    			        System.out.println("Error with playing sound.");
+    			        ex.printStackTrace();
+    			 }
+        		cheer.start();
         		safe.updateImage("safe_open.png", "safe_open.png", "safe_open.png");
         		((MusicPuzzleApplet)keyboard.safe.parent).safe_status = true;
         		((MusicPuzzleApplet)keyboard.safe.parent).showkey();
