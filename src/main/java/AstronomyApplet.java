@@ -52,6 +52,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 	
 	// parameter::  sizex, sizey , x , y
 	private Item table;//200, 200, 0, 0
+	private Item stage;
 	
 	//the token which ...'s phrase is written on
 	
@@ -101,14 +102,11 @@ public class AstronomyApplet extends PApplet implements Runnable{
 		  .addCallback(new CallbackListener(){
 				@Override
 				public void controlEvent(CallbackEvent theEvent) {
-					if(theEvent.getController().getValue() >= 99 && theEvent.getController().getValue() <= 102){
-						server_connection();
-						
-						
+					if (theEvent.getAction() == ControlP5.ACTION_RELEASE) {
+						if(theEvent.getController().getValue() >= 99 && theEvent.getController().getValue() <= 102){
+							server_connection();	
+						}
 					}
-					
-						
-					
 			    }
 		  });
 	
@@ -242,6 +240,17 @@ public class AstronomyApplet extends PApplet implements Runnable{
 					}
 			   	}
 		};
+		stage = new Item(this , 100 , 200 , 1100 , 400 , "stage3.png" , "stage3.png" , "stage3.png", Type.FURNITURE){
+			
+			@Override
+				public void controlEvent(CallbackEvent theEvent) {
+					if(theEvent.getController().getName().equals("stage1")){
+						if (theEvent.getAction() == 100) {
+							
+						}
+					}
+			   	}
+			};
 		
 	
 		mykey.controlP5.setVisible(false);
@@ -294,7 +303,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 		gameWinApplet.setFocusable(true);
 		jframe.setContentPane(gameWinApplet);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jframe.setSize(windowWidth, windowHeight);
+		jframe.setSize(1303, 745);
 		jframe.setVisible(true);
 	}
 
