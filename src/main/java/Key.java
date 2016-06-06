@@ -8,12 +8,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-
 import io.socket.emitter.Emitter;
 
 public class Key extends JPanel implements ActionListener{
@@ -25,6 +26,9 @@ public class Key extends JPanel implements ActionListener{
 	//private ArrayList<Character> inputCode; 
 	private StringBuilder inputCode;
 	private char end = 'e';
+	private String path = "main/resources/";
+	Clip press;
+	Clip close;
 	
 	private int numberOfButton = 12;
 	private Icon number_0;
@@ -54,6 +58,8 @@ public class Key extends JPanel implements ActionListener{
 	private JButton button_10;
 	private JButton button_11;
 	
+	
+	
 	private boolean safe_status = false;
 	
 	public Key(Keyboard k, Board b,Item i,boolean safe_s){
@@ -69,6 +75,20 @@ public class Key extends JPanel implements ActionListener{
 		//this.setLayout(new GridLayout(4, 3));
 		addButton();
 		this.setVisible(true);
+		 try {       
+			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+      	        
+		    } catch(Exception ex) {
+		        System.out.println("Error with playing sound.");
+		        ex.printStackTrace();
+		    }
+		 try {       
+				close = MusicPlay.getMusic("src/" + path + "Sounds/close.wav");
+	     	        
+			    } catch(Exception ex) {
+			        System.out.println("Error with playing sound.");
+			        ex.printStackTrace();
+			    }
 		Main.socket.on("safeopen", new Emitter.Listener() {
 
 			  @Override
@@ -145,28 +165,110 @@ public class Key extends JPanel implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
         if(e.getSource() == button_0){
+        	 try {       
+    			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+          	        
+    		    } catch(Exception ex) {
+    		        System.out.println("Error with playing sound.");
+    		        ex.printStackTrace();
+    		 }
         	inputCode.append("0");
+        	press.start();
         }else if(e.getSource() == button_1){
+        	try {       
+   			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+         	        
+   		    } catch(Exception ex) {
+   		        System.out.println("Error with playing sound.");
+   		        ex.printStackTrace();
+   		    }
         	inputCode.append("1");
+        	press.start();
         }else if(e.getSource() == button_2){
+        	try {       
+   			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+         	        
+   		    } catch(Exception ex) {
+   		        System.out.println("Error with playing sound.");
+   		        ex.printStackTrace();
+   		    }
         	inputCode.append("2");
+        	press.start();
         }else if(e.getSource() == button_3){
+        	try {       
+   			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+         	        
+   		    } catch(Exception ex) {
+   		        System.out.println("Error with playing sound.");
+   		        ex.printStackTrace();
+   		    }
         	inputCode.append("3");
+        	press.start();
         }else if(e.getSource() == button_4){
+        	try {       
+      			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+            	        
+      		    } catch(Exception ex) {
+      		        System.out.println("Error with playing sound.");
+      		        ex.printStackTrace();
+      		    }
         	inputCode.append("4");
+        	press.start();
         }else if(e.getSource() == button_5){
+        	try {       
+      			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+            	        
+      		    } catch(Exception ex) {
+      		        System.out.println("Error with playing sound.");
+      		        ex.printStackTrace();
+      		    }
         	inputCode.append("5");
+        	press.start();
         }else if(e.getSource() == button_6){
+        	try {       
+      			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+            	        
+      		    } catch(Exception ex) {
+      		        System.out.println("Error with playing sound.");
+      		        ex.printStackTrace();
+      		    }
         	inputCode.append("6");
+        	press.start();
         }else if(e.getSource() == button_7){
+        	try {       
+      			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+            	        
+      		    } catch(Exception ex) {
+      		        System.out.println("Error with playing sound.");
+      		        ex.printStackTrace();
+      		    }
         	inputCode.append("7");
+        	press.start();
         }else if(e.getSource() == button_8){
+        	try {       
+      			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+            	        
+      		    } catch(Exception ex) {
+      		        System.out.println("Error with playing sound.");
+      		        ex.printStackTrace();
+      		    }
         	inputCode.append("8");
+        	press.start();
         }else if(e.getSource() == button_9){
+        	try {       
+      			 press = MusicPlay.getMusic("src/" + path + "Sounds/press.wav");
+            	        
+      		    } catch(Exception ex) {
+      		        System.out.println("Error with playing sound.");
+      		        ex.printStackTrace();
+      		    }
         	inputCode.append("9");
+        	press.start();
         }else if(e.getSource() == button_10){
+        	press.start();
         	inputCode.deleteCharAt(inputCode.length()-1);
         }else if(e.getSource() == button_11){
+        	press.start();
          	//System.out.println(board.get_text());
         	System.out.println(keyboard.getPassword())
         	;
@@ -176,6 +278,14 @@ public class Key extends JPanel implements ActionListener{
         		((MusicPuzzleApplet)keyboard.safe.parent).showkey();
         	}else{
         		safe.updateImage("safe_close.png", "safe_close.png", "safe_close.png");
+        		try {       
+    				close = MusicPlay.getMusic("src/" + path + "Sounds/close.wav");
+    	     	        
+    			    } catch(Exception ex) {
+    			        System.out.println("Error with playing sound.");
+    			        ex.printStackTrace();
+    			 }
+        		close.start();
         	}
         	initial();
         }

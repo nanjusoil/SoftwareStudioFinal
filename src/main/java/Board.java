@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,6 +22,8 @@ public class Board extends JPanel{
 	
 	JLabel label;
 	private StringBuilder inputCode;
+
+	Clip close;
 	
 	private Image show_number_0;
 	private Image show_number_1;
