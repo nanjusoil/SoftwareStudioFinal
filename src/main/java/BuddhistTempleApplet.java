@@ -265,10 +265,10 @@ public class BuddhistTempleApplet extends PApplet{
 					libai.solControlP5.setVisible(false);
 					table.controlP5.setVisible(true);
 					
-					baijuyi.updateImage(30, 30, 620, 440,"card2.png" , "card2.png" , "card2.png");
-					dufu.updateImage(30, 30, 500, 440 ,"card2.png" , "card2.png" , "card2.png");
-					wangwei.updateImage(30, 30, 670, 440 ,"card2.png" , "card2.png" , "card2.png");
-					libai.updateImage(30, 30, 550, 440 ,"card2.png" , "card2.png" , "card2.png");
+					if(!baijuyi.isInBox)baijuyi.updateImage(30, 30, 620, 440,"card2.png" , "card2.png" , "card2.png");
+					if(!dufu.isInBox)dufu.updateImage(30, 30, 500, 440 ,"card2.png" , "card2.png" , "card2.png");
+					if(!wangwei.isInBox)wangwei.updateImage(30, 30, 670, 440 ,"card2.png" , "card2.png" , "card2.png");
+					if(!libai.isInBox)libai.updateImage(30, 30, 550, 440 ,"card2.png" , "card2.png" , "card2.png");
 
 				}
 		    }
@@ -326,10 +326,10 @@ public class BuddhistTempleApplet extends PApplet{
 							libai.solControlP5.setVisible(true);
 							
 							//adjust the cards' position and size
-							baijuyi.updateImage(50, 50, 640, 305 ,"card2.png" , "card2.png" , "card2.png");
-							dufu.updateImage(50, 50, 440, 305 ,"card2.png" , "card2.png" , "card2.png");
-							wangwei.updateImage(50, 50, 740, 305 ,"card2.png" , "card2.png" , "card2.png");
-							libai.updateImage(50, 50, 540, 305 ,"card2.png" , "card2.png" , "card2.png");
+							if(!baijuyi.isInBox)baijuyi.updateImage(50, 50, 640, 305 ,"card2.png" , "card2.png" , "card2.png");
+							if(!dufu.isInBox)dufu.updateImage(50, 50, 440, 305 ,"card2.png" , "card2.png" , "card2.png");
+							if(!wangwei.isInBox)wangwei.updateImage(50, 50, 740, 305 ,"card2.png" , "card2.png" , "card2.png");
+							if(!libai.isInBox)libai.updateImage(50, 50, 540, 305 ,"card2.png" , "card2.png" , "card2.png");
 						}
 					}
 				}
