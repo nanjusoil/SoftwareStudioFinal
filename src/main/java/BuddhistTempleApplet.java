@@ -293,7 +293,8 @@ public class BuddhistTempleApplet extends PApplet{
 					if(!dufu.isInBox)dufu.updateImage(30, 30, 500, 440 ,"card2.png" , "card2.png" , "card2.png");
 					if(!wangwei.isInBox)wangwei.updateImage(30, 30, 670, 440 ,"card2.png" , "card2.png" , "card2.png");
 					if(!libai.isInBox)libai.updateImage(30, 30, 550, 440 ,"card2.png" , "card2.png" , "card2.png");
-
+					
+					this.controlP5.setVisible(false);
 				}
 		    }
 		};
@@ -358,6 +359,8 @@ public class BuddhistTempleApplet extends PApplet{
 							if(!dufu.isInBox)dufu.updateImage(50, 50, 440, 305 ,"card2.png" , "card2.png" , "card2.png");
 							if(!wangwei.isInBox)wangwei.updateImage(50, 50, 740, 305 ,"card2.png" , "card2.png" , "card2.png");
 							if(!libai.isInBox)libai.updateImage(50, 50, 540, 305 ,"card2.png" , "card2.png" , "card2.png");
+							
+							buttonReturn.controlP5.setVisible(true);
 						}
 					}
 				}
@@ -683,6 +686,7 @@ public class BuddhistTempleApplet extends PApplet{
 		wangwei.solControlP5.setVisible(false);
 		libai.solControlP5.setVisible(false);
 		mykey.controlP5.setVisible(false);
+		buttonReturn.controlP5.setVisible(false);
 		itemArr = new ArrayList<Item>(Arrays.asList(baijuyi, dufu, wangwei, libai, mykey));
 		
 //		server_connection();
