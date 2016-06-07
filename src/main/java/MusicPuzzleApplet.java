@@ -55,20 +55,20 @@ public class MusicPuzzleApplet extends PApplet{
 	
 	Clip faith, hero, vocal, rurals,toast;   
 	
-	AstronomyApplet astronomyApplet;
+	private AstronomyApplet astronomyApplet;
 	
 	public boolean safe_status = false;//false:safe關著   true:safe 打開
 	
 	public MusicPuzzleApplet(JFrame jframe){
 		this.jframe = jframe;
-		
+		astronomyApplet = new AstronomyApplet(jframe); 
 		Main.socket.on("safeopen", new Emitter.Listener() {
 
 			  @Override
 			  public void call(Object... args) {
 				  System.out.println("asc");
 				  safe_status = true;
-				  server_connection();
+				  //server_connection();
 				  
 			  }
 
@@ -157,34 +157,35 @@ public class MusicPuzzleApplet extends PApplet{
 		});
 		
 		
-		Main.socket.on("putinItemmykey", new Emitter.Listener() {
+		Main.socket.on("putinItemmykey2", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
-				 itemBox.putinItem(mykey);
+				 //itemBox.putinItem(mykey);
 			  }
 		});
 		
 
-		Main.socket.on("checkItemmykey", new Emitter.Listener() {
+		Main.socket.on("checkItemmykey2", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
-				 itemBox.checkItem(mykey, itemArr);
+				// itemBox.checkItem(mykey, itemArr);
 			  }
 		});
 		
 		
-		Main.socket.on("useItemmykey", new Emitter.Listener() {
+		Main.socket.on("useItemmykey2", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
-				 	itemBox.useItem(mykey);
-				 	mykey.controlP5.setVisible(false);
+				 	//itemBox.useItem(mykey);
+				 	//mykey.controlP5.setVisible(false);
+				 nextRoom();
 			  }
 		});
 		
-		Main.socket.on("putinItempaperball", new Emitter.Listener() {
+		Main.socket.on("putinItempaperball2", new Emitter.Listener() {
 			
 			 @Override
 			  public void call(Object... args) {
@@ -233,8 +234,8 @@ public class MusicPuzzleApplet extends PApplet{
 		imgBackground.resize(windowWidth-itemboxWidth, windowHeight);
 		loginapplet = new LoginApplet(jframe);
 		
+		//astronomyApplet = new AstronomyApplet(jframe); 
 		
-		astronomyApplet = new AstronomyApplet(jframe); 
 
 		    try {
 		        
@@ -416,17 +417,18 @@ public class MusicPuzzleApplet extends PApplet{
 					if (theEvent.getAction() == 100) {
 						if(!isInBox){
 							itemBox.putinItem(this);
-							Main.socket.emit("putinItemmykey","data");
+							Main.socket.emit("putinItemmykey2","data");
 						}else{
 							itemBox.checkItem(this, itemArr);
-							Main.socket.emit("checkItemmykey","data");
+							Main.socket.emit("checkItemmykey2","data");
 						}
 					}
 				}else if(theEvent.getController().getName().equals("solmykey")){
 					if ((theEvent.getAction() == 100) && isInBox && isHolded){
 						itemBox.useItem(this);
+						
 						nextRoom();
-						Main.socket.emit("useItemmykey","data");
+						Main.socket.emit("useItemmykey2","data");
 					}
 				}
 		    }

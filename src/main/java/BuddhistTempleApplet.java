@@ -108,7 +108,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  useCard(baijuyi, 10, 180); 
+				  //useCard(baijuyi, 10, 180); 
 			  };
 
 		});
@@ -133,7 +133,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  useCard(dufu, -10, 130);
+				  //useCard(dufu, -10, 130);
 			  };
 
 		});
@@ -157,7 +157,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  useCard(wangwei, 80, 130);
+				  //useCard(wangwei, 80, 130);
 			  };
 
 		});
@@ -182,7 +182,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  useCard(libai, 70, 120);
+				  //useCard(libai, 70, 120);
 			  };
 
 		});
@@ -190,7 +190,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  itemBox.putinItem(mykey);
+				 // itemBox.putinItem(mykey);
 			  };
 
 		});
@@ -206,7 +206,7 @@ public class BuddhistTempleApplet extends PApplet{
 
 			  @Override
 			  public void call(Object... args) {
-				  itemBox.useItem(mykey);
+				  //itemBox.useItem(mykey);
 					nextRoom();
 			  };
 

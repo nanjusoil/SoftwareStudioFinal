@@ -68,7 +68,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 			
 			 @Override
 			  public void call(Object... args) {
-				 server_connection();
+				 //server_connection();
 //				  System.out.println("server");
 			  }
 		});
@@ -77,7 +77,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 
 			  @Override
 			  public void call(Object... args) {
-				  itemBox.putinItem(mykey);
+				  //itemBox.putinItem(mykey);
 			  };
 
 		});
@@ -85,7 +85,7 @@ public class AstronomyApplet extends PApplet implements Runnable{
 
 			  @Override
 			  public void call(Object... args) {
-				  itemBox.checkItem(mykey, itemArr);
+				  //itemBox.checkItem(mykey, itemArr);
 			  };
 
 		});
@@ -93,8 +93,8 @@ public class AstronomyApplet extends PApplet implements Runnable{
 
 			  @Override
 			  public void call(Object... args) {
-				  itemBox.useItem(mykey);
-				  nextRoom();
+				  //itemBox.useItem(mykey);
+				  //nextRoom();
 			  };
 
 		});
