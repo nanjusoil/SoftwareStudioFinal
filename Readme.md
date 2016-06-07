@@ -1,3 +1,8 @@
+#[3D的部分](https://github.com/nanjusoil/LibGdx_3d_test)
++ 使用libgdx
++ 先build gradle之後 在run configuration設定asset path就可以跑
+
+
 # [Coding Styles](https://google.github.io/styleguide/javaguide.html)
 + 照著一定的Coding Style應該會看起來比較好一點
 
@@ -43,3 +48,4 @@
 				變數名稱.loop(Clip.LOOP_CONTINUOUSLY);
 + 音樂檔僅能為.wav檔，附上音樂剪輯及轉檔網址 ----   音樂剪輯:: http://mp3cut.net/
 													轉檔::  http://media.io/zh/
+													
